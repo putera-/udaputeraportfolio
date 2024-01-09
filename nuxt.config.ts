@@ -10,5 +10,6 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
-  }
+  },
+  modules: ['nuxt-lucide-icons']
 })
