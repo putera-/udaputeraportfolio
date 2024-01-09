@@ -36,8 +36,14 @@
     <div class="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
         <div class="drawer-side">
-            <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="px-16 py-12 w-80 min-h-full bg-zinc-800 text-gray-300">
+            <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay text-white"></label>
+            <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-zinc-800 text-gray-300">
+                <div class="flex justify-end">
+                    <label for="my-drawer-4"
+                        class="btn btn-circle bg-transparent border-zinc-600 text-white hover:text-black">
+                        <XMarkIcon class="w-6" />
+                    </label>
+                </div>
                 <div class="mb-6 text-xl">Menu</div>
                 <ul class="menu px-0">
                     <li>
@@ -80,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { Bars2Icon, HomeIcon, UserIcon, BriefcaseIcon } from '@heroicons/vue/24/solid'
+import { Bars2Icon, HomeIcon, UserIcon, BriefcaseIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
 
 </script>
