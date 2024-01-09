@@ -15,23 +15,23 @@
                     <div>Jakarta, Indonesia</div>
                 </div>
                 <div class="flex gap-2 justify-center">
-                    <div class="btn btn-circle bg-transparent border-slate-500 hover:bg-transparent">
+                    <div class="btn btn-circle bg-transparent border-zinc-600">
                         <LucideInstagram :size="20" color="white" />
                     </div>
-                    <div class="btn btn-circle bg-transparent border-slate-500 hover:bg-transparent">
+                    <div class="btn btn-circle bg-transparent border-zinc-600">
                         <LucideLinkedin :size="20" color="white" />
                     </div>
-                    <div class="btn btn-circle bg-transparent border-slate-500 hover:bg-transparent">
+                    <div class="btn btn-circle bg-transparent border-zinc-600">
                         <LucideGithub :size="20" color="white" />
                     </div>
-                    <div class="btn btn-circle bg-transparent border-slate-500 hover:bg-transparent">
+                    <div class="btn btn-circle bg-transparent border-zinc-600">
                         <LucideGitlab :size="20" color="white" />
                     </div>
                 </div>
             </div>
         </div>
         <div
-            class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9 md:max-h-screen md:overflow-scroll bg-indigo-500">
+            class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9 md:max-h-screen md:overflow-y-scroll bg-indigo-500 scrollbar-hide">
             <div class="h-96">
                 content tambahan
             </div>

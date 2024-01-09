@@ -1,8 +1,8 @@
 <template>
-    <div class="font-inter grid grid-cols-12 md:max-h-screen min-h-screen bg-zinc-800">
+    <div class="font-inter grid grid-cols-12 md:max-h-screen min-h-screen">
         <div class="col-span-full md:col-span-11">
             <label for="my-drawer-4"
-                class="absolute right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:text-black">
+                class="absolute right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
                 <Bars2Icon class="w-6" />
             </label>
             <!-- slot here -->
@@ -12,20 +12,17 @@
             <div class="rounded-full border border-zinc-600 p-2">
                 <ul class="flex flex-col items-center gap-2">
                     <li class="tooltip tooltip-left" data-tip="Home">
-                        <a href=""
-                            class="btn btn-sm btn-circle bg-transparent border-slate-500 text-white hover:text-black border-0">
+                        <a href="" class="btn btn-sm btn-circle bg-transparent text-white border-0">
                             <HomeIcon class="w-4" />
                         </a>
                     </li>
                     <li class="tooltip tooltip-left" data-tip="Profile">
-                        <a href=""
-                            class="btn btn-sm btn-circle bg-transparent border-slate-500 text-white hover:text-black border-0">
+                        <a href="" class="btn btn-sm btn-circle bg-transparent text-white border-0">
                             <UserIcon class="w-4" />
                         </a>
                     </li>
                     <li class="tooltip tooltip-left" data-tip="Projects">
-                        <a href=""
-                            class="btn btn-sm btn-circle bg-transparent border-slate-500 text-white hover:text-black border-0">
+                        <a href="" class="btn btn-sm btn-circle bg-transparent text-white border-0">
                             <BriefcaseIcon class="w-4" />
                         </a>
                     </li>
@@ -35,31 +32,31 @@
     </div>
     <div class="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-side">
+        <div class="drawer-side overflow-x-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay text-white"></label>
             <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-zinc-800 text-gray-300">
                 <div class="flex justify-end">
                     <label for="my-drawer-4"
-                        class="btn btn-circle bg-transparent border-zinc-600 text-white hover:text-black">
+                        class="btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900 hover:border-0">
                         <XMarkIcon class="w-6" />
                     </label>
                 </div>
                 <div class="mb-6 text-xl">Menu</div>
                 <ul class="menu px-0">
                     <li>
-                        <label for="my-drawer-4" class="hover:text-white px-0">
+                        <label for="my-drawer-4" class="hover:text-white px-2">
                             <HomeIcon class="w-4" />
                             <div>Home</div>
                         </label>
                     </li>
                     <li>
-                        <label for="my-drawer-4" class="hover:text-white px-0">
+                        <label for="my-drawer-4" class="hover:text-white px-2">
                             <UserIcon class="w-4" />
                             <div>Profile</div>
                         </label>
                     </li>
                     <li>
-                        <label for="my-drawer-4" class="hover:text-white px-0">
+                        <label for="my-drawer-4" class="hover:text-white px-2">
                             <BriefcaseIcon class="w-4" />
                             <div>Projects</div>
                         </label>
@@ -67,16 +64,16 @@
                 </ul>
                 <div class="my-6 text-xl">Social</div>
                 <div class="flex gap-2">
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2 hover:bg-transparent">
+                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
                         <LucideInstagram :size="20" color="white" />
                     </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2 hover:bg-transparent">
+                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
                         <LucideLinkedin :size="20" color="white" />
                     </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2 hover:bg-transparent">
+                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
                         <LucideGithub :size="20" color="white" />
                     </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2 hover:bg-transparent">
+                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
                         <LucideGitlab :size="20" color="white" />
                     </div>
                 </div>
