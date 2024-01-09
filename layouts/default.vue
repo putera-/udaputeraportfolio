@@ -2,8 +2,9 @@
     <div class="font-inter grid grid-cols-12 md:max-h-screen min-h-screen">
         <div class="col-span-full md:col-span-11">
             <label for="my-drawer-4"
-                class="absolute right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
-                <Bars2Icon class="w-6" />
+                class="absolute z-10 right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
+                <Bars2Icon v-if="!show_mobile_menu" class="w-6" />
+                <XMarkIcon v-else class="w-6" />
             </label>
             <!-- slot here -->
             <slot />
@@ -31,16 +32,10 @@
         </div>
     </div>
     <div class="drawer drawer-end">
-        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay text-white"></label>
             <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-zinc-800 text-gray-300">
-                <div class="flex justify-end">
-                    <label for="my-drawer-4"
-                        class="btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900 hover:border-0">
-                        <XMarkIcon class="w-6" />
-                    </label>
-                </div>
                 <div class="mb-6 text-xl">Menu</div>
                 <ul class="menu px-0">
                     <li>
@@ -84,6 +79,8 @@
 
 <script setup lang="ts">
 import { Bars2Icon, HomeIcon, UserIcon, BriefcaseIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+
+const show_mobile_menu = ref(false);
 
 
 </script>
