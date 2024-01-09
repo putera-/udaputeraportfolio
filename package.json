@@ -1,0 +1,20 @@
+{
+  "name": "uda-putera-portfolio",
+  "version": "0.0.1-alpha",
+  "author": "Rizjami Putera <rizjamiputera@gmail.com>",
+  "private": true,
+  "type": "module",
+  "license": "ISC",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "^3.9.0",
+    "vue": "^3.4.5",
+    "vue-router": "^4.2.5"
+  }
+}
