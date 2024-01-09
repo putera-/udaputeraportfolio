@@ -3,5 +3,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     apiUrl: ''
+  },
+  css: ['~/assets/css/main.css'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   }
 })
