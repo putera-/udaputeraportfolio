@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 defineProps<{
-    prfile: Profile
+    profile: Profile
 }>();
 
 </script>

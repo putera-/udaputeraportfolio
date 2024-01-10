@@ -34,6 +34,7 @@
             class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9 md:max-h-screen md:overflow-y-scroll scrollbar-hide">
             <IndexProfile :profile="profile" />
             <IndexAbout :profile="profile" />
+            <IndexSkill :profile="profile" />
         </div>
     </div>
 </template>

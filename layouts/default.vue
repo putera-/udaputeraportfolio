@@ -74,8 +74,12 @@ const menus: Menu[] = [
         icon: resolveComponent('LucideCircleUserRound')
     },
     {
-        title: 'Project',
+        title: 'Projects',
         icon: resolveComponent('LucideBriefcase')
+    },
+    {
+        title: 'Skills',
+        icon: resolveComponent('LucideBone')
     }
 ];
 
