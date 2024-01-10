@@ -32,9 +32,9 @@
         </div>
         <div
             class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9 md:max-h-screen md:overflow-y-scroll scrollbar-hide">
-            <IndexIntro :profile="profile" />
-            <IndexAbout :profile="profile" />
-            <IndexSkill :profile="profile" />
+            <IndexIntro :profile="profile" id="home" />
+            <IndexAbout :profile="profile" id="about" />
+            <IndexSkill :profile="profile" id="skills" />
         </div>
     </div>
 </template>

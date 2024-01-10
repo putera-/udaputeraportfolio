@@ -13,9 +13,9 @@
             <div class="rounded-full border border-zinc-600 p-2">
                 <ul class="flex flex-col items-center gap-2">
                     <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
-                        <a href="" class="btn btn-sm btn-circle bg-transparent text-white border-0">
+                        <NuxtLink :to="menu.link" class="btn btn-sm btn-circle bg-transparent text-white border-0">
                             <component :is="menu.icon" :size="16" color="#b7b7b7" />
-                        </a>
+                        </NuxtLink>
                     </li>
                 </ul>
             </div>
@@ -61,25 +61,30 @@ const show_mobile_menu = ref(false);
 
 interface Menu {
     title: string
-    icon: any
+    icon: any,
+    link: string
 }
 
 const menus: Menu[] = [
     {
         title: 'Home',
-        icon: resolveComponent('LucideHome')
+        icon: resolveComponent('LucideHome'),
+        link: '#home'
     },
     {
         title: 'About',
-        icon: resolveComponent('LucideCircleUserRound')
+        icon: resolveComponent('LucideCircleUserRound'),
+        link: '/#about'
     },
     {
         title: 'Projects',
-        icon: resolveComponent('LucideBriefcase')
+        icon: resolveComponent('LucideBriefcase'),
+        link: '/#skills'
     },
     {
         title: 'Skills',
-        icon: resolveComponent('LucideBone')
+        icon: resolveComponent('LucideBone'),
+        link: '/#skills'
     }
 ];
 
