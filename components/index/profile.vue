@@ -1,6 +1,7 @@
 <template>
     <div class="grid grid-cols-12 py-20 md:min-h-screen">
-        <div class="col-span-12 lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10">
+        <div
+            class="col-span-12 lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
             <div class="rounded-2xl border border-zinc-600 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
                 <LucideHome :size="16" />
                 <div>introduce</div>
