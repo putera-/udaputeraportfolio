@@ -8,7 +8,8 @@ import type { IconsMysql } from '#build/components';
                 <LucideBone :size=16 />
                 <div>Skills</div>
             </div>
-            <div class="text-6xl font-light">Every great design begin with an even better story</div>
+            <div class="text-6xl font-light">Every great <span class="text-yellow-400">Projects</span> begin with
+                willingness to <span class="text-yellow-400">Learn</span></div>
             <div class="flex flex-wrap gap-6 justify-center items-end">
                 <div class="flex flex-col items-center">
                     <IconsGithub class="w-16" />
