@@ -5,7 +5,7 @@
             <div
                 class="md:fixed md:w-[33%] lg:w-[24%] rounded-3xl border border-zinc-600 text-white p-8 flex flex-col gap-6">
                 <div class="flex justify-between items-center">
-                    <div class="text-xl lg:text-2xl xl:text-3xl font-bold">{{ fullname }}</div>
+                    <div class="text-xl lg:text-2xl xl:text-3xl font-semibold text-yellow-400">{{ fullname }}</div>
                     <div class="text-sm font-ligbt text-right">Full Stack<br>Developer</div>
                 </div>
                 <div class="aspect-square bg-gray-300 rounded-xl flex justify-center items-center">

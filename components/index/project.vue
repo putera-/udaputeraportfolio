@@ -4,7 +4,7 @@
             <LucideBriefcase :size="16" />
             <div>Portfolio</div>
         </div>
-        <div class="text-7xl font-light">Feature <span class="text-yellow-400">Project</span></div>
+        <div class="text-7xl font-light">Latest <span class="text-yellow-400">Projects</span></div>
         <div class="grid grid-cols-2 gap-10">
             <div v-for="n in 4">
                 <div class="font-semibold text-xl mb-1">Project Name</div>
