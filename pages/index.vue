@@ -31,10 +31,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-full md:col-span-7 lg:col-span-8 xl:co-spaln-9">
+        <div class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9">
             <IndexIntro :profile="profile" id="intro" />
             <IndexAbout :profile="profile" id="about" />
             <IndexSkill :profile="profile" id="skills" />
+            <IndexProject :profile="profile" id="projects" />
         </div>
     </div>
 </template>

@@ -10,7 +10,7 @@ import type { IconsMysql } from '#build/components';
             </div>
             <div class="text-6xl font-light">Every great <span class="text-yellow-400">Projects</span> begin with
                 willingness to <span class="text-yellow-400">Learn</span></div>
-            <div class="flex flex-wrap gap-6 justify-center items-end">
+            <div class="flex flex-wrap gap-12 justify-center items-end mt-20">
                 <div class="flex flex-col items-center">
                     <IconsGithub class="w-16" />
                     <div>Github</div>

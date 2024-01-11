@@ -84,14 +84,14 @@ const menus: Menu[] = [
         link: '#intro'
     },
     {
-        title: 'Projects',
-        icon: resolveComponent('LucideBriefcase'),
-        link: '#about'
-    },
-    {
         title: 'Skills',
         icon: resolveComponent('LucideBone'),
         link: '#skills'
+    },
+    {
+        title: 'Projects',
+        icon: resolveComponent('LucideBriefcase'),
+        link: '#projects'
     }
 ];
 </script>
