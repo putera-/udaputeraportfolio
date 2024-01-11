@@ -1,5 +1,5 @@
 <template>
-    <div class="font-inter flex md:max-h-screen min-h-screen">
+    <div data-theme='dracula' class="font-inter flex min-h-screen">
         <!-- main content -->
         <div class="grow">
             <!-- slot here -->
@@ -12,8 +12,8 @@
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
                             <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
-                                class="btn btn-sm btn-circle bg-transparent text-white border-0">
-                                <component :is="menu.icon" :size="16" color="#b7b7b7" />
+                                class="btn btn-sm btn-circle bg-transparent text-accent hover:text-secondary border-0">
+                                <component :is="menu.icon" :size="16" />
                             </NuxtLink>
                         </li>
                     </ul>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <!-- mobile menu -->
-    <div class="drawer drawer-end">
+    <div data-theme='dracula' class="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay text-white"></label>
@@ -31,26 +31,26 @@
                 <ul class="menu px-0">
                     <li v-for="menu in menus">
                         <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
-                            for="my-drawer-4" class="hover:text-white px-2">
-                            <component :is="menu.icon" :size="16" color="#b7b7b7" />
-                            <div>{{ menu.title }}</div>
+                            for="my-drawer-4" class="text-accent hover:text-white px-2 text-base">
+                            <component :is="menu.icon" :size="16" />
+                            <div class="text-white font-thin">{{ menu.title }}</div>
                         </NuxtLink>
                     </li>
                 </ul>
                 <div class="my-6 text-xl">Social</div>
                 <div class="flex gap-2">
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
-                        <LucideInstagram :size="20" color="white" />
-                    </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
-                        <LucideLinkedin :size="20" color="white" />
-                    </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
-                        <LucideGithub :size="20" color="white" />
-                    </div>
-                    <div class="btn btn-sm btn-circle bg-transparent border-0 hover:border-2">
-                        <LucideGitlab :size="20" color="white" />
-                    </div>
+                    <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
+                        <LucideInstagram :size="20" />
+                    </NuxtLink>
+                    <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
+                        <LucideLinkedin :size="20" />
+                    </NuxtLink>
+                    <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
+                        <LucideGithub :size="20" />
+                    </NuxtLink>
+                    <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
+                        <LucideGitlab :size="20" />
+                    </NuxtLink>
                 </div>
             </div>
         </div>

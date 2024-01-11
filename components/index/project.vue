@@ -4,7 +4,7 @@
             <LucideBriefcase :size="16" />
             <div>Portfolio</div>
         </div>
-        <div class="text-7xl font-light">Latest <span class="text-yellow-400">Projects</span></div>
+        <div class="text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
         <div class="grid grid-cols-2 gap-10">
             <div v-for="n in 4">
                 <div class="font-semibold text-xl mb-1">Project Name</div>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <NuxtLink to="/projects" class="btn bg-yellow-400 text-black rounded-xl px-10">See All Projects</NuxtLink>
+            <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Projects</NuxtLink>
         </div>
     </div>
 </template>

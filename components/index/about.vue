@@ -4,7 +4,8 @@
             <LucideUser :size=16 />
             <div>About</div>
         </div>
-        <div class="text-6xl font-light">Every great design begin with an even better story</div>
+        <div class="text-6xl font-light">Every great design begin with an even <span class="text-accent">Better Story</span>
+        </div>
         <div>I design and code beautifully simple things and i love what i do. Just simple like that! Lorem
             ipsum dolor sit amet consectetur adipisicing elit. Odit qui vel beatae eveniet similique.
             Perferendis, vel error inventore illo voluptates eaque nam harum consequatur corporis eum eius culpa
