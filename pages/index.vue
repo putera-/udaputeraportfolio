@@ -1,8 +1,9 @@
 <template>
     <div class="grid grid-cols-12 gap-10 max-md:pt-14">
-        <div
-            class="col-span-full md:col-span-5 lg:col-span-4 xl:col-span-3 md:max-h-screen flex flex-col justify-center p-4">
-            <div class="rounded-3xl border border-zinc-600 text-white p-8 flex flex-col gap-6">
+        <div id="home"
+            class="col-span-full md:col-span-5 lg:col-span-4 xl:col-span-3 md:max-h-screen flex flex-col justify-center p-4 relative">
+            <div
+                class="md:fixed md:w-[33%] lg:w-[26%] xl:w-[20%] rounded-3xl border border-zinc-600 text-white p-8 flex flex-col gap-6">
                 <div class="flex justify-between items-center">
                     <div class="text-xl lg:text-2xl xl:text-3xl font-bold">{{ fullname }}</div>
                     <div class="text-sm font-ligbt text-right">Full Stack<br>Developer</div>
@@ -30,9 +31,8 @@
                 </div>
             </div>
         </div>
-        <div
-            class="col-span-full md:col-span-7 lg:col-span-8 xl:col-span-9 md:max-h-screen md:overflow-y-scroll scrollbar-hide">
-            <IndexIntro :profile="profile" id="home" />
+        <div class="col-span-full md:col-span-7 lg:col-span-8 xl:co-spaln-9">
+            <IndexIntro :profile="profile" id="intro" />
             <IndexAbout :profile="profile" id="about" />
             <IndexSkill :profile="profile" id="skills" />
         </div>

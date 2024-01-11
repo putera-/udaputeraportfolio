@@ -11,11 +11,5 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['nuxt-lucide-icons'],
-  ssr: false,
-  router: {
-    options: {
-      hashMode: true
-    }
-  }
-})
+  modules: ['nuxt-lucide-icons']
+});

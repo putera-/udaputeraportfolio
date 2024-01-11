@@ -1,26 +1,32 @@
 <template>
     <div class="font-inter grid grid-cols-12 md:max-h-screen min-h-screen">
+        <!-- main content -->
         <div class="col-span-full md:col-span-11">
             <label for="my-drawer-4"
-                class="absolute z-10 right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
+                class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
                 <LucideMenu v-if="!show_mobile_menu" :size="20" color="#b7b7b7" />
                 <LucideX v-else :size="20" color="#b7b7b7" />
             </label>
             <!-- slot here -->
             <slot />
         </div>
-        <div class="max-md:hidden md:col-span-1 max-h-screen flex flex-col items-center justify-center py-10">
-            <div class="rounded-full border border-zinc-600 p-2">
-                <ul class="flex flex-col items-center gap-2">
-                    <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
-                        <NuxtLink :to="menu.link" class="btn btn-sm btn-circle bg-transparent text-white border-0">
-                            <component :is="menu.icon" :size="16" color="#b7b7b7" />
-                        </NuxtLink>
-                    </li>
-                </ul>
+        <!-- side menu -->
+        <div class="max-md:hidden md:col-span-1 py-10 relative">
+            <div class="fixed top-0 right-0 h-screen flex items-center pr-10">
+                <div class="rounded-full border border-zinc-600 p-2">
+                    <ul class="flex flex-col items-center gap-2">
+                        <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
+                            <NuxtLink :to="{ path: '/', hash: menu.link }"
+                                class="btn btn-sm btn-circle bg-transparent text-white border-0">
+                                <component :is="menu.icon" :size="16" color="#b7b7b7" />
+                            </NuxtLink>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+    <!-- mobile menu -->
     <div class="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
@@ -29,10 +35,11 @@
                 <div class="mb-6 text-xl">Menu</div>
                 <ul class="menu px-0">
                     <li v-for="menu in menus">
-                        <label for="my-drawer-4" class="hover:text-white px-2">
+                        <NuxtLink :to="{ path: '/', hash: menu.link }" @click="show_mobile_menu = false" for="my-drawer-4"
+                            class="hover:text-white px-2">
                             <component :is="menu.icon" :size="16" color="#b7b7b7" />
                             <div>{{ menu.title }}</div>
-                        </label>
+                        </NuxtLink>
                     </li>
                 </ul>
                 <div class="my-6 text-xl">Social</div>
@@ -72,20 +79,26 @@ const menus: Menu[] = [
         link: '#home'
     },
     {
-        title: 'About',
+        title: 'Introduce',
         icon: resolveComponent('LucideCircleUserRound'),
-        link: '/#about'
+        link: '#intro'
     },
     {
         title: 'Projects',
         icon: resolveComponent('LucideBriefcase'),
-        link: '/#skills'
+        link: '#about'
     },
     {
         title: 'Skills',
         icon: resolveComponent('LucideBone'),
-        link: '/#skills'
+        link: '#skills'
     }
 ];
-
 </script>
+
+<style>
+body,
+html {
+    scroll-behavior: smooth;
+}
+</style>
