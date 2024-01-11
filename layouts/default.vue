@@ -1,18 +1,13 @@
 <template>
-    <div class="font-inter grid grid-cols-12 md:max-h-screen min-h-screen">
+    <div class="font-inter flex md:max-h-screen min-h-screen">
         <!-- main content -->
-        <div class="col-span-full md:col-span-11">
-            <label for="my-drawer-4"
-                class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-zinc-900 border-zinc-600 text-white hover:bg-zinc-900">
-                <LucideMenu v-if="!show_mobile_menu" :size="20" color="#b7b7b7" />
-                <LucideX v-else :size="20" color="#b7b7b7" />
-            </label>
+        <div class="grow">
             <!-- slot here -->
             <slot />
         </div>
         <!-- side menu -->
-        <div class="max-md:hidden md:col-span-1 py-10 relative">
-            <div class="fixed top-0 right-0 h-screen flex items-center pr-10">
+        <div class="max-md:hidden flex-none w-20 relative h-screen">
+            <div class="fixed top-0 h-screen w-full flex items-center">
                 <div class="rounded-full border border-zinc-600 p-2">
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
@@ -60,6 +55,12 @@
             </div>
         </div>
     </div>
+    <!-- button for trigger mobile menu -->
+    <label for="my-drawer-4"
+        class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-zinc-800 border-zinc-600 text-white hover:bg-zinc-900">
+        <LucideMenu v-if="!show_mobile_menu" :size="20" color="#b7b7b7" />
+        <LucideX v-else :size="20" color="#b7b7b7" />
+    </label>
 </template>
 
 <script setup lang="ts">
