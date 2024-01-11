@@ -3,7 +3,7 @@
         <!-- main content -->
         <div class="col-span-full md:col-span-11">
             <label for="my-drawer-4"
-                class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-transparent border-zinc-600 text-white hover:bg-zinc-900">
+                class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-zinc-900 border-zinc-600 text-white hover:bg-zinc-900">
                 <LucideMenu v-if="!show_mobile_menu" :size="20" color="#b7b7b7" />
                 <LucideX v-else :size="20" color="#b7b7b7" />
             </label>
@@ -16,7 +16,7 @@
                 <div class="rounded-full border border-zinc-600 p-2">
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
-                            <NuxtLink :to="{ path: '/', hash: menu.link }"
+                            <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
                                 class="btn btn-sm btn-circle bg-transparent text-white border-0">
                                 <component :is="menu.icon" :size="16" color="#b7b7b7" />
                             </NuxtLink>
@@ -35,8 +35,8 @@
                 <div class="mb-6 text-xl">Menu</div>
                 <ul class="menu px-0">
                     <li v-for="menu in menus">
-                        <NuxtLink :to="{ path: '/', hash: menu.link }" @click="show_mobile_menu = false" for="my-drawer-4"
-                            class="hover:text-white px-2">
+                        <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
+                            for="my-drawer-4" class="hover:text-white px-2">
                             <component :is="menu.icon" :size="16" color="#b7b7b7" />
                             <div>{{ menu.title }}</div>
                         </NuxtLink>
@@ -69,29 +69,39 @@ const show_mobile_menu = ref(false);
 interface Menu {
     title: string
     icon: any,
-    link: string
+    href: string
+    hash?: string
 }
 
 const menus: Menu[] = [
     {
         title: 'Home',
         icon: resolveComponent('LucideHome'),
-        link: '#home'
+        href: '/',
+        hash: '#home'
     },
     {
         title: 'Introduce',
         icon: resolveComponent('LucideCircleUserRound'),
-        link: '#intro'
+        href: '/',
+        hash: '#intro'
     },
     {
         title: 'Skills',
         icon: resolveComponent('LucideBone'),
-        link: '#skills'
+        href: '/',
+        hash: '#skills'
     },
     {
         title: 'Projects',
         icon: resolveComponent('LucideBriefcase'),
-        link: '#projects'
+        href: '/',
+        hash: '#projects'
+    },
+    {
+        title: 'All Projects',
+        icon: resolveComponent('LucideBriefcase'),
+        href: '/projects'
     }
 ];
 </script>

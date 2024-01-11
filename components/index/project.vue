@@ -6,7 +6,7 @@
         </div>
         <div class="text-7xl font-light">Feature <span class="text-yellow-400">Project</span></div>
         <div class="grid grid-cols-2 gap-10">
-            <div v-for="n in 10">
+            <div v-for="n in 4">
                 <div class="font-semibold text-xl mb-1">Project Name</div>
                 <div class="aspect-square rounded-3xl overflow-hidden">
                     <img src="/images/portfolio.jpg" alt="" class="object-cover h-full">
@@ -20,6 +20,9 @@
                     <div class="badge badge-outline rounded-lg">Tailwind</div>
                 </div>
             </div>
+        </div>
+        <div class="flex justify-center">
+            <NuxtLink to="/projects" class="btn bg-yellow-400 text-black rounded-xl px-10">See All Projects</NuxtLink>
         </div>
     </div>
 </template>
