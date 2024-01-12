@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
-    apiUrl: ''
+    apiUrl: '',
+    public: {
+      apiUrl: '',
+    }
   },
   css: ['~/assets/css/main.css'],
   postcss: {

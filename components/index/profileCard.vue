@@ -11,21 +11,32 @@
         </div>
         <div class="text-center text-xl lg:text-2xl xl:text-2xl font-light">
             <div>{{ profile.email }}</div>
-            <div>Jakarta, Indonesia</div>
+            <div>{{ profile.city }}, {{ profile.country }}</div>
         </div>
         <div class="flex gap-2 justify-center">
-            <div class="btn btn-circle bg-transparent border-zinc-600 text-accent">
+            <a v-if="profile.instagram" :href="profile.instagram" target="__blank"
+                class="btn btn-circle bg-transparent border-zinc-600 text-accent">
                 <LucideInstagram :size="20" />
-            </div>
-            <div class="btn btn-circle bg-transparent border-zinc-600 text-accent">
+            </a>
+            <a v-if="profile.linkedin" :href="profile.linkedin" target="__blank"
+                class="btn btn-circle bg-transparent border-zinc-600 text-accent">
                 <LucideLinkedin :size="20" />
-            </div>
-            <div class="btn btn-circle bg-transparent border-zinc-600 text-accent">
+            </a>
+            <a v-if="profile.github" :href="profile.github" target="__blank"
+                class="btn btn-circle bg-transparent border-zinc-600 text-accent">
                 <LucideGithub :size="20" />
-            </div>
-            <div class="btn btn-circle bg-transparent border-zinc-600 text-accent">
+            </a>
+            <a v-if="profile.gitlab" :href="profile.gitlab" target="__blank"
+                class="btn btn-circle bg-transparent border-zinc-600 text-accent">
                 <LucideGitlab :size="20" />
-            </div>
+            </a>
+            <a :href="'https://wa.me/' + profile.whatsapp" target="__blank"
+                class="btn btn-circle bg-transparent border-zinc-600">
+                <IconsWhatsapp class="w-8 fill-accent" />
+            </a>
+        </div>
+        <div class="flex justify-center">
+            <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Projects</NuxtLink>
         </div>
     </div>
 </template>
@@ -34,7 +45,8 @@
 const props = defineProps<{
     profile: Profile
 }>();
-const { apiUrl } = useRuntimeConfig()
+
+const { public: { apiUrl } } = useRuntimeConfig();
 
 const fullname = computed(() => {
     return `${props.profile.firstname} ${props.profile.lastname}`;

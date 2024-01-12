@@ -4,9 +4,8 @@
             <LucideHome :size="16" />
             <div>introduce</div>
         </div>
-        <div class="text-5xl md:text-7xl font-light">Say Hi from
-            <span class="text-accent">{{ profile.firstname }}</span>
-            ,<br>Front End Programmer and Developer
+        <div class="text-4xl md:text-5xl xl:text-7xl font-light">Say Hi from
+            <span class="text-accent">{{ profile.firstname }}</span>,<br>Front End Programmer and Developer
         </div>
         <div>I design and code beautifully simple things and i love what i do. Just simple like that! Lorem
             ipsum dolor sit amet consectetur adipisicing elit. Odit qui vel beatae eveniet similique.

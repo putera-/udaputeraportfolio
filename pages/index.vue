@@ -19,5 +19,5 @@
 </template>
 
 <script setup lang="ts">
-const { profile, skills } = await $fetch('/api/profile') as Portfolio;
+const { profile, skills } = await $fetch('/api/portfolio') as Portfolio;
 </script>
