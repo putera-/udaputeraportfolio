@@ -5,13 +5,9 @@
             <div>introduce</div>
         </div>
         <div class="text-4xl md:text-5xl xl:text-7xl font-light">Say Hi from
-            <span class="text-accent">{{ profile.firstname }}</span>,<br>Front End Programmer and Developer
+            <span class="text-accent">{{ profile.firstname }}</span>,<br>{{ profile.job }}
         </div>
-        <div>I design and code beautifully simple things and i love what i do. Just simple like that! Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Odit qui vel beatae eveniet similique.
-            Perferendis, vel error inventore illo voluptates eaque nam harum consequatur corporis eum eius culpa
-            cumque ex! Eum id, eos voluptas fuga et ipsam ipsa numquam unde perferendis quos ullam rem earum sed
-            illum aperiam voluptatem. Nesciunt?</div>
+        <div>{{ profile.bio }}</div>
         <div class="grow flex flex-col justify-end">
             <div class="flex gap-10 w-20">
                 <div class="flex flex-col gap-2">

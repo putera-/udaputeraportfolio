@@ -6,6 +6,7 @@ interface Portfolio {
 interface Profile {
     firstname: string
     lastname: string
+    job: string
     email: string
     phone: string
     dob: string
