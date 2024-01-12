@@ -10,7 +10,7 @@
                     class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4 overflow-hidden">
                     <IndexIntro :profile="profile" id="intro" />
                     <IndexAbout :profile="profile" id="about" />
-                    <IndexSkill :profile="profile" id="skills" />
+                    <IndexSkill :skills="skills" id="skills" />
                     <IndexProject :profile="profile" id="projects" />
                 </div>
             </div>
@@ -19,5 +19,5 @@
 </template>
 
 <script setup lang="ts">
-const profile = await $fetch('/api/profile') as Profile;
+const { profile, skills } = await $fetch('/api/profile') as Portfolio;
 </script>

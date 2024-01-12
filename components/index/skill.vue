@@ -4,52 +4,27 @@
             <LucideBone :size=16 />
             <div>Skills</div>
         </div>
-        <div class="text-6xl font-light">Every great <span class="text-yellow-400">Projects</span> begin with
+        <div class="text-6xl font-light mb-10">Every great <span class="text-yellow-400">Projects</span> begin with
             willingness to <span class="text-yellow-400">Learn</span></div>
-        <div class="flex flex-wrap gap-12 justify-center items-end mt-20">
-            <div class="flex flex-col items-center">
-                <IconsGithub class="w-16" />
-                <div>Github</div>
+
+        <div v-for="category in skills">
+            <div class="mb-3 text-sm text-accent font-semibold">{{ category.title }}</div>
+            <div class="flex flex-wrap gap-12 items-end">
+                <div v-for="skill in category.skills" class="flex flex-col items-center">
+                    <div class="bg-slate-300 w-16 h-16 rounded-xl p-1 overflow-hidden">
+                        <component v-html="skill.svg" class="w-16"></component>
+                    </div>
+                    <div class="text-xs mt-2">{{ skill.title }}</div>
+                </div>
             </div>
-            <div class="flex flex-col items-center">
-                <IconsGitlab class="w-16" />
-                <div>Gitlab</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsJavascript class="w-16" />
-                <div>Javascript</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsPhp class="w-16" />
-                <div>PHP</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsVue class="w-16" />
-                <div>Vue</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsNuxt class="w-16" />
-                <div>Nuxt</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsTailwind class="w-16" />
-                <div>Tailwind</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsMysql class="w-16" />
-                <div>MySQL</div>
-            </div>
-            <div class="flex flex-col items-center">
-                <IconsTypescript class="w-16" />
-                <div>TypeScript</div>
-            </div>
+
         </div>
+
     </div>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-    profile: Profile
+    skills: SkillCategory[]
 }>();
-
 </script>
