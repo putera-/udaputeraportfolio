@@ -4,8 +4,9 @@
             <div class="text-xl lg:text-2xl xl:text-3xl font-semibold text-accent">{{ fullname }}</div>
             <div class="text-sm font-ligbt text-right">Full Stack<br>Developer</div>
         </div>
-        <div class="aspect-square bg-gray-300 rounded-xl flex justify-center items-center">
-            <LucideUser :size="200" />
+        <div class="aspect-square bg-gray-300 rounded-xl flex justify-center items-center overflow-hidden">
+            <img v-if="profile.avatar" :src="`${apiUrl}${profile.avatar}`" alt="" class="object-cover h-full">
+            <LucideUser v-else :size="200" />
         </div>
         <div class="text-center text-xl lg:text-2xl xl:text-2xl font-light">
             <div>{{ profile.email }}</div>
@@ -29,7 +30,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     profile: Profile
 }>();
+const { apiUrl } = useRuntimeConfig()
+
+const fullname = computed(() => {
+    return `${props.profile.firstname} ${props.profile.lastname}`;
+});
 </script>

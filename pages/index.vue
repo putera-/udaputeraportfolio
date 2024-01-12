@@ -20,10 +20,4 @@
 
 <script setup lang="ts">
 const profile = await $fetch('/api/profile') as Profile;
-
-const fullname = computed(() => {
-    return `${profile.firstname} ${profile.lastname}`;
-});
-
-
 </script>
