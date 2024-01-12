@@ -8,7 +8,7 @@
         <div class="grid grid-cols-2 gap-10">
             <div v-for="n in 4">
                 <div class="font-semibold text-xl mb-1">Project Name</div>
-                <div class="aspect-square rounded-3xl overflow-hidden">
+                <div class="aspect-square rounded-3xl overflow-hidden hover:scale-110 duration-300">
                     <img src="/images/portfolio.jpg" alt="" class="object-cover h-full">
                 </div>
                 <div class="font-light mt-2 flex flex-wrap gap-3">

@@ -7,7 +7,7 @@
         <div class="col-span-full md:col-span-6 lg:col-span-7">
             <div class="grid grid-cols-12 md:min-h-screen">
                 <div
-                    class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4 overflow-hidden">
+                    class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
                     <IndexIntro :profile="profile" id="intro" />
                     <IndexAbout :profile="profile" id="about" />
                     <IndexSkill :skills="skills" id="skills" />

@@ -4,7 +4,8 @@
             <div class="text-xl lg:text-2xl xl:text-3xl font-semibold text-accent">{{ fullname }}</div>
             <div class="text-sm font-ligbt text-right">Full Stack<br>Developer</div>
         </div>
-        <div class="aspect-square bg-gray-300 rounded-xl flex justify-center items-center overflow-hidden">
+        <div
+            class="aspect-square bg-gray-300 rounded-xl flex justify-center items-center overflow-hidden hover:scale-110 duration-300">
             <img v-if="profile.avatar" :src="`${apiUrl}${profile.avatar}`" alt="" class="object-cover h-full">
             <LucideUser v-else :size="200" />
         </div>

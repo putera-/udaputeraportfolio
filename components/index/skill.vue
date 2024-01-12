@@ -9,9 +9,10 @@
 
         <div v-for="category in skills">
             <div class="mb-3 text-sm text-accent font-semibold">{{ category.title }}</div>
-            <div class="flex flex-wrap gap-12 items-end">
+            <div class="flex flex-wrap gap-4 sm:gap-6 md:gap-10 items-end">
                 <div v-for="skill in category.skills" class="flex flex-col items-center">
-                    <div class="bg-slate-300 w-16 h-16 rounded-xl p-1 overflow-hidden">
+                    <div
+                        class="bg-slate-300 w-16 md:w-20 h-16 md:h-20 rounded-xl p-1 overflow-hidden hover:scale-110 duration-300">
                         <component v-html="skill.svg" class="w-16"></component>
                     </div>
                     <div class="text-xs mt-2">{{ skill.title }}</div>
