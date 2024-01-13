@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-8 min-h-screen py-14">
         <div class="rounded-2xl border border-zinc-600 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
-            <LucideUser :size=16 />
+            <LucideSmilePlus :size=16 />
             <div>About</div>
         </div>
         <div class="text-6xl font-light">Every great design begin with an even <span class="text-accent">Better Story</span>

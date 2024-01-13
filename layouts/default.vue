@@ -88,6 +88,18 @@ const menus: Menu[] = [
         hash: '#intro'
     },
     {
+        title: 'About',
+        icon: resolveComponent('LucideSmilePlus'),
+        href: '/',
+        hash: '#about'
+    },
+    {
+        title: 'Education',
+        icon: resolveComponent('LucideGraduationCap'),
+        href: '/',
+        hash: '#education'
+    },
+    {
         title: 'Skills',
         icon: resolveComponent('LucideBone'),
         href: '/',

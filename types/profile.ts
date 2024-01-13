@@ -1,6 +1,7 @@
 interface Portfolio {
-    profile: Profile,
+    profile: Profile
     skills: SkillCategory[]
+    educations: Education[]
 }
 
 interface Profile {
@@ -35,4 +36,12 @@ interface Skill {
     title: string
     svg: string
     categoryId: number
+}
+
+interface Education {
+    institutionName: string
+    startYear: number
+    endYear?: number
+    major?: string
+    degree?: string
 }
