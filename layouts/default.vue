@@ -100,6 +100,12 @@ const menus: Menu[] = [
         hash: '#education'
     },
     {
+        title: 'Experience',
+        icon: resolveComponent('LucideNotebookPen'),
+        href: '/',
+        hash: '#experience'
+    },
+    {
         title: 'Skills',
         icon: resolveComponent('LucideBone'),
         href: '/',
