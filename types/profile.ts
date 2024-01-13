@@ -2,6 +2,7 @@ interface Portfolio {
     profile: Profile
     skills: SkillCategory[]
     educations: Education[]
+    experiences: Experience[]
     projects: Project[]
 }
 
@@ -47,11 +48,24 @@ interface Education {
     degree?: string
 }
 
+interface Experience {
+    company: string
+    location: string
+    title: string
+    description: string
+    startDate: number
+    endDate?: number
+    readStartDate: string
+    readEndDate?: string
+}
+
 interface Project {
     title: string
     description: string
     startDate: string
     endDate?: string
+    readStartDate: string
+    readEndDate?: string
     url?: string
     github?: string
     gitlab?: string

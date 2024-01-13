@@ -6,8 +6,11 @@
         </div>
         <div class="text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
         <div class="grid grid-cols-2 gap-10">
-            <div v-for="n in 4">
-                <div class="font-semibold text-xl mb-1">Project Name</div>
+            <div v-for="project in projects">
+                <div class="flex justify-between items-center">
+                    <div class="font-semibold text-xl mb-1">{{ project.title }}</div>
+                    <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
+                </div>
                 <div class="aspect-square rounded-3xl overflow-hidden hover:scale-110 duration-300">
                     <img src="/images/portfolio.jpg" alt="" class="object-cover h-full">
                 </div>
@@ -28,5 +31,7 @@
 </template>
 
 <script setup lang="ts">
-
+defineProps<{
+    projects: Project[]
+}>();
 </script>

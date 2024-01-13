@@ -8,27 +8,33 @@
             willingness to <span class="text-yellow-400">Learn</span></div> -->
 
         <div class="flex flex-col">
-            <div v-for="project in projects" class="flex group">
+            <div v-for="experience in experiences" class="flex group">
                 <div class="divider divider-horizontal divider-start !gap-0 mt-2">
                     <LucideCircle :size="10" class="fill-slate-300 group-hover:fill-accent" />
                 </div>
                 <div>
-                    <div class="text-slate-300 group-hover:text-accent font-extralight">{{ project.startDate }} - <span>{{
-                        project.endDate || 'Present'
-                    }}</span></div>
-                    <div class="text-3xl mb-4">{{ project.title }}</div>
-                    <div class="min-h-16 flex flex-col gap-4">
-                        <div class="text-sm font-thin" v-if="project.company">{{ project.company }}</div>
-                        <div class="">{{ project.description }}</div>
+                    <div class="text-slate-300 group-hover:text-accent font-extralight">{{ experience.readStartDate }} -
+                        <span>{{
+                            experience.readEndDate || 'Present'
+                        }}</span>
+                    </div>
+                    <div class="text-3xl mb-1">{{ experience.company }}</div>
+                    <div class="mb-10 flex flex-col gap-4">
+                        <div class="text-md font-light" v-if="experience.company">{{ experience.title }}</div>
+                        <div class="text-md font-thin">{{ experience.description }}</div>
                     </div>
                 </div>
             </div>
+            <div class="flex justify-center mt-10">
+                <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Experiences</NuxtLink>
+            </div>
+
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-    projects: Project[]
+    experiences: Experience[]
 }>();
 </script>

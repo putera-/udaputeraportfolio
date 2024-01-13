@@ -11,9 +11,9 @@
                     <IndexIntro :profile="profile" id="intro" />
                     <IndexAbout :profile="profile" id="about" />
                     <IndexEducation :educations="educations" id="education" />
-                    <IndexExperience :projects="projects" id="experience" />
+                    <IndexExperience :experiences="experiences" id="experience" />
                     <IndexSkill :skills="skills" id="skills" />
-                    <IndexProject :profile="profile" id="projects" />
+                    <IndexProject :projects="projects" id="projects" />
                 </div>
             </div>
         </div>
@@ -21,5 +21,5 @@
 </template>
 
 <script setup lang="ts">
-const { profile, skills, educations, projects } = await $fetch('/api/portfolio') as Portfolio;
+const { profile, skills, educations, experiences, projects } = await $fetch('/api/portfolio') as Portfolio;
 </script>
