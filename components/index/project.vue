@@ -6,7 +6,7 @@
         </div>
         <div class="text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
         <div class="grid grid-cols-2 gap-10">
-            <div v-for="project in projects">
+            <NuxtLink :to="`/projects/${project.id}`" v-for="project in projects">
                 <div class="flex justify-between items-center">
                     <div class="font-semibold text-xl mb-1">{{ project.title }}</div>
                     <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
@@ -22,7 +22,7 @@
                     <div class="badge badge-outline rounded-lg">Tailwind</div>
                     <div class="badge badge-outline rounded-lg">Tailwind</div>
                 </div>
-            </div>
+            </NuxtLink>
         </div>
         <div class="flex justify-center">
             <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Projects</NuxtLink>

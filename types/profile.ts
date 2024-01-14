@@ -60,6 +60,7 @@ interface Experience {
 }
 
 interface Project {
+    id: number
     title: string
     description: string
     startDate: string
