@@ -7,21 +7,7 @@
         <div class="text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
         <div class="grid grid-cols-2 gap-10">
             <NuxtLink :to="`/projects/${project.id}`" v-for="project in projects">
-                <div class="flex justify-between items-center">
-                    <div class="font-semibold text-xl mb-1">{{ project.title }}</div>
-                    <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
-                </div>
-                <div class="aspect-square rounded-3xl overflow-hidden hover:scale-110 duration-300">
-                    <img src="/images/portfolio.jpg" alt="" class="object-cover h-full">
-                </div>
-                <div class="font-light mt-2 flex flex-wrap gap-3">
-                    <div class="badge badge-outline rounded-lg">NodeJs</div>
-                    <div class="badge badge-outline rounded-lg">ExpressJs</div>
-                    <div class="badge badge-outline rounded-lg">Tailwind</div>
-                    <div class="badge badge-outline rounded-lg">Tailwind</div>
-                    <div class="badge badge-outline rounded-lg">Tailwind</div>
-                    <div class="badge badge-outline rounded-lg">Tailwind</div>
-                </div>
+                <ProjectCard :project="project" />
             </NuxtLink>
         </div>
         <div class="flex justify-center">
