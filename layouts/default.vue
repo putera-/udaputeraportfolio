@@ -1,5 +1,5 @@
 <template>
-    <div data-theme='dracula' class="font-inter flex min-h-screen">
+    <div data-theme='dracula' class="font-inter text-default flex min-h-screen">
         <!-- main content -->
         <div class="grow">
             <!-- slot here -->
@@ -8,7 +8,7 @@
         <!-- side menu -->
         <div class="max-md:hidden flex-none w-20 relative h-screen">
             <div class="fixed top-0 h-screen w-full flex items-center">
-                <div class="rounded-full border border-zinc-600 p-2">
+                <div class="rounded-full border border-neutral p-2">
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
                             <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
@@ -20,24 +20,30 @@
                 </div>
             </div>
         </div>
+        <!-- button for trigger mobile menu -->
+        <label for="my-drawer-4"
+            class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-base-100 border-neutral text-default hover:bg-neutral">
+            <LucideMenu v-if="!show_mobile_menu" :size="20" />
+            <LucideX v-else :size="20" />
+        </label>
     </div>
     <!-- mobile menu -->
-    <div data-theme='dracula' class="drawer drawer-end">
+    <div data-theme='dracula' class="drawer drawer-end text-default">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
-            <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay text-white"></label>
-            <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-zinc-800 text-gray-300">
-                <div class="mb-6 text-xl">Menu</div>
+            <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+            <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-neutral">
+                <div class="mb-6 text-xl text-accent">Menu</div>
                 <ul class="menu px-0">
                     <li v-for="menu in menus">
                         <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
-                            for="my-drawer-4" class="text-accent hover:text-white px-2 text-base">
+                            for="my-drawer-4" class="text-accent hover:text-primary px-2">
                             <component :is="menu.icon" :size="16" />
                             <div class="text-white font-thin">{{ menu.title }}</div>
                         </NuxtLink>
                     </li>
                 </ul>
-                <div class="my-6 text-xl">Social</div>
+                <div class="my-6 text-xl text-accent">Social</div>
                 <div class="flex gap-2">
                     <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
                         <LucideInstagram :size="20" />
@@ -55,12 +61,6 @@
             </div>
         </div>
     </div>
-    <!-- button for trigger mobile menu -->
-    <label for="my-drawer-4"
-        class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-zinc-800 border-zinc-600 text-white hover:bg-zinc-900">
-        <LucideMenu v-if="!show_mobile_menu" :size="20" color="#b7b7b7" />
-        <LucideX v-else :size="20" color="#b7b7b7" />
-    </label>
 </template>
 
 <script setup lang="ts">

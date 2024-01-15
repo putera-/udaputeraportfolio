@@ -5,7 +5,7 @@
     </div>
     <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 duration-300">
         <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md" alt="" class="object-cover h-full">
-        <div v-else class="aspect-square flex justify-center items-center bg-neutral">
+        <div v-else class="aspect-square flex justify-center items-center bg-accent">
             <LucideBriefcase :size="200" class="" />
         </div>
     </div>

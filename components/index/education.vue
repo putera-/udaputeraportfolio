@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-8 min-h-screen py-14">
-        <div class="rounded-2xl border border-zinc-600 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
+        <div class="rounded-2xl border border-neutral flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
             <LucideGraduationCap :size=16 />
             <div>Educations</div>
         </div>
@@ -10,10 +10,10 @@
         <div class="flex flex-col">
             <div v-for="education in educations" class="flex group">
                 <div class="divider divider-horizontal divider-start !gap-0 mt-2">
-                    <LucideCircle :size="10" class="fill-slate-300 group-hover:fill-accent" />
+                    <LucideCircle :size="10" class="fill-default group-hover:fill-accent" />
                 </div>
                 <div>
-                    <div class="text-slate-300 group-hover:text-accent font-extralight">{{ education.startYear }} - <span>{{
+                    <div class="group-hover:text-accent font-extralight">{{ education.startYear }} - <span>{{
                         education.endYear || 'Present'
                     }}</span></div>
                     <div class="text-3xl">{{ education.institutionName }}</div>
