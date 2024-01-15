@@ -13,10 +13,17 @@ interface Project {
     company?: string
     skills?: SkillCategory[]
     ProjectSkills?: ProjectSkills[]
+    photos: Photo[]
 }
 
 interface ProjectSkills {
     skill: {
         title: string
     }
+}
+
+interface Photo {
+    path: string
+    path_md: string
+    path_sm: string
 }
