@@ -14,6 +14,8 @@ interface Profile {
     phone: string
     dob: string
     avatar?: string
+    avatar_md?: string
+    avatar_sm?: string
     city: string
     country: string
     bio: string
