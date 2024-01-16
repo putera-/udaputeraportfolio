@@ -1,5 +1,5 @@
 <template>
-    <div data-theme='dracula' class="font-inter text-default flex min-h-screen">
+    <div data-theme='garden' class="font-inter text-default flex min-h-screen">
         <!-- main content -->
         <div class="grow">
             <!-- slot here -->
@@ -8,7 +8,7 @@
         <!-- side menu -->
         <div class="max-md:hidden flex-none w-20 relative h-screen">
             <div class="fixed top-0 h-screen w-full flex items-center">
-                <div class="rounded-full border border-neutral p-2">
+                <div class="rounded-full border border-neutral/50 p-2">
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
                             <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
@@ -22,13 +22,13 @@
         </div>
         <!-- button for trigger mobile menu -->
         <label for="my-drawer-4"
-            class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-base-100 border-neutral text-default hover:bg-neutral">
+            class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-base-100 border-neutral/50 text-default hover:bg-neutral">
             <LucideMenu v-if="!show_mobile_menu" :size="20" />
             <LucideX v-else :size="20" />
         </label>
     </div>
     <!-- mobile menu -->
-    <div data-theme='dracula' class="drawer drawer-end text-default">
+    <div data-theme='garden' class="drawer drawer-end text-default">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>

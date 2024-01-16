@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-8 min-h-screen py-14">
-        <div class="rounded-2xl border border-neutral flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
-            <LucideHome :size="16" />
+        <div class="rounded-2xl border border-neutral/50 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
+            <LucideHome :size="16" class="text-accent" />
             <div>introduce</div>
         </div>
         <div class="text-4xl md:text-5xl xl:text-7xl font-light">Say Hi from

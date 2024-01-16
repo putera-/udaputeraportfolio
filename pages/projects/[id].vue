@@ -17,7 +17,7 @@
                 </Carousel>
             </div>
             <div v-else
-                class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-neutral">
+                class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-neutral text-accent">
                 <LucideBriefcase :size="200" class="" />
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="text-xs mb-1">{{ skillCat.title }}</div>
                 <div class="flex gap-2 mb-2">
                     <div v-for="skill of skillCat.skills"
-                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline border-accent rounded-lg flex gap-1 py-4">
+                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline border-neutral/50 rounded-lg flex gap-1 py-4">
                         <div class="bg-slate-300 w-4 md:w-5 lg:w-6 rounded p-px overflow-hidden hover:scale-110 duration-300"
                             v-html="skill.svg">
                         </div>
