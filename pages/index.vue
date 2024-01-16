@@ -21,5 +21,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+    middleware: 'profile'
+});
+
 const { profile, skills, educations, experiences, projects } = await $fetch('/api/portfolio') as Portfolio;
 </script>

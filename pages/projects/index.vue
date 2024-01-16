@@ -26,6 +26,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+    middleware: 'profile'
+});
+
 const data = ref<DataProject>({});
 const page = ref<number>(1);
 const perpage = ref<number>(9);
