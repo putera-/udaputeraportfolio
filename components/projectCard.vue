@@ -9,7 +9,7 @@
             <LucideBriefcase :size="200" class="" />
         </div>
     </div>
-    <div class="font-light mt-2 flex flex-wrap gap-2">
+    <div class="font-light mt-2 flex flex-nowrap gap-2 overflow-hidden">
         <div v-for="skill of project.ProjectSkills" class="badge badge-outline rounded-lg">{{ skill.skill.title }}</div>
     </div>
 </template>

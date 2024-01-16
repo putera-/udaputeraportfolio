@@ -1,5 +1,9 @@
-export default defineEventHandler(async (event): Promise<Project[]> => {
-    const { apiUrl } = useRuntimeConfig()
-    const { data: projects } = await $fetch(apiUrl + '/projects') as { data: Project[] };
-    return projects;
+export default defineEventHandler(async (event): Promise<DataProject> => {
+    const { apiUrl } = useRuntimeConfig();
+    const query = getQuery(event);
+
+    const page = query!.page || 1;
+    const perpage = query!.perpage || 9;
+
+    return await $fetch(apiUrl + `/projects?page=${page}&perpage=${perpage}`) as DataProject;
 })

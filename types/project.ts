@@ -27,3 +27,11 @@ interface Photo {
     path_md: string
     path_sm: string
 }
+
+interface DataProject {
+    data: Project[]
+    page: number
+    total: number
+    total_data: number
+    total_page: number
+}
