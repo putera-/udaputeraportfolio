@@ -81,17 +81,11 @@ const menus: Menu[] = [
         href: '/',
         hash: '#home'
     },
-    // {
-    //     title: 'Introduce',
-    //     icon: resolveComponent('LucideCircleUserRound'),
-    //     href: '/',
-    //     hash: '#intro'
-    // },
     {
-        title: 'About',
-        icon: resolveComponent('LucideSmilePlus'),
+        title: 'Blogs',
+        icon: resolveComponent('LucideBookOpenText'),
         href: '/',
-        hash: '#about'
+        hash: '#blogs'
     },
     {
         title: 'Education',

@@ -4,7 +4,9 @@
             <LucideBookOpenText :size="16" class="text-accent" />
             <div>Blogs</div>
         </div>
-        <div class="text-7xl font-light">Latest <span class="text-accent">Blogs</span></div>
+        <div class="text-6xl font-light">Every great design begin with an even <span class="text-accent">Better Story</span>
+        </div>
+
         <div class="grid grid-cols-2 gap-10">
             <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in blogs">
                 <BlogCard :blog="blog" />
