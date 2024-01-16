@@ -1,10 +1,10 @@
 <template>
-    <div class="max-w-7xl mx-auto my-14">
-        <div class="text-3xl font-semibold text-accent mb-10">Projects</div>
+    <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
+        <IndexHeader subTitle="Project" href="#" />
         <div class="flex justify-end">
             <div class="join">
                 <button class="join-item btn" @click="page--" :class="{ 'btn-disabled': data.page == 1 }">«</button>
-                <button class="join-item btn">Page {{ data.page }} of {{ data.total_page }}</button>
+                <button class="join-item btn font-normal">Page {{ data.page }} of {{ data.total_page }}</button>
                 <button class="join-item btn" @click="page++"
                     :class="{ 'btn-disabled': data.page == data.total_page }">»</button>
             </div>
@@ -13,6 +13,14 @@
             <NuxtLink :to="`/projects/${project.id}`" v-for="project in data.data" class="card p-4">
                 <ProjectCard :project="project" />
             </NuxtLink>
+        </div>
+        <div class="flex justify-end">
+            <div class="join">
+                <button class="join-item btn" @click="page--" :class="{ 'btn-disabled': data.page == 1 }">«</button>
+                <button class="join-item btn font-normal">Page {{ data.page }} of {{ data.total_page }}</button>
+                <button class="join-item btn" @click="page++"
+                    :class="{ 'btn-disabled': data.page == data.total_page }">»</button>
+            </div>
         </div>
     </div>
 </template>

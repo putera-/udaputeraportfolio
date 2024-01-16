@@ -1,5 +1,6 @@
 <template>
-    <div class="max-w-6xl mx-auto flex flex-col gap-6 px-4 py-10">
+    <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
+        <IndexHeader subTitle="projects" href="/projects" />
         <div class="overflow-hidden">
             <div v-if="project.photos.length">
                 <Carousel :autoplay="10000" :wrapAround="true" class="">
@@ -32,7 +33,7 @@
                 <div class="text-xs mb-1">{{ skillCat.title }}</div>
                 <div class="flex gap-2 mb-2">
                     <div v-for="skill of skillCat.skills"
-                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline rounded-lg flex gap-1 py-4">
+                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline border-accent rounded-lg flex gap-1 py-4">
                         <div class="bg-slate-300 w-4 md:w-5 lg:w-6 rounded p-px overflow-hidden hover:scale-110 duration-300"
                             v-html="skill.svg">
                         </div>
