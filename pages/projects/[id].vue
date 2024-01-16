@@ -2,9 +2,11 @@
     <div class="max-w-6xl mx-auto flex flex-col gap-6 px-4 py-10">
         <div class="overflow-hidden">
             <div v-if="project.photos.length">
-                <Carousel :autoplay="10000" :wrapAround="true">
-                    <Slide v-for="(photo, i) in project.photos" :key="i">
-                        <img class="rounded md:rounded-lg lg:rounded-2xl" :src="apiUrl + photo.path">
+                <Carousel :autoplay="10000" :wrapAround="true" class="">
+                    <Slide v-for="(photo, i) in project.photos" :key="i" class="">
+                        <div class="aspect-video w-full bg-contain bg-accent/25 flex justify-center">
+                            <img class="max-h-full" :src="apiUrl + photo.path">
+                        </div>
                     </Slide>
 
                     <template #addons>
@@ -29,8 +31,9 @@
             <div v-for="skillCat of project.skills">
                 <div class="text-xs mb-1">{{ skillCat.title }}</div>
                 <div class="flex gap-2 mb-2">
-                    <div v-for="skill of skillCat.skills" class="badge badge-lg badge-outline rounded-lg flex gap-1 py-4">
-                        <div class="bg-slate-300 w-6 rounded-xl p-px overflow-hidden hover:scale-110 duration-300"
+                    <div v-for="skill of skillCat.skills"
+                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline rounded-lg flex gap-1 py-4">
+                        <div class="bg-slate-300 w-4 md:w-5 lg:w-6 rounded p-px overflow-hidden hover:scale-110 duration-300"
                             v-html="skill.svg">
                         </div>
                         {{ skill.title }}
@@ -51,8 +54,26 @@ const id = route.params.id;
 const project = await $fetch('/api/project/' + id) as Project;
 </script>
 
-<style scoped>
+<style>
 .carousel {
     display: block;
+}
+
+.carousel__viewport {
+    border-radius: 0.25rem;
+}
+
+@media (min-width: 768px) {
+
+    .carousel__viewport {
+        border-radius: 0.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .carousel__viewport {
+
+        border-radius: 1rem;
+    }
 }
 </style>
