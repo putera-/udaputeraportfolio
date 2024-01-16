@@ -9,14 +9,18 @@
         <div class="max-md:hidden flex-none w-20 relative h-screen">
             <div class="fixed top-0 h-screen w-full flex items-center">
                 <div class="rounded-full border border-neutral/50 p-2">
-                    <ul class="flex flex-col items-center gap-2">
-                        <li v-for="menu in menus" class="tooltip tooltip-left" :data-tip="menu.title">
-                            <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
-                                class="btn btn-sm btn-circle bg-transparent text-accent hover:text-secondary border-0">
-                                <component :is="menu.icon" :size="16" />
-                            </NuxtLink>
-                        </li>
-                    </ul>
+                    <template v-for="subMenus in menus">
+                        <ul class="flex flex-col items-center gap-2">
+                            <li v-for="menu in subMenus" class="tooltip tooltip-left" :data-tip="menu.title">
+                                <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
+                                    class="btn btn-sm btn-circle bg-transparent text-accent hover:text-secondary border-0">
+                                    <component :is="menu.icon" :size="16" />
+                                </NuxtLink>
+                            </li>
+                        </ul>
+                        <div class="divider divider-accent before:h-px after:h-px"
+                            :class="menus.indexOf(subMenus) != (menus.length - 1) ? '' : 'hidden'" />
+                    </template>
                 </div>
             </div>
         </div>
@@ -32,17 +36,21 @@
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" v-model="show_mobile_menu" />
         <div class="drawer-side overflow-x-hidden">
             <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="pl-16 pr-4 pt-4 pb-12 w-80 min-h-full bg-neutral">
+            <div class="px-8 pt-4 pb-12 w-80 min-h-full bg-neutral">
                 <div class="mb-6 text-xl text-accent">Menu</div>
-                <ul class="menu px-0">
-                    <li v-for="menu in menus">
-                        <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
-                            for="my-drawer-4" class="text-accent hover:text-primary px-2">
-                            <component :is="menu.icon" :size="16" />
-                            <div class="text-white font-thin">{{ menu.title }}</div>
-                        </NuxtLink>
-                    </li>
-                </ul>
+                <template v-for="subMenus in menus">
+                    <ul class="menu px-0">
+                        <li v-for="menu in subMenus">
+                            <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
+                                for="my-drawer-4" class="text-accent hover:text-primary px-2">
+                                <component :is="menu.icon" :size="16" />
+                                <div class="text-white font-thin">{{ menu.title }}</div>
+                            </NuxtLink>
+                        </li>
+                    </ul>
+                    <div class="divider divider-accent before:h-px after:h-px"
+                        :class="menus.indexOf(subMenus) != (menus.length - 1) ? '' : 'hidden'" />
+                </template>
                 <div class="my-6 text-xl text-accent">Social</div>
                 <div class="flex gap-2">
                     <NuxtLink to="/" class="btn btn-sm btn-circle bg-transparent text-accent border-0 hover:border-2">
@@ -74,48 +82,58 @@ interface Menu {
     hash?: string
 }
 
-const menus: Menu[] = [
-    {
-        title: 'Home',
-        icon: resolveComponent('LucideHome'),
-        href: '/',
-        hash: '#home'
-    },
-    {
-        title: 'Blogs',
-        icon: resolveComponent('LucideBookOpenText'),
-        href: '/',
-        hash: '#blogs'
-    },
-    {
-        title: 'Education',
-        icon: resolveComponent('LucideGraduationCap'),
-        href: '/',
-        hash: '#education'
-    },
-    {
-        title: 'Experience',
-        icon: resolveComponent('LucideNotebookPen'),
-        href: '/',
-        hash: '#experience'
-    },
-    {
-        title: 'Skills',
-        icon: resolveComponent('LucideBone'),
-        href: '/',
-        hash: '#skills'
-    },
-    {
-        title: 'Projects',
-        icon: resolveComponent('LucideBriefcase'),
-        href: '/',
-        hash: '#projects'
-    },
-    {
-        title: 'All Projects',
-        icon: resolveComponent('LucideBriefcase'),
-        href: '/projects'
-    }
+const menus: Menu[][] = [
+    [
+
+        {
+            title: 'Home',
+            icon: resolveComponent('LucideHome'),
+            href: '/',
+            hash: '#home'
+        },
+        {
+            title: 'Blogs',
+            icon: resolveComponent('LucideBookOpenText'),
+            href: '/',
+            hash: '#blogs'
+        },
+        {
+            title: 'Education',
+            icon: resolveComponent('LucideGraduationCap'),
+            href: '/',
+            hash: '#education'
+        },
+        {
+            title: 'Experience',
+            icon: resolveComponent('LucideNotebookPen'),
+            href: '/',
+            hash: '#experience'
+        },
+        {
+            title: 'Skills',
+            icon: resolveComponent('LucideBone'),
+            href: '/',
+            hash: '#skills'
+        },
+        {
+            title: 'Projects',
+            icon: resolveComponent('LucideBriefcase'),
+            href: '/',
+            hash: '#projects'
+        }
+    ],
+    [
+        {
+            title: 'All Blogs',
+            icon: resolveComponent('LucideNotebookPen'),
+            href: '/blogs'
+        },
+        {
+            title: 'All Projects',
+            icon: resolveComponent('LucideBriefcase'),
+            href: '/projects'
+        }
+    ]
 ];
 </script>
 
