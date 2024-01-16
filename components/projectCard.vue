@@ -3,10 +3,10 @@
         <div class="font-semibold text-accent text-xl mb-1">{{ project.title }}</div>
         <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
     </div>
-    <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 duration-300">
+    <div class="aspect-video rounded-xl overflow-hidden hover:scale-105 duration-300">
         <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md" alt="" class="object-cover h-full">
-        <div v-else class="aspect-square flex justify-center items-center bg-accent">
-            <LucideBriefcase :size="200" class="" />
+        <div v-else class="aspect-video flex justify-center items-center bg-accent">
+            <LucideBriefcase :size="120" class="" />
         </div>
     </div>
     <div class="font-light mt-2 flex flex-nowrap gap-2 overflow-hidden">

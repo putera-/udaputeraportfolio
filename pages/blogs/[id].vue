@@ -24,7 +24,7 @@
         <div class="text-3xl font-semibold text-accent">{{ blog.title }}</div>
         <div class="text-sm">{{ blog.readDate }}</div>
         <div>
-            <div class="">{{ blog.content }}</div>
+            <div class="indent-8">{{ blog.content }}</div>
         </div>
     </div>
 </template>
