@@ -4,6 +4,7 @@ interface Portfolio {
     educations: Education[]
     experiences: Experience[]
     projects: Project[]
+    blogs: Blog[]
 }
 
 interface Profile {

@@ -10,6 +10,7 @@
                     class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
                     <IndexIntro :profile="profile" id="intro" />
                     <IndexAbout :profile="profile" id="about" />
+                    <IndexBlog :blogs="blogs" id="about" />
                     <IndexEducation :educations="educations" id="education" />
                     <IndexExperience :experiences="experiences" id="experience" />
                     <IndexSkill :skills="skills" id="skills" />
@@ -25,5 +26,5 @@ definePageMeta({
     middleware: 'profile'
 });
 
-const { profile, skills, educations, experiences, projects } = await $fetch('/api/portfolio') as Portfolio;
+const { profile, skills, educations, experiences, projects, blogs } = await $fetch('/api/portfolio') as Portfolio;
 </script>

@@ -22,12 +22,6 @@ interface ProjectSkills {
     }
 }
 
-interface Photo {
-    path: string
-    path_md: string
-    path_sm: string
-}
-
 interface DataProject {
     data: Project[]
     page: number
