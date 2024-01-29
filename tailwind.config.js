@@ -12,7 +12,21 @@ export default {
         extend: {
             fontFamily: {
                 'inter': 'Inter, sans-serif'
-            }
+            },
+            colors: {
+                darkmode: {
+                    50: "--color-darkmode-50",
+                    100: "--color-darkmode-100",
+                    200: "--color-darkmode-200",
+                    300: "--color-darkmode-300",
+                    400: "--color-darkmode-400",
+                    500: "--color-darkmode-500",
+                    600: "--color-darkmode-600",
+                    700: "--color-darkmode-700",
+                    800: "--color-darkmode-800",
+                    900: "--color-darkmode-900",
+                },
+            },
         },
     },
     plugins: [
