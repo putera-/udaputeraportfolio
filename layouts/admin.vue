@@ -3,18 +3,21 @@
     <div
         class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
-            <LucideHome :size="20" />
+            <NuxtLink to="/admin">
+                <ImagesMonas class="h-10" />
+            </NuxtLink>
+            <NuxtLink to="/admin" class="text-lg ml-3"> Uda Putera </NuxtLink>
             <label for="my-drawer-2" class="cursor-pointer md:hidden">
                 <LucideAlignRight :size="20" />
             </label>
 
         </div>
         <div class="h-[70px] flex max-md items-center px-3 sm:px-8">
-            <a href="" class="-intro-x hidden md:flex md:items-center">
-                <LucideHome :size="20" />
+            <NuxtLink to="/admin" class="-intro-x hidden md:flex md:items-center">
+                <ImagesMonas class="h-10" />
                 <!-- <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg"> -->
-                <span class=" text-lg ml-3"> Uda Putera </span>
-            </a>
+                <span class="text-lg ml-3"> Uda Putera </span>
+            </NuxtLink>
             <div
                 class="divider divider-horizontal max-md:hidden before:bg-neutral/25 after:bg-neutral/25 after:w-px before:w-px">
             </div>
@@ -29,8 +32,7 @@
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component"
-                                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <ImagesRupiahCircle />
                         </div>
                     </div>
                     <ul tabindex="0"
@@ -43,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="wrapper relative z-[1] before:bg-neutral/25">
+    <div class="wrapper relative z-[100] md:z-[1] before:bg-neutral/25">
         <div class="bg-neutral rounded-3xl min-h-screen flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
@@ -77,7 +79,7 @@ const menus: Menu[] = [
             {
                 label: "Sub Menu",
                 icon: resolveComponent("LucideFileDigit"),
-                to: "/",
+                to: "/admin/test",
             },
             {
                 label: "Sub Menu",
