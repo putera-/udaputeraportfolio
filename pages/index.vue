@@ -1,30 +1,40 @@
 <template>
-    <div class="grid grid-cols-10 gap-10 max-md:pt-14">
-        <div id="home"
-            class="col-span-full md:col-span-5 lg:col-span-4 xl:col-span-3 md:max-h-screen flex flex-col justify-center px-8 relative">
-            <IndexProfileCard :profile="profile" />
-        </div>
-        <div class="col-span-full md:col-span-5 lg:col-span-6 xl:col-span-7">
-            <div class="grid grid-cols-12 md:min-h-screen">
-                <div
-                    class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
-                    <IndexIntro :profile="profile" id="intro" />
-                    <!-- <IndexAbout :profile="profile" id="about" /> -->
-                    <IndexBlog :blogs="blogs" id="blogs" />
-                    <IndexEducation :educations="educations" id="education" />
-                    <IndexExperience :experiences="experiences" id="experience" />
-                    <IndexSkill :skills="skills" id="skills" />
-                    <IndexProject :projects="projects" id="projects" />
-                </div>
+<div class="grid grid-cols-10 gap-10 max-md:pt-14">
+    <div id="home"
+        class="col-span-full md:col-span-5 lg:col-span-4 xl:col-span-3 md:max-h-screen flex flex-col justify-center px-8 relative">
+        <IndexProfileCard :profile="profile" />
+    </div>
+    <div class="col-span-full md:col-span-5 lg:col-span-6 xl:col-span-7">
+        <div class="grid grid-cols-12 md:min-h-screen">
+            <div
+                class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
+                <IndexIntro :profile="profile" id="intro" />
+                <!-- <IndexAbout :profile="profile" id="about" /> -->
+                <IndexBlog :blogs="blogs" id="blogs" />
+                <IndexEducation :educations="educations" id="education" />
+                <IndexExperience :experiences="experiences" id="experience" />
+                <IndexSkill :skills="skills" id="skills" />
+                <IndexProject :projects="projects" id="projects" />
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
     middleware: 'profile'
 });
+const getPortfolio = async (): Promise<Portfolio> => {
+    try {
+        return await $fetch('/api/portfolio') as Portfolio;
+    } catch (error: any) {
+        throw createError({
+            statusCode: 500,
+            statusMessage: error.message,
+        })
+    }
+}
 
-const { profile, skills, educations, experiences, projects, blogs } = await $fetch('/api/portfolio') as Portfolio;
+const { profile, skills, educations, experiences, projects, blogs } = await getPortfolio();
 </script>
