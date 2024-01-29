@@ -1,7 +1,7 @@
 <template>
 <div data-theme="retro" class="block pb-5 px-3 md:px-8 max-w-screen min-h-screen bg-base-100 text-default">
     <div
-        class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12">
+        class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
             <NuxtLink to="/admin">
                 <ImagesMonas class="h-10" />
@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="wrapper relative z-[100] md:z-[1] before:bg-neutral/25">
-        <div class="bg-neutral rounded-3xl min-h-screen flex">
+        <div class="bg-neutral rounded-3xl flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
@@ -119,8 +119,17 @@ const menus: Menu[] = [
     right: 0;
     left: 0;
     margin-top: -1rem;
-    /* background-color: rgb(255 255 255 / 0.1); */
     border-radius: 1.3rem;
     z-index: -1;
+}
+
+.wrapper>div {
+    min-height: calc(100vh - 150px);
+}
+
+@media (max-width: 767px) {
+    .wrapper>div {
+        min-height: calc(100vh - 220px);
+    }
 }
 </style>

@@ -81,7 +81,7 @@
 
 <style>
 .st0 {
-    fill: #FFFFFF;
+    fill: #00000000;
 }
 
 .st1 {
