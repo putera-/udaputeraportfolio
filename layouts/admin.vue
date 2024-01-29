@@ -54,29 +54,7 @@
                 </div>
                 <div class="drawer-side">
                     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-                    <ul class="z-20 menu p-4 w-[250px] min-h-full max-md:bg-neutral text-white">
-                        <!-- Sidebar content here -->
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
-                        <li>
-                            <details open>
-                                <summary>Parent</summary>
-                                <ul>
-                                    <li><a class="active">Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                    <li>
-                                        <details>
-                                            <summary>Parent</summary>
-                                            <ul>
-                                                <li><a>Submenu 1</a></li>
-                                                <li><a>Submenu 2</a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
+                    <AdminNavigation :menus="menus" />
                 </div>
             </div>
         </div>
@@ -85,7 +63,47 @@
 </template>
 
 <script setup lang="ts">
-
+const menus: Menu[] = [
+    {
+        label: "Dashboard",
+        icon: resolveComponent("LucideLayoutDashboard"),
+        to: "/",
+    },
+    {
+        label: "Menu 1",
+        icon: resolveComponent("LucideBookType"),
+        to: "",
+        children: [
+            {
+                label: "Sub Menu",
+                icon: resolveComponent("LucideFileDigit"),
+                to: "/",
+            },
+            {
+                label: "Sub Menu",
+                icon: resolveComponent("LucideFileDigit"),
+                to: "/",
+            },
+            {
+                label: "Sub Menu",
+                icon: resolveComponent("LucideFileDigit"),
+                to: "/",
+                children: [
+                    {
+                        label: "In Sub Menu",
+                        icon: resolveComponent("LucideFileDigit"),
+                        to: "/",
+                    },
+                    {
+                        label: "In Sub Menu",
+                        icon: resolveComponent("LucideFileDigit"),
+                        to: "/admin",
+                    },
+                ]
+            },
+        ],
+    },
+]
 </script>
 
 <style scoped>
