@@ -1,7 +1,7 @@
 <template>
 <div class="grid max-md:grid-rows-2 md:grid-cols-10 h-screen">
     <div class="md:col-span-4 px-10 flex flex-col">
-        <div class="py-10 text-2xl font-thin">{{ url.origin }}</div>
+        <NuxtLink :to="url.origin" class="py-10 text-2xl font-thin">{{ url.origin }}</NuxtLink>
         <div class="grow flex flex-col justify-center items-center">
             <div>
                 <div class="text-6xl md:text-7xl font-bold">500</div>
