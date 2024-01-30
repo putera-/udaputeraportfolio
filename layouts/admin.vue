@@ -3,14 +3,13 @@
     <div
         class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
-            <NuxtLink to="/admin">
+            <NuxtLink to="/admin w-16">
                 <ImagesMonas class="h-10" />
             </NuxtLink>
             <NuxtLink to="/admin" class="text-lg ml-3"> Uda Putera </NuxtLink>
-            <label for="my-drawer-2" class="cursor-pointer md:hidden">
+            <label for="my-drawer-2" class="cursor-pointer md:hidden flex justify-end w-16">
                 <LucideAlignRight :size="20" />
             </label>
-
         </div>
         <div class="h-[70px] flex max-md items-center px-3 sm:px-8">
             <NuxtLink to="/admin" class="-intro-x hidden md:flex md:items-center">
@@ -45,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="wrapper relative z-[100] md:z-[1] before:bg-neutral/25">
+    <div class="wrapper relative z-[10] md:z-[1] before:bg-neutral/25">
         <div class="bg-neutral rounded-3xl flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
