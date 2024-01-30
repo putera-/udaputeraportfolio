@@ -1,7 +1,8 @@
 <template>
-    <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
-        <IndexHeader subTitle="projects" href="/projects" />
-        <div class="overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
+    <IndexHeader subTitle="projects" href="/projects" />
+    <div class="grid grid-cols-10 gap-6">
+        <div class="col-span-full lg:col-span-7 overflow-hidden">
             <div v-if="project.photos.length">
                 <Carousel :autoplay="10000" :wrapAround="true" class="">
                     <Slide v-for="(photo, i) in project.photos" :key="i" class="">
@@ -20,29 +21,21 @@
                 class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-neutral text-accent">
                 <LucideBriefcase :size="200" class="" />
             </div>
-        </div>
-        <div class="text-3xl font-semibold text-accent">{{ project.title }}</div>
-        <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
-        <div>
-            <div class="text-accent font-light">Description:</div>
-            <div class="">{{ project.description }}</div>
-        </div>
-        <div>
-            <div class="text-accent font-light mb-2">Technologies:</div>
-            <div v-for="skillCat of project.skills">
-                <div class="text-xs mb-1">{{ skillCat.title }}</div>
-                <div class="flex gap-2 mb-2">
-                    <div v-for="skill of skillCat.skills"
-                        class="badge badge-xs md:badge-md lg:badge-lg badge-outline border-neutral/50 rounded-lg flex gap-1 py-4">
-                        <div class="bg-slate-300 w-4 md:w-5 lg:w-6 rounded p-px overflow-hidden hover:scale-110 duration-300"
-                            v-html="skill.svg">
-                        </div>
-                        {{ skill.title }}
-                    </div>
-                </div>
+            <div class="mt-4">
+                <div class="lg:hidden text-3xl font-semibold text-accent">{{ project.title }}</div>
+
+                <div class="text-accent font-semibold">Description:</div>
+                <div class="">{{ project.description }}</div>
             </div>
         </div>
+        <div class="max-lg:hidden lg:col-span-3">
+            <div class="text-3xl font-semibold text-accent">{{ project.title }}</div>
+            <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
+            <ProjectSkills v-if="project.skills" :skills="project.skills" class="mt-4" />
+        </div>
     </div>
+    <ProjectSkills v-if="project.skills" :skills="project.skills" class="lg:hidden" />
+</div>
 </template>
 
 <script setup lang="ts">
