@@ -15,5 +15,15 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
-    modules: ['nuxt-lucide-icons']
+    modules: [
+        'nuxt-lucide-icons',
+        '@pinia/nuxt'
+    ],
+    pinia: {
+        storesDirs: ['./stores/**']
+    },
+    routeRules: {
+        '/': { prerender: true },
+        '/admin/**': { ssr: false }
+    }
 });

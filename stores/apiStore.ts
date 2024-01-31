@@ -17,28 +17,29 @@ export const useApiStore = defineStore('api', {
 
         //     return header;
         // },
-        // async get(url: string) {
-        //     const baseURL = useRuntimeConfig().public.apiUrl;
-        //     try {
-        //         const fetch = await $fetch(baseURL + url, {
-        //             method: 'GET',
-        //             headers: this.getHeader()
-        //         });
+        async get(url: string) {
+            const baseURL = useRuntimeConfig().public.apiUrl;
+            try {
+                const fetch = await $fetch(baseURL + url, {
+                    method: 'GET',
+                    credentials: 'include'
+                    // headers: this.getHeader()
+                });
 
-        //         // Create a promise that will resolve after 3 seconds
-        //         const timeoutPromise = new Promise((_, reject) => {
-        //             setTimeout(() => {
-        //                 reject(new Error('request timed out'));
-        //             }, 3000);
-        //         });
+                // Create a promise that will resolve after 3 seconds
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => {
+                        reject(new Error('request timed out'));
+                    }, 3000);
+                });
 
-        //         const response = await Promise.race([fetch, timeoutPromise]);
+                const response = await Promise.race([fetch, timeoutPromise]);
 
-        //         return response;
-        //     } catch (error: any) {
-        //         this.handleError(error);
-        //     }
-        // },
+                return response;
+            } catch (error: any) {
+                this.handleError(error);
+            }
+        },
         async post(url: string, data = {}) {
             const baseURL = useRuntimeConfig().public.apiUrl;
             try {
@@ -60,6 +61,8 @@ export const useApiStore = defineStore('api', {
 
                 return response;
             } catch (error) {
+                console.log('dapet  error')
+                console.log(error)
                 this.handleError(error);
             }
         },
@@ -86,35 +89,35 @@ export const useApiStore = defineStore('api', {
         //         this.handleError(error);
         //     }
         // },
-        // async delete(url: string, data = {}) {
-        //     const baseURL = useRuntimeConfig().public.apiUrl;
-        //     try {
-        //         const fetch = await $fetch(baseURL + url, {
-        //             method: 'DELETE',
-        //             headers: this.getHeader(),
-        //             body: JSON.stringify(data),
-        //         });
+        async delete(url: string, data = {}) {
+            const baseURL = useRuntimeConfig().public.apiUrl;
+            try {
+                const fetch = await $fetch(baseURL + url, {
+                    method: 'DELETE',
+                    // headers: this.getHeader(),
+                    body: JSON.stringify(data),
+                    credentials: 'include'
+                });
 
-        //         // Create a promise that will resolve after 3 seconds
-        //         const timeoutPromise = new Promise((_, reject) => {
-        //             setTimeout(() => {
-        //                 reject(new Error('request timed out'));
-        //             }, 3000);
-        //         });
+                // Create a promise that will resolve after 3 seconds
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => {
+                        reject(new Error('request timed out'));
+                    }, 3000);
+                });
 
-        //         const response = await Promise.race([fetch, timeoutPromise]);
+                const response = await Promise.race([fetch, timeoutPromise]);
 
-        //         return response;
-        //     } catch (error) {
-        //         this.handleError(error);
-        //     }
-        // },
+                return response;
+            } catch (error) {
+                this.handleError(error);
+            }
+        },
         handleError(error: any) {
-            // TODO fix response handler between middleware or not
-            if (error.status == 401) return navigateTo('/login') // login page
+            if (error.status == 401) return navigateTo('/admin/login') // login page
             if (error.status == 403) return navigateTo('/403'); // FORBIDEN
             if (error.status == 404) return navigateTo('/404'); // NOT FOUND
-            if (error.status == 500 || error.status == undefined) return navigateTo('/500'); // NOT FOUND
+            if (error.status == 500 || error.status == undefined) return navigateTo('/500'); // SERVER ERROR
             throw error;
         },
         // reset() {

@@ -3,7 +3,7 @@
     <div
         class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
-            <NuxtLink to="/admin w-16">
+            <NuxtLink to="/admin" class="w-16">
                 <ImagesMonas class="h-10" />
             </NuxtLink>
             <NuxtLink to="/admin" class="text-lg ml-3"> Uda Putera </NuxtLink>
@@ -38,7 +38,7 @@
                         class="mt-3 z-30 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                         <li><a>Profile</a></li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><button @click="AuthStore.logout()">Logout</button></li>
                     </ul>
                 </div>
             </div>
@@ -105,6 +105,8 @@ const menus: Menu[] = [
         ],
     },
 ]
+
+const AuthStore = useAuthStore();
 </script>
 
 <style scoped>
