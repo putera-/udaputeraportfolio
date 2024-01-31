@@ -1,8 +1,7 @@
 export default defineEventHandler(async (event): Promise<Portfolio> => {
     const { apiUrl } = useRuntimeConfig()
     try {
-        const { data: portfolio } = await $fetch(apiUrl + '/portfolio') as { data: Portfolio };
-        return portfolio;
+        return await $fetch(apiUrl + '/portfolio') as Portfolio;
     } catch (error: any) {
         throw new Error(error);
     }
