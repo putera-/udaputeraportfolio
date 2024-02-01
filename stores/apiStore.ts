@@ -61,8 +61,6 @@ export const useApiStore = defineStore('api', {
 
                 return response;
             } catch (error) {
-                console.log('dapet  error')
-                console.log(error)
                 this.handleError(error);
             }
         },
@@ -115,10 +113,14 @@ export const useApiStore = defineStore('api', {
         },
         handleError(error: any) {
             if (error.status == 401) return navigateTo('/admin/login') // login page
-            if (error.status == 403) return navigateTo('/403'); // FORBIDEN
-            if (error.status == 404) return navigateTo('/404'); // NOT FOUND
-            if (error.status == 500 || error.status == undefined) return navigateTo('/500'); // SERVER ERROR
-            throw error;
+
+            if (error.status == 404 || error.status == 500 || error.status == undefined) {
+                throw createError({
+                    statusCode: error.status
+                });
+            }
+
+            throw error.data.errors;
         },
         // reset() {
         //     this.token = null;

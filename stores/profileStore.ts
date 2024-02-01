@@ -13,7 +13,11 @@ export const useProfileStore = defineStore('profile', {
         },
         async update(data: Profile): Promise<void> {
             const Api = useApiStore();
-            this.profile = await Api.put('/profile', data) as Profile;
+            try {
+                this.profile = await Api.put('/profile', data) as Profile;
+            } catch (error: any) {
+                throw error;
+            }
         }
     }
 });

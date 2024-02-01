@@ -117,12 +117,29 @@
 <div class="divider mb-0"></div>
 
 <div class="">
-    <button @click="doUpdate" class="btn btn-primary float-right">Update</button>
+    <button @click="confirmUpdate = true" class="btn btn-primary float-right">Update</button>
+</div>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" v-model="confirmUpdate" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="confirmUpdate = false">✕</button>
+        <p class="py-4">Are you sure to update
+            <span class="font-bold text-lg">Profile?</span>
+        </p>
+        <div class="modal-action">
+            <label class="btn" @click="confirmUpdate = false">Close</label>
+            <label class="btn btn-neutral" @click="doUpdate">Update</label>
+        </div>
+    </div>
+    <label class="modal-backdrop" @click="confirmUpdate = false">Close</label>
 </div>
 </template>
 
 <script setup lang="ts">
-import { useProfileStore } from '~/stores/profileStore';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 definePageMeta({
     layout: 'admin',
@@ -180,9 +197,20 @@ const form = ref<Profile>({
     discord: '',
 });
 
+const confirmUpdate = ref(false);
 const doUpdate = async () => {
     const data = { ...form.value };
     delete data.avatar
-    await ProfileStore.update(data);
+    try {
+        await ProfileStore.update(data);
+        confirmUpdate.value = false;
+        toast.success("Success", {
+            autoClose: 3000
+        });
+    } catch (error: any) {
+        toast.error(error, {
+            autoClose: 3000
+        });
+    }
 }
 </script>
