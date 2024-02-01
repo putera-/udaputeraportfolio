@@ -3,9 +3,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     if (!profile.value) {
         try {
-            profile.value = await $fetch('/api/profile') as Profile;
-        } catch (error) {
-            return navigateTo('/500')
+            const getProfile = await $fetch('/api/profile') as Profile;
+            profile.value = await Promise.race([getProfile, timeoutPromise]) as Profile;
+        } catch (error: any) {
+            throw createError({
+                statusCode: error.statusCode
+            });
         }
     }
 });
