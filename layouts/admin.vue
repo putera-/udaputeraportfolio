@@ -1,7 +1,8 @@
 <template>
-<div data-theme="retro" class="block pb-5 px-3 md:px-8 max-w-screen min-h-screen bg-base-100 text-default">
+<div data-theme="retro"
+    class="block pb-5 px-3 md:px-8 max-w-screen min-h-screen bg-base-100 text-default overflow-x-hidden">
     <div
-        class="top-bar-boxed h-[140px] md:h-[70px] z-10 relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
+        class="top-bar-boxed h-[140px] md:h-[70px] z-[2] relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
             <a href="/" target="__blank" class="w-16">
                 <ImagesMonas class="h-10" />
@@ -12,9 +13,8 @@
             </label>
         </div>
         <div class="h-[70px] flex max-md items-center px-3 sm:px-8">
-            <a href="/" target="__blank" class="-intro-x hidden md:flex md:items-center">
+            <a href="/" target="__blank" class="-intro-x max-md:hidden md:flex md:items-center">
                 <ImagesMonas class="h-10" />
-                <!-- <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg"> -->
                 <span class="text-lg ml-3"> Uda Putera </span>
             </a>
             <div
@@ -44,14 +44,14 @@
             </div>
         </div>
     </div>
-    <div class="wrapper relative z-[10] md:z-[1] before:bg-neutral/25">
+    <div class="wrapper relative z-[1] md:z-[1] before:bg-neutral/25">
         <div class="bg-neutral rounded-3xl flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content rounded-3xl p-4 bg-slate-100 -mr-px">
                     <!-- Page content here -->
-                    <slot />
+                    <slot class="max-w-full overflow-hidden" />
                 </div>
                 <div class="drawer-side">
                     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
