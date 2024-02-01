@@ -36,7 +36,6 @@
                     </div>
                     <ul tabindex="0"
                         class="mt-3 z-30 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li><a>Profile</a></li>
                         <li><a>Settings</a></li>
                         <li><button @click="AuthStore.logout()">Logout</button></li>
                     </ul>
@@ -68,42 +67,8 @@ const menus: Menu[] = [
     {
         label: "Proile",
         icon: resolveComponent("LucideLayoutDashboard"),
-        to: "/",
-    },
-    {
-        label: "Menu 1",
-        icon: resolveComponent("LucideBookType"),
-        to: "",
-        children: [
-            {
-                label: "Sub Menu",
-                icon: resolveComponent("LucideFileDigit"),
-                to: "/",
-            },
-            {
-                label: "Sub Menu",
-                icon: resolveComponent("LucideFileDigit"),
-                to: "/",
-            },
-            {
-                label: "Sub Menu",
-                icon: resolveComponent("LucideFileDigit"),
-                to: "/",
-                children: [
-                    {
-                        label: "In Sub Menu",
-                        icon: resolveComponent("LucideFileDigit"),
-                        to: "/",
-                    },
-                    {
-                        label: "In Sub Menu",
-                        icon: resolveComponent("LucideFileDigit"),
-                        to: "/admin",
-                    },
-                ]
-            },
-        ],
-    },
+        to: "/admin",
+    }
 ]
 
 const AuthStore = useAuthStore();
