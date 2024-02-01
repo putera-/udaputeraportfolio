@@ -1,6 +1,6 @@
 <template>
 <div class="flex flex-col gap-8 min-h-screen py-14">
-    <div class="rounded-2xl border border-neutral/50 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
+    <div class="rounded-2xl border border-accent/50 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
         <LucideBookOpenText :size="16" class="text-accent" />
         <div>Blogs</div>
     </div>

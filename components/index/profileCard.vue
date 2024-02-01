@@ -9,8 +9,8 @@
         <img v-if="profile.avatar" :src="`${apiUrl}${profile.avatar}`" alt="" class="object-cover h-full">
         <LucideUserRound v-else :size="200" class="text-accent" />
     </div>
-    <div class="text-center text-xl lg:text-2xl xl:text-2xl font-light">
-        <div>{{ profile.email }}</div>
+    <div class="text-center text-xl font-light text-accent">
+        <div class="">{{ profile.email }}</div>
         <div>{{ profile.city }}, {{ profile.country }}</div>
     </div>
     <div class="flex flex-wrap gap-3 justify-center">
