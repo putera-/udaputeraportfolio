@@ -117,7 +117,7 @@
 <div class="divider mb-0"></div>
 
 <div class="">
-    <button class="btn btn-primary float-right">Update</button>
+    <button @click="doUpdate" class="btn btn-primary float-right">Update</button>
 </div>
 </template>
 
@@ -132,8 +132,30 @@ definePageMeta({
 const { public: { apiUrl } } = useRuntimeConfig();
 const ProfileStore = useProfileStore();
 onBeforeMount(async (): Promise<void> => {
-    if (!ProfileStore.data) await ProfileStore.get();
-    form.value = ProfileStore.profile;
+    if (!ProfileStore.profile) await ProfileStore.get();
+    const profile: Profile = ProfileStore.profile as Profile;
+
+    form.value = {
+        firstname: profile.firstname,
+        lastname: profile.lastname,
+        job: profile.job,
+        email: profile.email,
+        phone: profile.phone,
+        dob: profile.dob,
+        avatar: profile.avatar,
+        address: profile.address,
+        city: profile.city,
+        country: profile.country,
+        bio: profile.bio,
+        web: profile.web,
+        github: profile.github,
+        gitlab: profile.gitlab,
+        linkedin: profile.linkedin,
+        instagram: profile.instagram,
+        facebook: profile.facebook,
+        twitter: profile.twitter,
+        discord: profile.discord,
+    };
 });
 
 const form = ref<Profile>({
@@ -144,8 +166,6 @@ const form = ref<Profile>({
     phone: '',
     dob: '',
     avatar: '',
-    avatar_md: '',
-    avatar_sm: '',
     address: '',
     city: '',
     country: '',
@@ -158,8 +178,11 @@ const form = ref<Profile>({
     facebook: '',
     twitter: '',
     discord: '',
-    readDob: '',
-    whatsapp: ''
 });
 
+const doUpdate = async () => {
+    const data = { ...form.value };
+    delete data.avatar
+    await ProfileStore.update(data);
+}
 </script>

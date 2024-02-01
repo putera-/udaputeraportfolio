@@ -29,11 +29,11 @@ interface Profile {
     facebook: string
     twitter: string
     discord: string,
-    readDob: string
-    whatsapp: string
-    count_project: number
-    month_of_experience: number
-    year_of_experience: number
+    readDob?: string
+    whatsapp?: string
+    count_project?: number
+    month_of_experience?: number
+    year_of_experience?: number
 }
 
 interface SkillCategory {

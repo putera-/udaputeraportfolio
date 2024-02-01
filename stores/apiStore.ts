@@ -66,29 +66,29 @@ export const useApiStore = defineStore('api', {
                 this.handleError(error);
             }
         },
-        // async put(url: string, data = {}) {
-        //     const baseURL = useRuntimeConfig().public.apiUrl;
-        //     try {
-        //         const fetch = await $fetch(baseURL + url, {
-        //             method: 'PUT',
-        //             headers: this.getHeader(),
-        //             body: JSON.stringify(data),
-        //         });
+        async put(url: string, data = {}) {
+            const baseURL = useRuntimeConfig().public.apiUrl;
+            try {
+                const fetch = await $fetch(baseURL + url, {
+                    method: 'PUT',
+                    body: JSON.stringify(data),
+                    credentials: 'include'
+                });
 
-        //         // Create a promise that will resolve after 3 seconds
-        //         const timeoutPromise = new Promise((_, reject) => {
-        //             setTimeout(() => {
-        //                 reject(new Error('request timed out'));
-        //             }, 3000);
-        //         });
+                // Create a promise that will resolve after 3 seconds
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => {
+                        reject(new Error('request timed out'));
+                    }, 3000);
+                });
 
-        //         const response = await Promise.race([fetch, timeoutPromise]);
+                const response = await Promise.race([fetch, timeoutPromise]);
 
-        //         return response;
-        //     } catch (error) {
-        //         this.handleError(error);
-        //     }
-        // },
+                return response;
+            } catch (error) {
+                this.handleError(error);
+            }
+        },
         async delete(url: string, data = {}) {
             const baseURL = useRuntimeConfig().public.apiUrl;
             try {
