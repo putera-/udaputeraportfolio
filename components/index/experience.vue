@@ -9,15 +9,15 @@
 
     <div class="flex flex-col">
         <div v-for="experience in experiences" class="flex group">
-            <div class="divider divider-horizontal divider-start !gap-0 mt-2">
-                <LucideCircle :size="10" class="fill-default group-hover:fill-accent" />
+            <div class="divider divider-horizontal divider-start !gap-0 mt-2 after:bg-accent/50 after:w-px">
+                <LucideCircle :size="10" class="fill-default stroke-accent group-hover:fill-accent" />
             </div>
             <div>
-                <div class="group-hover:text-accent font-extralight">{{ experience.readStartDate }} - {{
+                <div class="group-hover:text-accent font-light">{{ experience.readStartDate }} - {{
                     experience.readEndDate }} </div>
                 <div class="text-3xl mb-1">{{ experience.company }}</div>
-                <div class="mb-10 flex flex-col gap-4">
-                    <div class="text-md font-light" v-if="experience.company">{{ experience.title }}</div>
+                <div class="mb-10 flex flex-col gap-4 font-light">
+                    <div class="text-md" v-if="experience.company">{{ experience.title }}</div>
                     <div class="text-md">{{ experience.description }}</div>
                 </div>
             </div>

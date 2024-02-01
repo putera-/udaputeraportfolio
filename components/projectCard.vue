@@ -1,6 +1,6 @@
 <template>
 <div class="flex flex-col">
-    <div class="font-semibold text-accent text-xl mb-1">{{ project.title }}</div>
+    <div class="font-semibold text-accent text-xl mb-1 truncate">{{ project.title }}</div>
     <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
 </div>
 <div class="aspect-video rounded-xl overflow-hidden hover:scale-105 duration-300 mt-1">

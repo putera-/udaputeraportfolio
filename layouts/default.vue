@@ -8,7 +8,7 @@
     <!-- side menu -->
     <div class="max-md:hidden flex-none w-20 relative h-screen">
         <div class="fixed top-0 h-screen w-full flex items-center">
-            <div class="rounded-full border border-neutral/50 p-2">
+            <div class="rounded-full border border-accent/50 p-2">
                 <template v-for="subMenus in menus">
                     <ul class="flex flex-col items-center gap-2">
                         <li v-for="menu in subMenus" class="tooltip tooltip-left" :data-tip="menu.title">
@@ -18,7 +18,7 @@
                             </NuxtLink>
                         </li>
                     </ul>
-                    <div class="divider divider-accent before:h-px after:h-px"
+                    <div class="divider my-1 before:h-px after:h-px before:bg-accent/50 after:bg-accent/50"
                         :class="menus.indexOf(subMenus) != (menus.length - 1) ? '' : 'hidden'" />
                 </template>
             </div>
@@ -26,7 +26,7 @@
     </div>
     <!-- button for trigger mobile menu -->
     <label for="my-drawer-4"
-        class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-base-100 border-neutral/50 text-default hover:bg-neutral">
+        class="fixed z-10 right-4 top-4 md:hidden btn btn-circle bg-base-100 border-accent/50 text-default hover:bg-neutral">
         <LucideMenu v-if="!show_mobile_menu" :size="20" />
         <LucideX v-else :size="20" />
     </label>
