@@ -32,7 +32,7 @@ const getPortfolio = async (): Promise<Portfolio> => {
         throw createError({
             statusCode: 500,
             statusMessage: error.message,
-        })
+        });
     }
 }
 

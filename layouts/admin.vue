@@ -66,7 +66,7 @@
 <script setup lang="ts">
 const menus: Menu[] = [
     {
-        label: "Dashboard",
+        label: "Proile",
         icon: resolveComponent("LucideLayoutDashboard"),
         to: "/",
     },
@@ -78,7 +78,7 @@ const menus: Menu[] = [
             {
                 label: "Sub Menu",
                 icon: resolveComponent("LucideFileDigit"),
-                to: "/admin/test",
+                to: "/",
             },
             {
                 label: "Sub Menu",
