@@ -17,6 +17,7 @@ interface Profile {
     avatar?: string
     avatar_md?: string
     avatar_sm?: string
+    address: string
     city: string
     country: string
     bio: string
