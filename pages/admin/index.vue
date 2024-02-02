@@ -1,5 +1,6 @@
 <template>
 <div class="font-bold text-3xl">Profile</div>
+<div class="divider mt-0"></div>
 <div class="max-sm:flex max-sm:flex-col-reverse sm:grid sm:grid-cols-2 gap-6 xl:gap-16">
     <div>
         <div class="grid lg:grid-cols-2 gap-4">
@@ -58,9 +59,11 @@
         </div>
     </div>
     <div class="xl:px-10">
-        <img v-if="form.avatar_md" :src="apiUrl + form.avatar_md" class="rounded-2xl mx-auto">
+        <label>Avatar</label>
+        <img v-if="form.avatar" :src="form.avatar" class="rounded-2xl mx-auto">
         <div v-else class="bg-indigo-400 w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
         </div>
+        <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" @change="handleAvatar">
         <label class="form-control w-full">
             <div class="label-text">Bio</div>
             <textarea v-model="form.bio" type="text" placeholder="Bio" rows="4"
@@ -159,7 +162,7 @@ onBeforeMount(async (): Promise<void> => {
         email: profile.email,
         phone: profile.phone,
         dob: profile.dob,
-        avatar: profile.avatar,
+        avatar: apiUrl + profile.avatar_md,
         address: profile.address,
         city: profile.city,
         country: profile.country,
@@ -197,13 +200,57 @@ const form = ref<Profile>({
     discord: '',
 });
 
+const fileInput = ref<HTMLInputElement | null>(null);
+let avatar: File | null;
+
+const handleAvatar = (e: Event): void => {
+    const fileInput = e.target as HTMLInputElement;
+    const files = fileInput.files;
+
+    if (!files!.length) {
+        avatar = null;
+    } else {
+        avatar = files![0];
+
+        // reset image preview
+        form.value.avatar = '';
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            form.value.avatar = reader.result as string;
+        };
+        reader.readAsDataURL(avatar);
+    }
+}
+
+
 const confirmUpdate = ref(false);
 const doUpdate = async () => {
-    const data = { ...form.value };
-    delete data.avatar
+    let data: Profile | FormData = { ...form.value } as Profile;
+    delete data.avatar;
+
+    if (avatar) {
+        const formData = new FormData();
+
+        for (const [key, value] of Object.entries(data)) {
+            if (value) {
+                formData.append(key, value as string);
+            }
+        }
+
+        formData.append('avatar', avatar);
+        data = formData;
+    }
+
     try {
         await ProfileStore.update(data);
+
         confirmUpdate.value = false;
+        // reset file input avatar
+        if (fileInput.value) {
+            fileInput.value.value = '';
+        }
+
         toast.success("Success", {
             autoClose: 3000
         });

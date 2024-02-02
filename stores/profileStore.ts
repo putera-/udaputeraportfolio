@@ -11,7 +11,7 @@ export const useProfileStore = defineStore('profile', {
             const Api = useApiStore();
             this.profile = await Api.get('/profile') as Profile;
         },
-        async update(data: Profile): Promise<void> {
+        async update(data: Profile | FormData): Promise<void> {
             const Api = useApiStore();
             try {
                 this.profile = await Api.put('/profile', data) as Profile;

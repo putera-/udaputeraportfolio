@@ -1,29 +1,18 @@
 export const useApiStore = defineStore('api', {
-    state: () => ({
-        // token: null,
-    }),
     actions: {
-        // getHeader() {
-        //     // const Auth = useAuthStore();
-        //     const header = {
-        //         'Content-Type': 'application/json',
-        //         'Access-Control-Allow-Origin': '*',
-        //         // Authorization: ''
-        //     }
+        handleData(data: any = {}) {
+            if (data instanceof FormData) {
+                return data;
+            }
 
-        //     // if (Auth.token) {
-        //     //     header.Authorization = 'Bearer ' + Auth.token;
-        //     // }
-
-        //     return header;
-        // },
+            return JSON.stringify(data);
+        },
         async get(url: string) {
             const baseURL = useRuntimeConfig().public.apiUrl;
             try {
                 const fetch = await $fetch(baseURL + url, {
                     method: 'GET',
-                    credentials: 'include'
-                    // headers: this.getHeader()
+                    credentials: 'include',
                 });
 
                 // Create a promise that will resolve after 3 seconds
@@ -40,14 +29,16 @@ export const useApiStore = defineStore('api', {
                 this.handleError(error);
             }
         },
-        async post(url: string, data = {}) {
+        async post(url: string, data: any = {}) {
             const baseURL = useRuntimeConfig().public.apiUrl;
+
+            data = this.handleData(data);
+
             try {
                 const fetch = $fetch(baseURL + url, {
                     method: 'POST',
-                    // headers: this.getHeader(),
-                    body: JSON.stringify(data),
-                    credentials: 'include'
+                    body: data,
+                    credentials: 'include',
                 });
 
                 // Create a promise that will resolve after 3 seconds
@@ -64,12 +55,15 @@ export const useApiStore = defineStore('api', {
                 this.handleError(error);
             }
         },
-        async put(url: string, data = {}) {
+        async put(url: string, data: any = {}) {
             const baseURL = useRuntimeConfig().public.apiUrl;
+
+            data = this.handleData(data);
+
             try {
                 const fetch = await $fetch(baseURL + url, {
                     method: 'PUT',
-                    body: JSON.stringify(data),
+                    body: data,
                     credentials: 'include'
                 });
 
@@ -87,12 +81,11 @@ export const useApiStore = defineStore('api', {
                 this.handleError(error);
             }
         },
-        async delete(url: string, data = {}) {
+        async delete(url: string, data: any = {}) {
             const baseURL = useRuntimeConfig().public.apiUrl;
             try {
                 const fetch = await $fetch(baseURL + url, {
                     method: 'DELETE',
-                    // headers: this.getHeader(),
                     body: JSON.stringify(data),
                     credentials: 'include'
                 });
@@ -121,11 +114,6 @@ export const useApiStore = defineStore('api', {
             }
 
             throw error.data.errors;
-        },
-        // reset() {
-        //     this.token = null;
-        //     axios.defaults.headers.common['Authorization'] = undefined;
-        //     localStorage.removeItem('token');
-        // }
+        }
     },
 })
