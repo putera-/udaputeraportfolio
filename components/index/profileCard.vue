@@ -6,7 +6,8 @@
     </div>
     <div
         class="aspect-square bg-neutral rounded-xl flex justify-center items-center overflow-hidden hover:scale-110 duration-300">
-        <img v-if="profile.avatar" :src="`${apiUrl}${profile.avatar}`" alt="" class="object-cover h-full">
+        <img v-if="profile.avatar" :src="`${apiUrl}${profile.avatar}`" alt=""
+            class="object-cover min-h-full min-w-full">
         <LucideUserRound v-else :size="200" class="text-accent" />
     </div>
     <div class="text-center text-xl font-light text-accent">
