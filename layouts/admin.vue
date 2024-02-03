@@ -75,10 +75,52 @@
 <script setup lang="ts">
 const menus: Menu[] = [
     {
-        label: "Profile",
+        label: "Dashboard",
         icon: resolveComponent("LucideLayoutDashboard"),
+        to: "/admin",
+    },
+    {
+        label: "Profile",
+        icon: resolveComponent("LucideBookUser"),
         to: "/admin/profile",
-    }
+    },
+    {
+        label: "Blogs",
+        icon: resolveComponent("LucideBookOpenText"),
+        to: "/admin/blogs",
+    },
+    {
+        label: "Experience",
+        icon: resolveComponent("LucideBuilding2"),
+        to: "/admin/experiences",
+    },
+    {
+        label: "Education",
+        icon: resolveComponent("LucideGraduationCap"),
+        to: "/admin/educations",
+    },
+    {
+        label: "Skills",
+        icon: resolveComponent("LucideBone"),
+        to: "",
+        children: [
+            {
+                label: "Skills",
+                icon: resolveComponent("LucideBone"),
+                to: "/admin/skills",
+            },
+            {
+                label: "Category",
+                icon: resolveComponent("LucideBone"),
+                to: "/admin/skills",
+            }
+        ]
+    },
+    {
+        label: "Projects",
+        icon: resolveComponent("LucideBriefcase"),
+        to: "/admin/projects",
+    },
 ]
 
 const AuthStore = useAuthStore();
