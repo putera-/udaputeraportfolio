@@ -7,9 +7,19 @@
     <div class="text-6xl font-light">My <span class="text-accent">Story</span>
     </div>
 
-    <div class="grid grid-cols-2 gap-10">
-        <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in blogs">
-            <BlogCard :blog="blog" />
+    <div class="flex flex-col gap-5">
+        <!-- TODO alt -->
+        <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in blogs" class="flex gap-2">
+            <div class="hover:scale-105 duration-300">
+                <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" alt=""
+                    class="aspect-video w-44 min-w-44 rounded-lg">
+                <div v-else class="aspect-video w-44 min-w-44 rounded-lg bg-accent"></div>
+            </div>
+            <div class="">
+                <div class="font-semibold text-accent text-xl truncate">{{ blog.title }}</div>
+                <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
+                <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
+            </div>
         </NuxtLink>
     </div>
     <div class="flex justify-center">
@@ -22,4 +32,6 @@
 defineProps<{
     blogs: Blog[]
 }>();
+
+const { public: { apiUrl } } = useRuntimeConfig();
 </script>

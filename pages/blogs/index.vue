@@ -1,12 +1,16 @@
 <template>
 <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
-    <IndexHeader subTitle="Blog" href="#" />
+    <IndexHeader subTitle="Blogs" href="/blogs" />
     <template v-if="data">
-        <div class="flex justify-end">
+        <div class="flex max-sm:flex-col justify-between items-end">
+            <div class="max-sm:mb-4 text-4xl max-sm:w-full">My Latest <span class="text-accent">Blogs</span>
+            </div>
             <div class="join">
-                <button class="join-item btn" @click="page--" :class="{ 'btn-disabled': data.page == 1 }">«</button>
-                <button class="join-item btn font-normal">Page {{ data.page }} of {{ data.total_page }}</button>
-                <button class="join-item btn" @click="page++"
+                <button class="join-item btn max-md:btn-sm" @click="page--"
+                    :class="{ 'btn-disabled': data.page == 1 }">«</button>
+                <button class="join-item btn max-md:btn-sm font-normal">Page {{ data.page }} of {{ data.total_page
+                }}</button>
+                <button class="join-item btn max-md:btn-sm" @click="page++"
                     :class="{ 'btn-disabled': data.page == data.total_page }">»</button>
             </div>
         </div>
@@ -17,9 +21,11 @@
         </div>
         <div class="flex justify-end">
             <div class="join">
-                <button class="join-item btn" @click="page--" :class="{ 'btn-disabled': data.page == 1 }">«</button>
-                <button class="join-item btn font-normal">Page {{ data.page }} of {{ data.total_page }}</button>
-                <button class="join-item btn" @click="page++"
+                <button class="join-item btn max-md:btn-sm" @click="page--"
+                    :class="{ 'btn-disabled': data.page == 1 }">«</button>
+                <button class="join-item btn max-md:btn-sm font-normal">Page {{ data.page }} of {{ data.total_page
+                }}</button>
+                <button class="join-item btn max-md:btn-sm" @click="page++"
                     :class="{ 'btn-disabled': data.page == data.total_page }">»</button>
             </div>
         </div>
