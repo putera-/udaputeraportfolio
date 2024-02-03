@@ -1,8 +1,7 @@
 <template>
-<div data-theme="retro"
-    class="block pb-5 px-3 md:px-8 max-w-screen min-h-screen bg-base-100 text-default overflow-x-hidden">
+<div data-theme="retro" class="pb-5 px-3 md:px-8 max-w-screen min-h-screen bg-base-100 text-default overflow-x-hidden">
     <div
-        class="top-bar-boxed h-[140px] md:h-[70px] z-[2] relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
+        class="top-bar-boxed h-[140px] md:h-[70px] relative border-b border-neutral/25 -mx-3 sm:-mx-8 md:pt-0 mb-12 max-w-screen">
         <div class="md:hidden h-[70px] flex justify-between items-center border-b border-neutral/25 px-3 sm:px-8">
             <a href="/" target="__blank" class="w-16">
                 <ImagesMonas class="h-10" />
@@ -29,22 +28,32 @@
                         <li>Profile</li>
                     </ul>
                 </div>
-                <div class="dropdown dropdown-end">
+                <div class="absolute z-10 right-4 sm:right-8 dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
                             <ImagesRupiahCircle />
                         </div>
                     </div>
-                    <ul tabindex="0"
-                        class="mt-3 z-30 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li><a>Settings</a></li>
-                        <li><button @click="AuthStore.logout()">Logout</button></li>
+                    <ul tabindex="10"
+                        class="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li>
+                            <button @click="">
+                                <LucideUser :size="16" />
+                                User
+                            </button>
+                        </li>
+                        <li>
+                            <button @click="AuthStore.logout()">
+                                <LucideKeySquare :size="16" />
+                                Logout
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="wrapper relative z-[1] md:z-[1] before:bg-neutral/25">
+    <div class="wrapper relative before:bg-neutral/25">
         <div class="bg-neutral rounded-3xl flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
@@ -87,7 +96,7 @@ const AuthStore = useAuthStore();
     left: 0;
     margin-top: -1rem;
     border-radius: 1.3rem;
-    z-index: -1;
+    z-index: -2;
 }
 
 .wrapper>div {
