@@ -75,9 +75,9 @@
 <script setup lang="ts">
 const menus: Menu[] = [
     {
-        label: "Proile",
+        label: "Profile",
         icon: resolveComponent("LucideLayoutDashboard"),
-        to: "/admin",
+        to: "/admin/profile",
     }
 ]
 
