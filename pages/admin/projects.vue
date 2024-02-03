@@ -1,6 +1,6 @@
 <template>
 <div class="font-bold text-3xl">Projects</div>
-<div class="divider mt-0"></div>
+<div class="divider before:h-px after:h-px mt-0"></div>
 </template>
 
 <script setup lang="ts">

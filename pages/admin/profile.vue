@@ -1,6 +1,6 @@
 <template>
 <div class="font-bold text-3xl">Profile</div>
-<div class="divider mt-0"></div>
+<div class="divider before:h-px after:h-px mt-0"></div>
 <div class="max-sm:flex max-sm:flex-col-reverse sm:grid sm:grid-cols-2 gap-6 xl:gap-16">
     <div>
         <div class="grid lg:grid-cols-2 gap-4">

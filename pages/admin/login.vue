@@ -1,6 +1,6 @@
 <template>
 <div class="px-10 sm:px-20 lg:px-24 xl:px-44 h-full flex items-center mx-auto">
-    <div class="mx-auto w-full">
+    <div class="mx-auto before:h-px after:h-px w-full">
         <div class="font-bold text-center text-3xl mb-4">Uda Putera</div>
         <div class="flex flex-col gap-5 md:gap-10">
             <div
