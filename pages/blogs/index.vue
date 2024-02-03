@@ -1,6 +1,7 @@
 <template>
-    <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
-        <IndexHeader subTitle="Blog" href="#" />
+<div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
+    <IndexHeader subTitle="Blog" href="#" />
+    <template v-if="data">
         <div class="flex justify-end">
             <div class="join">
                 <button class="join-item btn" @click="page--" :class="{ 'btn-disabled': data.page == 1 }">«</button>
@@ -22,7 +23,8 @@
                     :class="{ 'btn-disabled': data.page == data.total_page }">»</button>
             </div>
         </div>
-    </div>
+    </template>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -30,7 +32,7 @@ definePageMeta({
     middleware: 'profile'
 });
 
-const data = ref<DataBlog>({});
+const data = ref<DataBlog>();
 const page = ref<number>(1);
 const perpage = ref<number>(9);
 onBeforeMount(async () => {
