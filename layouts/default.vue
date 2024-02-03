@@ -125,7 +125,7 @@ const menus: Menu[][] = [
     [
         {
             title: 'All Blogs',
-            icon: resolveComponent('LucideNotebookPen'),
+            icon: resolveComponent('LucideBookOpenText'),
             href: '/blogs'
         },
         {

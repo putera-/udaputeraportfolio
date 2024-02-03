@@ -15,7 +15,7 @@
                     class="aspect-video w-44 min-w-44 rounded-lg">
                 <div v-else class="aspect-video w-44 min-w-44 rounded-lg bg-accent"></div>
             </div>
-            <div class="">
+            <div class="overflow-hidden">
                 <div class="font-semibold text-accent text-xl truncate">{{ blog.title }}</div>
                 <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
                 <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
