@@ -1,6 +1,6 @@
 <template>
 <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
-    <IndexHeader subTitle="projects" href="/projects" />
+    <IndexHeader subTitle="Projects" href="/projects" />
     <div class="text-3xl font-semibold text-accent">{{ project.title }}</div>
     <div class="grid grid-cols-10 gap-6">
         <div class="col-span-full lg:col-span-7 overflow-hidden">
