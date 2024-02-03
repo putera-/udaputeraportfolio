@@ -4,7 +4,9 @@
         <LucideBone :size=16 class="text-accent" />
         <div>Skills</div>
     </div>
-    <div class="text-6xl font-light mb-10">Every great <span class="text-accent">Projects</span> begin with
+    <div class="text-4xl md:text-5xl xl:text-7xl font-light mb-2 md:mb-10">Every great <span
+            class="text-accent">Projects</span>
+        begin with
         willingness to <span class="text-accent">Learn</span></div>
 
     <div v-for="category in skills">

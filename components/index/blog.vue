@@ -1,10 +1,10 @@
 <template>
-<div class="flex flex-col gap-8 min-h-screen py-14">
+<div class="flex flex-col gap-4 md:gap-8 min-h-screen py-14">
     <div class="rounded-2xl border border-accent/50 flex items-center gap-2 w-min px-4 py-2 uppercase text-xs">
         <LucideBookOpenText :size="16" class="text-accent" />
         <div>Blogs</div>
     </div>
-    <div class="text-6xl font-light">My <span class="text-accent">Story</span>
+    <div class="text-4xl md:text-5xl xl:text-7xl font-light">My <span class="text-accent">Story</span>
     </div>
 
     <div class="flex flex-col gap-5">

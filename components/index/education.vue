@@ -13,10 +13,10 @@
                 <LucideCircle :size="10" class="fill-default stroke-accent group-hover:fill-accent" />
             </div>
             <div>
-                <div class="group-hover:text-accent font-light">{{ education.startYear }} - <span>{{
+                <div class="textsm group-hover:text-accent font-light">{{ education.startYear }} - <span>{{
                     education.endYear || 'Present'
                 }}</span></div>
-                <div class="text-3xl">{{ education.institutionName }}</div>
+                <div class="text-xl md:text-3xl">{{ education.institutionName }}</div>
                 <div class="min-h-12">
                     <div class="text-sm font-light" v-if="education.major || education.degree">{{ education.major
                     }}

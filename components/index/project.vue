@@ -4,7 +4,7 @@
         <LucideBriefcase :size="16" class="text-accent" />
         <div>PROJECTS</div>
     </div>
-    <div class="text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
+    <div class="text-4xl md:text-5xl xl:text-7xl font-light">Latest <span class="text-accent">Projects</span></div>
     <div class="grid grid-cols-2 gap-10">
         <NuxtLink :to="`/projects/${project.id}`" v-for="project in projects">
             <ProjectCard :project="project" />

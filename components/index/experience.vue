@@ -15,7 +15,7 @@
             <div>
                 <div class="group-hover:text-accent font-light">{{ experience.readStartDate }} - {{
                     experience.readEndDate }} </div>
-                <div class="text-3xl mb-1">{{ experience.company }}</div>
+                <div class="text-xl md:text-3xl mb-1">{{ experience.company }}</div>
                 <div class="mb-10 flex flex-col gap-4 font-light">
                     <div class="text-md" v-if="experience.company">{{ experience.title }}</div>
                     <div class="text-md">{{ experience.description }}</div>
