@@ -1,10 +1,14 @@
 <template>
-<div class="flex flex-col">
+<div>
     <div class="font-semibold text-accent text-xl mb-1 truncate">{{ project.title }}</div>
-    <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
+    <div class="flex justify-between">
+        <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
+        <div class="text-xs text-accent">{{ status }}</div>
+    </div>
 </div>
 <div class="aspect-video rounded-xl overflow-hidden hover:scale-105 duration-300 mt-1">
-    <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md" alt="" class="object-cover h-full">
+    <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md" alt=""
+        class="object-cover h-full bg-accent">
     <div v-else class="aspect-video flex justify-center items-center bg-accent">
         <LucideBriefcase :size="120" class="" />
     </div>
@@ -16,9 +20,14 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import Project from './index/project.vue';
+
+const props = defineProps<{
     project: Project
 }>();
 const { public: { apiUrl } } = useRuntimeConfig();
+const status = computed(() => {
+    return props.project.status.replaceAll('_', ' ');
+})
 
 </script>

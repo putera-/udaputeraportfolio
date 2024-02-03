@@ -1,6 +1,7 @@
 <template>
 <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
     <IndexHeader subTitle="projects" href="/projects" />
+    <div class="text-3xl font-semibold text-accent">{{ project.title }}</div>
     <div class="grid grid-cols-10 gap-6">
         <div class="col-span-full lg:col-span-7 overflow-hidden">
             <div v-if="project.photos.length">
@@ -22,15 +23,27 @@
                 <LucideBriefcase :size="200" class="" />
             </div>
             <div class="mt-4">
-                <div class="lg:hidden text-3xl font-semibold text-accent">{{ project.title }}</div>
+                <div class="lg:hidden">
+                    <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ status }}</span></div>
+                    <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
+                    <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
+                        project.company }}</span></div>
+                    <div class="text-sm" v-if="project.url">Url: <span class="text-accent font-semi-bold">{{ project.url
+                    }}</span></div>
+                </div>
 
-                <div class="text-accent font-semibold">Description:</div>
-                <div class="">{{ project.description }}</div>
+                <div class="text-accent font-semibold mt-4">Description:</div>
+                <div class="text-justify">{{ project.description }}</div>
             </div>
         </div>
         <div class="max-lg:hidden lg:col-span-3">
-            <div class="text-3xl font-semibold text-accent">{{ project.title }}</div>
-            <div class="text-sm">{{ project.readStartDate }} - {{ project.readEndDate || "present" }}</div>
+            <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ status }}</span></div>
+            <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
+            <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
+                project.company }}</span></div>
+            <div class="text-sm" v-if="project.url">Url: <span class="text-accent font-semi-bold">{{ project.url
+            }}</span></div>
+
             <ProjectSkills v-if="project.skills" :skills="project.skills" class="mt-4" />
         </div>
     </div>
@@ -50,6 +63,10 @@ const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
 const id = route.params.id;
 const project = await $fetch('/api/project/' + id) as Project;
+
+const status = computed(() => {
+    return project.status.replaceAll('_', ' ');
+})
 </script>
 
 <style>

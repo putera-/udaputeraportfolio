@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 defineProps<{
-    skills: ProjectSkills
+    skills: SkillCategory[]
 }>();
 
 </script>
