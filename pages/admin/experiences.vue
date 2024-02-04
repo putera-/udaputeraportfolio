@@ -3,15 +3,10 @@
 <div class="divider before:h-px after:h-px mt-0"></div>
 <div class="flex gap-2 max-sm:items-end justify-between">
     <div class="grow">
-        <div class="flex items-center bg-base-100 pl-2 rounded">
-            <LucideSearch :size="16" class="flex-none" />
-            <input v-model="filter" @keyup.enter="getData()" type="text"
-                class="input input-sm focus:outline-0 focus:border-0 !w-full">
-            <button @click="getData()" class="btn btn-neutral btn-sm rounded-l-none flex-none">Search</button>
-        </div>
+        <AdminSearch :filter="filter" :doFilter="doFilter" />
     </div>
     <div class="flex-none">
-        <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :goto-page="getData" />
+        <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :gotoPage="getData" />
     </div>
 </div>
 <div class="py-3">
@@ -28,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="hover" v-for="data in ExperieneStore.experiences">
+                <tr class="hover" v-for=" data  in  ExperieneStore.experiences ">
                     <td>
                         <div>{{ data.company }}</div>
                         <div class="text-xs">{{ data.title }}</div>
@@ -42,7 +37,7 @@
         </table>
     </div>
     <div class="md:hidden flex flex-col gap-2">
-        <div class="card bg-base-100/50 p-2" v-for="data in ExperieneStore.experiences">
+        <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperieneStore.experiences ">
             <div class="flex gap-2 items-center">
                 <LucideBuilding2 :size="20" class="text-gray-500" />
                 <div class="grow">
@@ -66,7 +61,7 @@
     </div>
 </div>
 <div class="flex justify-end">
-    <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :goto-page="getData" />
+    <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :gotoPage="getData" />
 </div>
 </template>
 
@@ -86,5 +81,10 @@ const page = ref<number>(1);
 const getData = async (targetPage: number = 1) => {
     page.value = targetPage;
     await ExperieneStore.getAll(filter.value, page.value)
+}
+
+const doFilter = async (newFilter: string) => {
+    filter.value = newFilter;
+    await getData();
 }
 </script>
