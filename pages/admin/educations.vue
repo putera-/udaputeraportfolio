@@ -25,7 +25,7 @@
             <tbody>
                 <tr class="hover" v-for="data in educations">
                     <td>
-                        <div>{{ data.institutionName }}</div>
+                        <div class="text-neutral font-semibold">{{ data.institutionName }}</div>
                         <div class="text-xs">
                             <span v-if="data.major">{{ data.major }}</span>
                             <span v-if="data.degree"> - {{ data.degree }}</span>
@@ -45,7 +45,7 @@
                 <div class="grow">
                     <div class="flex justify-between">
                         <div>
-                            <div>{{ data.institutionName }}</div>
+                            <div class="text-neutral font-semibold">{{ data.institutionName }}</div>
                             <div class="text-xs">
                                 <span v-if="data.major">{{ data.major }}</span>
                                 <span v-if="data.degree"> - {{ data.degree }}</span>

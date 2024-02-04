@@ -27,7 +27,7 @@
             <tbody>
                 <tr class="hover" v-for=" data  in  ExperienceStore.experiences ">
                     <td>
-                        <div>{{ data.company }}</div>
+                        <div class="text-neutral font-semibold">{{ data.company }}</div>
                         <div class="text-xs">{{ data.title }}</div>
                     </td>
                     <td>{{ data.readStartDate }}</td>
@@ -45,7 +45,7 @@
                 <div class="grow">
                     <div class="flex justify-between">
                         <div>
-                            <div>{{ data.company }}</div>
+                            <div class="text-neutral font-semibold">{{ data.company }}</div>
                             <div class="text-xs">{{ data.title }}</div>
                         </div>
                         <div>
