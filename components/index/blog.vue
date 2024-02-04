@@ -8,10 +8,9 @@
     </div>
 
     <div class="flex flex-col gap-5">
-        <!-- TODO alt -->
         <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in blogs" class="flex gap-2">
             <div class="hover:scale-105 duration-300">
-                <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" alt=""
+                <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
                     class="aspect-video w-44 min-w-44 rounded-lg">
                 <div v-else class="aspect-video w-44 min-w-44 rounded-lg bg-accent"></div>
             </div>

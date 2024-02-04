@@ -38,7 +38,7 @@ definePageMeta({
     middleware: 'profile'
 });
 
-const data = ref<DataBlog>();
+const data = ref<BlogPage>();
 const page = ref<number>(1);
 const perpage = ref<number>(9);
 onBeforeMount(async () => {

@@ -7,7 +7,7 @@ interface Blog {
     shortDateTime: string
 }
 
-interface DataBlog {
+interface BlogPage {
     data: Blog[]
     page: number
     total: number
