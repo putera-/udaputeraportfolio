@@ -13,7 +13,7 @@
     <div class="flex-none">
         <div class="join">
             <button class="join-item btn btn-sm" :class="{ 'btn-disabled': ExperieneStore.page == 1 }">«</button>
-            <button class="join-item btn btn-sm bg-base-100">
+            <button class="join-item btn btn-sm bg-base-100 font-normal max-sm:text-xs">
                 Page {{ ExperieneStore.page }}
                 <span class="max-sm:hidden"> of {{ ExperieneStore.total_page }}</span>
             </button>
@@ -76,7 +76,7 @@
 <div class="flex justify-end">
     <div class="join">
         <button class="join-item btn btn-sm" :class="{ 'btn-disabled': ExperieneStore.page == 1 }">«</button>
-        <button class="join-item btn btn-sm bg-base-100">
+        <button class="join-item btn btn-sm bg-base-100 font-normal max-sm:text-xs">
             Page {{ ExperieneStore.page }}
             <span class="max-sm:hidden"> of {{
                 ExperieneStore.total_page }}</span>
