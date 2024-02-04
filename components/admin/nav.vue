@@ -1,6 +1,6 @@
 <template>
 <li v-if="!menu.children" class="mt-3">
-    <NuxtLink :to="menu.to">
+    <NuxtLink :to="menu.to" @click="hide()">
         <component :is="menu.icon"></component>
         {{ menu.label }}
     </NuxtLink>
@@ -13,7 +13,7 @@
         </summary>
         <ul>
             <template v-for="subMenu in menu.children">
-                <AdminNav :menu="subMenu" />
+                <AdminNav :menu="subMenu" :hide="hide" />
             </template>
         </ul>
     </details>
@@ -22,11 +22,12 @@
 
 <script setup lang="ts">
 defineProps<{
-    menu: Menu
+    menu: Menu,
+    hide: Function
 }>();
 const path = useRoute().path;
 
-const isMenuOpen = (menu) => {
+const isMenuOpen = (menu: Menu) => {
     if (!menu.children) return false;
 
     const paths1: string[] = menu.children.map((c: any) => c.to);

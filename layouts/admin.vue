@@ -7,7 +7,7 @@
                 <ImagesMonas class="h-10" />
             </a>
             <a href="/" target="__blank" class="text-lg ml-3"> Uda Putera </a>
-            <label for="my-drawer-2" class="cursor-pointer md:hidden flex justify-end w-16">
+            <label @click="showMenu = !showMenu" class="cursor-pointer md:hidden flex justify-end w-16">
                 <LucideAlignRight :size="20" />
             </label>
         </div>
@@ -57,14 +57,14 @@
         <div class="bg-neutral rounded-3xl flex">
             <!-- <div>SIDE MENU</div> -->
             <div class="drawer md:drawer-open">
-                <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+                <input :checked="showMenu" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content rounded-3xl p-4 bg-slate-100 -mr-px">
                     <!-- Page content here -->
                     <slot class="max-w-full overflow-hidden" />
                 </div>
                 <div class="drawer-side">
-                    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-                    <AdminNavigation :menus="menus" />
+                    <label @click="showMenu = false" aria-label="close sidebar" class="drawer-overlay"></label>
+                    <AdminNavigation :menus="menus" :hide="() => showMenu = false" />
                 </div>
             </div>
         </div>
@@ -73,6 +73,7 @@
 </template>
 
 <script setup lang="ts">
+const showMenu = ref<boolean>(false);
 const menus: Menu[] = [
     {
         label: "Dashboard",
@@ -121,7 +122,7 @@ const menus: Menu[] = [
         icon: resolveComponent("LucideBriefcase"),
         to: "/admin/projects",
     },
-]
+];
 
 const AuthStore = useAuthStore();
 </script>
