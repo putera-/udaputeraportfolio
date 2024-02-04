@@ -5,5 +5,9 @@ export default defineEventHandler(async (event): Promise<BlogPage> => {
     const page = query!.page || 1;
     const perpage = query!.perpage || 9;
 
-    return await $fetch(apiUrl + `/blogs?page=${page}&perpage=${perpage}`) as BlogPage;
+    try {
+        return await $fetch(apiUrl + `/blogs?page=${page}&perpage=${perpage}`) as BlogPage;
+    } catch (error) {
+        throw error;
+    }
 })

@@ -38,14 +38,18 @@ definePageMeta({
     middleware: 'profile'
 });
 
-const data = ref<BlogPage>();
 const page = ref<number>(1);
 const perpage = ref<number>(9);
-onBeforeMount(async () => {
-    data.value = await $fetch('/api/blogs');
-});
+const getData = async () => {
+    try {
+        return await $fetch(`/api/blogs?page=${page.value}&perpage=${perpage.value}`) as BlogPage;
+    } catch (error: any) {
+        throw createError(error);
+    }
+}
 
+const data = ref<BlogPage>();
 watchEffect(async () => {
-    data.value = await $fetch(`/api/blogs?page=${page.value}&perpage=${perpage.value}`);
+    data.value = await getData();
 });
 </script>

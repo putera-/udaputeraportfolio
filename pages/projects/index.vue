@@ -1,5 +1,5 @@
 <template>
-<div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
+<div v-if="data" class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 py-12 md:py-8">
     <IndexHeader subTitle="Projects" href="/projects" />
     <div class="flex max-sm:flex-col justify-between items-end">
         <div class="max-sm:mb-4 text-4xl max-sm:w-full">My Latest <span class="text-accent">Projects</span></div>
@@ -35,14 +35,19 @@ definePageMeta({
     middleware: 'profile'
 });
 
-const data = ref<DataProject>({});
 const page = ref<number>(1);
 const perpage = ref<number>(9);
-onBeforeMount(async () => {
-    data.value = await $fetch('/api/projects');
-});
+const getData = async () => {
+    try {
+        return await $fetch(`/api/projects?page=${page.value}&perpage=${perpage.value}`) as ProjectPage;
+    } catch (error: any) {
+        throw createError(error);
+    }
+}
+
+const data = ref<ProjectPage | null>(null);
 
 watchEffect(async () => {
-    data.value = await $fetch(`/api/projects?page=${page.value}&perpage=${perpage.value}`);
+    data.value = await getData();
 });
 </script>

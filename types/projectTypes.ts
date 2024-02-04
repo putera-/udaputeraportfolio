@@ -22,7 +22,7 @@ interface ProjectSkills {
     }
 }
 
-interface DataProject {
+interface ProjectPage {
     data: Project[]
     page: number
     total: number
