@@ -35,14 +35,3 @@ interface Profile {
     month_of_experience?: number
     year_of_experience?: number
 }
-
-interface SkillCategory {
-    title: string
-    skills: Skill[]
-}
-
-interface Skill {
-    title: string
-    svg: string
-    categoryId: number
-}
