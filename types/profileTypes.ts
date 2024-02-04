@@ -46,11 +46,3 @@ interface Skill {
     svg: string
     categoryId: number
 }
-
-interface Education {
-    institutionName: string
-    startYear: number
-    endYear?: number
-    major?: string
-    degree?: string
-}
