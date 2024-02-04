@@ -5,21 +5,13 @@
     <div class="grow">
         <div class="flex items-center bg-base-100 pl-2 rounded">
             <LucideSearch :size="16" class="flex-none" />
-            <input v-model="filter" @keyup.enter="search" type="text"
+            <input v-model="filter" @keyup.enter="getData()" type="text"
                 class="input input-sm focus:outline-0 focus:border-0 !w-full">
-            <button @click="search" class="btn btn-neutral btn-sm rounded-l-none flex-none">Search</button>
+            <button @click="getData()" class="btn btn-neutral btn-sm rounded-l-none flex-none">Search</button>
         </div>
     </div>
     <div class="flex-none">
-        <div class="join">
-            <button class="join-item btn btn-sm" :class="{ 'btn-disabled': ExperieneStore.page == 1 }">«</button>
-            <button class="join-item btn btn-sm bg-base-100 font-normal max-sm:text-xs">
-                Page {{ ExperieneStore.page }}
-                <span class="max-sm:hidden"> of {{ ExperieneStore.total_page }}</span>
-            </button>
-            <button class="join-item btn btn-sm"
-                :class="{ 'btn-disabled': ExperieneStore.page == ExperieneStore.total_page }">»</button>
-        </div>
+        <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :goto-page="getData" />
     </div>
 </div>
 <div class="py-3">
@@ -74,16 +66,7 @@
     </div>
 </div>
 <div class="flex justify-end">
-    <div class="join">
-        <button class="join-item btn btn-sm" :class="{ 'btn-disabled': ExperieneStore.page == 1 }">«</button>
-        <button class="join-item btn btn-sm bg-base-100 font-normal max-sm:text-xs">
-            Page {{ ExperieneStore.page }}
-            <span class="max-sm:hidden"> of {{
-                ExperieneStore.total_page }}</span>
-        </button>
-        <button class="join-item btn btn-sm"
-            :class="{ 'btn-disabled': ExperieneStore.page == ExperieneStore.total_page }">»</button>
-    </div>
+    <AdminPagination :page="page" :total_page="ExperieneStore.total_page" :goto-page="getData" />
 </div>
 </template>
 
@@ -95,22 +78,13 @@ definePageMeta({
 
 const ExperieneStore = useExperienceStore();
 onBeforeMount(async (): Promise<void> => {
-    await ExperieneStore.getAll(filter.value);
-    console.log(ExperieneStore.data);
+    await getData();
 });
 
-
 const filter = ref<string>('');
-// const data = computed<Experience[]>(() => {
-//     const search = filter.value.trim();
-//     if (search != '') {
-//         return ExperieneStore.data.filter((d: Experience) => d.company.toLowerCase().includes(search));
-//     } else {
-//         return ExperieneStore.data;
-//     }
-// })
-const search = async () => {
-    await ExperieneStore.getAll(filter.value)
+const page = ref<number>(1);
+const getData = async (targetPage: number = 1) => {
+    page.value = targetPage;
+    await ExperieneStore.getAll(filter.value, page.value)
 }
-
 </script>

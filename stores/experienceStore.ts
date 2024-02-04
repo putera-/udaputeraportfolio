@@ -14,9 +14,9 @@ export const useExperienceStore = defineStore('experience', {
         total_page: (state): number => state.data ? state.data.total_page : 0
     },
     actions: {
-        async getAll(search: string): Promise<void> {
+        async getAll(search: string, page: number = 1): Promise<void> {
             const Api = useApiStore();
-            this.data = await Api.get('/experiences?search=' + search) as ExperiencePage[];
+            this.data = await Api.get(`/experiences?limit=10&page=${page}&search=${search}`) as ExperiencePage;
         }
     }
 });
