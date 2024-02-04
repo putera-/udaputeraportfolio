@@ -8,7 +8,7 @@
         <AdminSearch :filter="filter" :doFilter="doFilter" />
     </div>
     <div class="flex-none">
-        <AdminPagination :page="ExperieneStore.page" :total_page="ExperieneStore.total_page" :gotoPage="getData" />
+        <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page" :gotoPage="getData" />
     </div>
 </div>
 <div class="py-3">
@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="hover" v-for=" data  in  ExperieneStore.experiences ">
+                <tr class="hover" v-for=" data  in  ExperienceStore.experiences ">
                     <td>
                         <div>{{ data.company }}</div>
                         <div class="text-xs">{{ data.title }}</div>
@@ -39,7 +39,7 @@
         </table>
     </div>
     <div class="md:hidden flex flex-col gap-2">
-        <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperieneStore.experiences ">
+        <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperienceStore.experiences ">
             <div class="flex gap-2 items-center">
                 <LucideBuilding2 :size="20" class="text-gray-500" />
                 <div class="grow">
@@ -63,7 +63,7 @@
     </div>
 </div>
 <div class="flex justify-end">
-    <AdminPagination :page="ExperieneStore.page" :total_page="ExperieneStore.total_page" :gotoPage="getData" />
+    <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page" :gotoPage="getData" />
 </div>
 </template>
 
@@ -73,7 +73,7 @@ definePageMeta({
     middleware: ['auth']
 });
 
-const ExperieneStore = useExperienceStore();
+const ExperienceStore = useExperienceStore();
 onBeforeMount(async (): Promise<void> => {
     await getData();
 });
@@ -93,7 +93,7 @@ const getData = async (targetPage: number = 1) => {
     isLoading.value = true;
 
     page.value = targetPage;
-    await ExperieneStore.getAll(filter.value, page.value)
+    await ExperienceStore.getAll(filter.value, page.value)
 
     isLoading.value = false;
 }
