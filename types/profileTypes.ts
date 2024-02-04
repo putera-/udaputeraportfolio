@@ -54,14 +54,3 @@ interface Education {
     major?: string
     degree?: string
 }
-
-interface Experience {
-    company: string
-    location: string
-    title: string
-    description: string
-    startDate: number
-    endDate?: number
-    readStartDate: string
-    readEndDate?: string
-}
