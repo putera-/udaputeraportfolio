@@ -1,42 +1,18 @@
 <template>
-<NuxtLayout name="error">
-    <!-- 404 -->
-    <div v-if="error!.statusCode == 404" class="grid max-md:grid-rows-2 md:grid-cols-10 h-screen">
-        <div class="md:col-span-5 px-10 flex flex-col">
-            <div class="grow flex flex-col justify-center items-center">
-                <div class="flex flex-col gap-4">
-                    <div class="text-5xl md:text-7xl font-bold">Ooops...</div>
-                    <div class="text-4xl font-semibold">Page not found!</div>
-                    <NuxtLink :to="url.origin" class="btn max-md:btn-sm bg-slate-600 w-min px-10 pb-px mx-auto">Home
-                    </NuxtLink>
-                </div>
-            </div>
-        </div>
-        <div class="md:col-span-5 w-full h-full flex flex-col justify-center items-center">
-            <div class="text-6xl font-bold">404</div>
-            <ImagesGhost class="md:w-60 lg:w-80 xl:w-96" />
+<div class="bg-black w-screen h-screen max-h-screen max-w-screen overflow-hidden relative">
+    <div class="w-full h-full grid grid-rows-2 md:grid-rows-1 items-center px-20">
+        <div>
+            <div class="text-4xl md:text-7xl font-bold text-white mb-2 md:mb-4">ERROR {{ error!.statusCode }}</div>
+            <div class="text-3xl md:text-5xl font-bold text-white">{{ error!.statusMessage || 'Internal Server Error!!!'
+            }}</div>
         </div>
     </div>
 
-    <!-- 500 -->
-    <div v-if="error!.statusCode == 500" class="grid max-md:grid-rows-2 md:grid-cols-10 h-screen">
-        <div class="md:col-span-4 px-10 flex flex-col">
-            <NuxtLink :to="url.origin" class="py-10 text-2xl font-thin">{{ url.origin }}</NuxtLink>
-            <div class="grow flex flex-col justify-center items-center">
-                <div>
-                    <div class="text-6xl md:text-7xl font-bold">500</div>
-                    <div class="text-4xl font-semibold">Internal Server Error!</div>
-                    <NuxtLink :to="url.origin" class="btn max-md:btn-sm bg-slate-600 w-min px-10 pb-px mx-auto mt-3">
-                        Home
-                    </NuxtLink>
-                </div>
-            </div>
-        </div>
-        <div class="md:col-span-6 overflow-hidden py-10">
-            <ImagesBroken class="h-[50vh] md:h-[90vh] max-h-[90vh] max-w-full ml-20" />
-        </div>
-    </div>
-</NuxtLayout>
+    <ImagesGhost v-if="error!.statusCode == 500" class="w-[60vw] md:w-[40vw] xl:w-[30vw] absolute right-28 bottom-10" />
+    <ImagesBroken v-else class="w-[110vw] md:w-[80vw] xl:w-[55vw] absolute -right-28 bottom-10" />
+    <ImagesHills
+        class="absolute w-[180vw] -bottom-5 sm:-bottom-12 md:-bottom-18 lg:-bottom-32 xl:-bottom-48 -left-48" />
+</div>
 </template>
 
 <script setup lang="ts">
