@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <ImagesGhost v-if="error!.statusCode == 500" class="w-[60vw] md:w-[40vw] xl:w-[30vw] absolute right-28 bottom-10" />
+    <ImagesGhost v-if="error!.statusCode == 404" class="w-[60vw] md:w-[40vw] xl:w-[30vw] absolute right-28 bottom-10" />
     <ImagesBroken v-else class="w-[110vw] md:w-[80vw] xl:w-[55vw] absolute -right-28 bottom-10" />
     <ImagesHills
         class="absolute w-[180vw] -bottom-5 sm:-bottom-12 md:-bottom-18 lg:-bottom-32 xl:-bottom-48 -left-48" />
