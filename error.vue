@@ -1,10 +1,15 @@
 <template>
-<div class="bg-black w-screen h-screen max-h-screen max-w-screen overflow-hidden relative">
-    <div class="w-full h-full grid grid-rows-2 md:grid-rows-1 items-center px-20">
-        <div>
-            <div class="text-4xl md:text-7xl font-bold text-white mb-2 md:mb-4">ERROR {{ error!.statusCode }}</div>
-            <div class="text-3xl md:text-5xl font-bold text-white">{{ error!.statusMessage || 'Internal Server Error!!!'
-            }}</div>
+<div class="bg-black w-screen h-screen max-h-screen max-w-screen overflow-hidden relative px-10 md:px-20">
+    <a :href="url.origin" class="text-white text-xl font-semibold absolute top-10 md:top-20 left-10 md:left-20">{{
+        url.origin }}</a>
+
+    <div class="w-full h-full grid grid-rows-2 md:grid-rows-1 items-center">
+        <div class="flex flex-col gap-4">
+            <div class="text-2xl sm:text-4xl md:text-7xl font-bold text-white mb-2">ERROR {{ error!.statusCode }}</div>
+            <div class="text-xl sm:text-3xl md:text-5xl font-bold text-white">
+                {{ error!.statusMessage || 'Internal Server Error!!!' }}
+            </div>
+            <a :href="url.origin" class="btn btn-neutral w-min truncate">{{ url.origin }}</a>
         </div>
     </div>
 
