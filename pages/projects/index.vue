@@ -50,4 +50,20 @@ const data = ref<ProjectPage | null>(null);
 watchEffect(async () => {
     data.value = await getData();
 });
+
+// SEO and META
+const { value: useProfile } = useState<Profile>('profile');
+const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
+useSeoMeta({
+    title: fullname + ' Projects',
+    description: useProfile.bio,
+    ogTitle: fullname + ' Projects',
+    ogDescription: useProfile.bio,
+    ogImage: apiUrl + useProfile.avatar,
+    twitterCard: 'summary_large_image',
+});
+// END: SEO and META
 </script>

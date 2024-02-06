@@ -41,6 +41,21 @@ const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
 const id = route.params.id;
 const blog = await $fetch('/api/blog/' + id) as Blog;
+
+// SEO and META
+const { value: useProfile } = useState<Profile>('profile');
+const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const photo = blog.photos.length ? (apiUrl + blog.photos[0].path) : ''
+
+useSeoMeta({
+    title: `${blog.title} - ${fullname} Blog`,
+    description: blog.content,
+    ogTitle: `${blog.title} - ${fullname} Blog`,
+    ogDescription: blog.content,
+    ogImage: photo,
+    twitterCard: 'summary_large_image',
+});
+// END: SEO and META
 </script>
 
 <style>

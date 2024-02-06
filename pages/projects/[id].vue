@@ -66,7 +66,22 @@ const project = await $fetch('/api/project/' + id) as Project;
 
 const status = computed(() => {
     return project.status.replaceAll('_', ' ');
-})
+});
+
+// SEO and META
+const { value: useProfile } = useState<Profile>('profile');
+const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const photo = project.photos.length ? (apiUrl + project.photos[0].path) : ''
+
+useSeoMeta({
+    title: `${project.title} - ${fullname} Project`,
+    description: project.description,
+    ogTitle: `${project.title} - ${fullname} Project`,
+    ogDescription: project.description,
+    ogImage: photo,
+    twitterCard: 'summary_large_image',
+});
+// END: SEO and META
 </script>
 
 <style>

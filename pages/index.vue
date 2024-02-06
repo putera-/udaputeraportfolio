@@ -37,4 +37,20 @@ const getPortfolio = async (): Promise<Portfolio> => {
 }
 
 const { profile, skills, educations, experiences, projects, blogs } = await getPortfolio();
+
+// SEO and META
+const { value: useProfile } = useState<Profile>('profile');
+const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
+useSeoMeta({
+    title: fullname + ' Portfolio',
+    description: useProfile.bio,
+    ogTitle: fullname + ' Portfolio',
+    ogDescription: useProfile.bio,
+    ogImage: apiUrl + useProfile.avatar,
+    twitterCard: 'summary_large_image',
+});
+// END: SEO and META
 </script>
