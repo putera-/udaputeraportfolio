@@ -105,7 +105,10 @@ export const useApiStore = defineStore('api', {
             }
         },
         handleError(error: any) {
-            if (error.status == 401) return navigateTo('/admin/login') // login page
+            if (error.status == 401) {
+                window.localStorage.clear(); // clear local storage
+                return navigateTo('/admin/login'); // login page
+            }
 
             if (error.status == 404 || error.status == 500 || error.status == undefined) {
                 throw createError({
