@@ -50,14 +50,10 @@ const doLogin = async () => {
     try {
         const form = validate(authValidation, formData.value);
 
-        console.log('selesai')
-        console.log(form);
-
         await AuthStore.login(form);
     } catch (error: any) {
         if (error.isJoi) {
             errors.value = error.data;
-            console.log(error.data)
         }
     }
 }
