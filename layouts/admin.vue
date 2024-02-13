@@ -64,7 +64,7 @@
                 </div>
                 <div class="drawer-side">
                     <label @click="showMenu = false" aria-label="close sidebar" class="drawer-overlay"></label>
-                    <AdminNavigation :menus="menus" :hide="() => showMenu = false" />
+                    <AdminNavigation :hide="() => showMenu = false" />
                 </div>
             </div>
         </div>
@@ -74,43 +74,6 @@
 
 <script setup lang="ts">
 const showMenu = ref<boolean>(false);
-const menus: Menu[] = [
-    {
-        label: "Dashboard",
-        icon: resolveComponent("LucideLayoutDashboard"),
-        to: "/admin"
-    },
-    {
-        label: "Profile",
-        icon: resolveComponent("LucideBookUser"),
-        to: "/admin/profile"
-    },
-    {
-        label: "Blogs",
-        icon: resolveComponent("LucideBookOpenText"),
-        to: "/admin/blogs"
-    },
-    {
-        label: "Experience",
-        icon: resolveComponent("LucideBuilding2"),
-        to: "/admin/experiences"
-    },
-    {
-        label: "Education",
-        icon: resolveComponent("LucideGraduationCap"),
-        to: "/admin/educations"
-    },
-    {
-        label: "Skills",
-        icon: resolveComponent("LucideBone"),
-        to: "/admin/skills"
-    },
-    {
-        label: "Projects",
-        icon: resolveComponent("LucideBriefcase"),
-        to: "/admin/projects"
-    },
-];
 
 const AuthStore = useAuthStore();
 </script>
@@ -127,7 +90,7 @@ const AuthStore = useAuthStore();
     left: 0;
     margin-top: -1rem;
     border-radius: 1.3rem;
-    z-index: -2;
+    z-index: 0;
 }
 
 .wrapper>div {
