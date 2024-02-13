@@ -16,7 +16,16 @@ export const useBlogStore = defineStore('blog', {
     actions: {
         async getAll(search: string, page: number = 1): Promise<void> {
             const Api = useApiStore();
-            this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`) as BlogPage;
+            this.data = await Api.get(`/blogs?limit=2&page=${page}&search=${search}`) as BlogPage;
+        },
+        async remove(id: number): Promise<void> {
+            const Api = useApiStore();
+
+            try {
+                await Api.delete(`/blog/${id}`);
+            } catch (error: any) {
+                throw new Error(error);
+            }
         }
     }
 });

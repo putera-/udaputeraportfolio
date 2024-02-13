@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="py-3">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+    <div v-if="BlogStore.blogs.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
         <div v-for="blog in BlogStore.blogs" class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
             <div class="flex justify-between gap-2">
                 <div>
@@ -26,7 +26,8 @@
                         <li><a class="btn btn-xs h-min justify-start my-px">
                                 <LucidePencil :size="16" />Edit
                             </a></li>
-                        <li><button class="btn btn-error btn-xs h-min my-px">
+                        <li><button class="btn btn-error btn-xs h-min my-px"
+                                @click="removeData = blog; confirmDelete = true;">
                                 <LucideTrash2 :size="16" />Delete
                             </button></li>
                     </ul>
@@ -40,14 +41,26 @@
             </div>
             <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
         </div>
+
+    </div>
+    <div v-else class="flex justify-center">
+        <ImagesEmpty class="w-3/4 lg:w-1/3" />
     </div>
 </div>
 <div class="flex justify-end">
     <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
 </div>
+
+<AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
+    Are you sure to remove this blog?
+    <br>
+    <span class="font-bold text-lg" v-if="removeData">{{ removeData.title }}</span>
+</AdminConfirmation>
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify';
+
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
@@ -57,8 +70,6 @@ const { public: { apiUrl } } = useRuntimeConfig();
 const BlogStore = useBlogStore();
 onBeforeMount(async (): Promise<void> => {
     await getData();
-
-    console.log(BlogStore.blogs)
 });
 
 const filter = ref<string>('');
@@ -70,14 +81,40 @@ const doFilter = async (newFilter: string) => {
     await getData();
 }
 
-const getData = async (targetPage: number = 1) => {
+const getData = async (targetPage?: number) => {
     if (isLoading.value) return;
 
     isLoading.value = true;
 
-    page.value = targetPage;
+    if (targetPage) page.value = targetPage;
+
     await BlogStore.getAll(filter.value, page.value)
 
     isLoading.value = false;
+}
+
+// delete
+const confirmDelete = ref<boolean>(false);
+const removeData = ref<Blog | null>(null)
+
+const remove = async (): Promise<void> => {
+    if (!removeData.value) return;
+
+    isLoading.value = true;
+
+    try {
+        await BlogStore.remove(removeData.value!.id);
+
+        // reload page
+        await getData();
+
+        isLoading.value = false;
+        confirmDelete.value = false;
+        toast.success('Success', { autoClose: 3000 })
+    } catch (error: any) {
+        toast.error(error.message, { autoClose: 3000 })
+
+        isLoading.value = false;
+    }
 }
 </script>
