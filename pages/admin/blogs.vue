@@ -1,68 +1,85 @@
 <template>
-<div class="font-bold text-3xl flex gap-2">Blogs
-    <IconsCatLoading v-if="isLoading" class="w-8" />
-</div>
-<div class="divider before:h-px after:h-px mt-0"></div>
-<div class="flex gap-2 max-sm:items-end justify-between">
-    <div class="grow">
-        <AdminSearch :filter="filter" :doFilter="doFilter" />
-    </div>
-    <div class="flex-none">
-        <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
-    </div>
-</div>
-<div class="py-3">
-    <div v-if="BlogStore.blogs.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-        <div v-for="blog in BlogStore.blogs" class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
-            <div class="flex justify-between gap-2">
-                <div>
-                    <div class="font-semibold text-neutral text-lg truncate">{{ blog.title }}</div>
-                    <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
+<div>
+    <NuxtLayout name="admin">
+        <template #breadcrumb>
+            <li>Blogs</li>
+        </template>
+
+        <template #default>
+            <div class="flex justify-between">
+                <div class="font-bold text-3xl flex gap-2">Blogs
+                    <IconsCatLoading v-if="isLoading" class="w-8" />
                 </div>
-                <div class="dropdown dropdown-end">
-                    <LucideMoreVertical :size="16" tabindex="0" role="button" />
-                    <ul tabindex="0"
-                        class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
-                        <li><a class="btn btn-xs h-min justify-start my-px">
-                                <LucidePencil :size="16" />Edit
-                            </a></li>
-                        <li><button class="btn btn-error btn-xs h-min my-px"
-                                @click="removeData = blog; confirmDelete = true;">
-                                <LucideTrash2 :size="16" />Delete
-                            </button></li>
-                    </ul>
+                <button class="btn btn-neutral btn-sm">
+                    <LucidePlus :size="12" /> New Blog
+                </button>
+            </div>
+            <div class="divider before:h-px after:h-px mt-0"></div>
+            <div class="flex gap-2 max-sm:items-end justify-between">
+                <div class="grow">
+                    <AdminSearch :filter="filter" :doFilter="doFilter" />
+                </div>
+                <div class="flex-none">
+                    <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
                 </div>
             </div>
-            <div class="border-b border-b-neutral/25"></div>
-            <div class="hover:scale-105 duration-300">
-                <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
-                    class="aspect-video w-full rounded-lg">
-                <div v-else class="aspect-video w-full rounded-lg bg-accent/50"></div>
+            <div class="py-3">
+                <div v-if="BlogStore.blogs.length"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+                    <div v-for="blog in BlogStore.blogs"
+                        class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
+                        <div class="flex justify-between gap-2">
+                            <div>
+                                <div class="font-semibold text-neutral text-lg truncate">{{ blog.title }}</div>
+                                <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
+                            </div>
+                            <div class="dropdown dropdown-end">
+                                <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                                    <li><a class="btn btn-xs h-min justify-start my-px">
+                                            <LucidePencil :size="16" />Edit
+                                        </a></li>
+                                    <li><button class="btn btn-error btn-xs h-min my-px"
+                                            @click="removeData = blog; confirmDelete = true;">
+                                            <LucideTrash2 :size="16" />Delete
+                                        </button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="border-b border-b-neutral/25"></div>
+                        <div class="hover:scale-105 duration-300">
+                            <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
+                                class="aspect-video w-full rounded-lg">
+                            <div v-else class="aspect-video w-full rounded-lg bg-accent/50"></div>
+                        </div>
+                        <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
+                    </div>
+
+                </div>
+                <div v-else class="flex justify-center">
+                    <ImagesEmpty class="w-3/4 lg:w-1/3" />
+                </div>
             </div>
-            <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
-        </div>
+            <div class="flex justify-end">
+                <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
+            </div>
 
-    </div>
-    <div v-else class="flex justify-center">
-        <ImagesEmpty class="w-3/4 lg:w-1/3" />
-    </div>
+            <AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
+                Are you sure to remove this blog?
+                <br>
+                <span class="font-bold text-lg" v-if="removeData">{{ removeData.title }}</span>
+            </AdminConfirmation>
+        </template>
+    </NuxtLayout>
 </div>
-<div class="flex justify-end">
-    <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
-</div>
-
-<AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
-    Are you sure to remove this blog?
-    <br>
-    <span class="font-bold text-lg" v-if="removeData">{{ removeData.title }}</span>
-</AdminConfirmation>
 </template>
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 definePageMeta({
-    layout: 'admin',
+    layout: false,
     middleware: ['auth']
 });
 const { public: { apiUrl } } = useRuntimeConfig();

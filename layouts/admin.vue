@@ -22,10 +22,7 @@
             <div class="grow flex justify-between items-center">
                 <div class="text-sm breadcrumbs">
                     <ul>
-                        <li>
-                            <NuxtLink to="/">Home</NuxtLink>
-                        </li>
-                        <li>Profile</li>
+                        <slot name="breadcrumb" />
                     </ul>
                 </div>
                 <div class="absolute z-10 right-4 sm:right-8 dropdown dropdown-end">
