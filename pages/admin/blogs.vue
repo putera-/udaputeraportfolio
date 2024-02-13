@@ -13,10 +13,24 @@
 </div>
 <div class="py-3">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-        <div v-for="blog in BlogStore.blogs" class="card shadow-lg p-4 bg-base-100 flex flex-col gap-2">
-            <div class="">
-                <div class="font-semibold text-neutral text-lg truncate">{{ blog.title }}</div>
-                <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
+        <div v-for="blog in BlogStore.blogs" class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
+            <div class="flex justify-between gap-2">
+                <div>
+                    <div class="font-semibold text-neutral text-lg truncate">{{ blog.title }}</div>
+                    <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
+                </div>
+                <div class="dropdown dropdown-end">
+                    <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                    <ul tabindex="0"
+                        class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                        <li><a class="btn btn-xs h-min justify-start my-px">
+                                <LucidePencil :size="16" />Edit
+                            </a></li>
+                        <li><button class="btn btn-error btn-xs h-min my-px">
+                                <LucideTrash2 :size="16" />Delete
+                            </button></li>
+                    </ul>
+                </div>
             </div>
             <div class="border-b border-b-neutral/25"></div>
             <div class="hover:scale-105 duration-300">
@@ -25,15 +39,6 @@
                 <div v-else class="aspect-video w-full rounded-lg bg-accent/50"></div>
             </div>
             <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
-            <!-- <div class="border-b border-b-neutral/25"></div> -->
-            <div class="flex justify-end gap-2">
-                <button class="btn btn-sm btn-danger btn-circle">
-                    <LucideTrash2 :size="16" />
-                </button>
-                <button class="btn btn-sm btn-accent btn-circle">
-                    <LucidePencilLine :size="16" />
-                </button>
-            </div>
         </div>
     </div>
 </div>
