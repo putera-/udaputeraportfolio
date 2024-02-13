@@ -10,9 +10,9 @@
                 <div class="font-bold text-3xl flex gap-2">Blogs
                     <IconsCatLoading v-if="isLoading" class="w-8" />
                 </div>
-                <button class="btn btn-neutral btn-sm">
+                <NuxtLink to="/admin/blogs/create" class="btn btn-neutral btn-sm">
                     <LucidePlus :size="12" /> New Blog
-                </button>
+                </NuxtLink>
             </div>
             <div class="divider before:h-px after:h-px mt-0"></div>
             <div class="flex gap-2 max-sm:items-end justify-between">
@@ -28,9 +28,10 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                     <div v-for="blog in BlogStore.blogs"
                         class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
-                        <div class="flex justify-between gap-2">
-                            <div>
-                                <div class="font-semibold text-neutral text-lg truncate">{{ blog.title }}</div>
+                        <div class="flex justify-between gap-2 max-w-full">
+                            <div class="overflow-hidden">
+                                <div class="font-semibold text-neutral text-lg truncate w-full">{{ blog.title }}
+                                </div>
                                 <div class="text-xs font-light">{{ blog.shortDateTime }}</div>
                             </div>
                             <div class="dropdown dropdown-end">
@@ -48,9 +49,9 @@
                             </div>
                         </div>
                         <div class="border-b border-b-neutral/25"></div>
-                        <div class="hover:scale-105 duration-300">
+                        <div class="hover:scale-105 duration-300 aspect-video bg-neutral/40 rounded-lg overflow-hidden">
                             <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
-                                class="aspect-video w-full rounded-lg">
+                                class="h-full max-w-full mx-auto">
                             <div v-else class="aspect-video w-full rounded-lg bg-accent/50"></div>
                         </div>
                         <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
@@ -79,8 +80,8 @@
 import { toast } from 'vue3-toastify';
 
 definePageMeta({
-    layout: false,
-    middleware: ['auth']
+    middleware: ['auth'],
+    layout: false
 });
 const { public: { apiUrl } } = useRuntimeConfig();
 

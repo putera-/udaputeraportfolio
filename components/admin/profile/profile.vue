@@ -59,7 +59,7 @@
     <div class="xl:px-10">
         <label>Avatar</label>
         <img v-if="form.avatar" :src="form.avatar" class="rounded-2xl mx-auto">
-        <div v-else class="bg-indigo-400 w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
+        <div v-else class="bg-neutral/50 w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
         </div>
         <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
             @change="handleAvatar">
@@ -138,13 +138,7 @@ const doUpdate = async () => {
         data = validate(profileValidate, data);
 
         if (avatar) {
-            const formData = new FormData();
-
-            for (const [key, value] of Object.entries(data)) {
-                if (value) {
-                    formData.append(key, value as string);
-                }
-            }
+            const formData: FormData = toFormData(data);
 
             formData.append('avatar', avatar);
             data = formData;

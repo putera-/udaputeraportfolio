@@ -16,7 +16,32 @@ export const useBlogStore = defineStore('blog', {
     actions: {
         async getAll(search: string, page: number = 1): Promise<void> {
             const Api = useApiStore();
-            this.data = await Api.get(`/blogs?limit=2&page=${page}&search=${search}`) as BlogPage;
+            this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`) as BlogPage;
+        },
+        async create(data: Record<string, string>, photos: File[]): Promise<void> {
+            // TODO Validate
+            const Api = useApiStore();
+
+            let formData: Record<string, string> | FormData;
+
+            if (photos.length) {
+                // create FormData if photo available
+                formData = toFormData(data);
+
+                for (const photo of photos) {
+                    formData.append('photos', photo);
+                }
+            } else {
+                // still for json
+                formData = data;
+            }
+
+            try {
+                await Api.post('/blog', formData);
+            } catch (error: any) {
+                throw new Error(error);
+            }
+
         },
         async remove(id: number): Promise<void> {
             const Api = useApiStore();
