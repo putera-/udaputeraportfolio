@@ -25,8 +25,6 @@ export const useAuthStore = defineStore('auth', {
             try {
                 this.user = await Api.post('/login', data) as User;
 
-                window.localStorage.setItem('isLogedIn', '1');
-
                 navigateTo('/admin')
             } catch (error: any) {
                 throw new Error(error)
@@ -38,8 +36,6 @@ export const useAuthStore = defineStore('auth', {
                 await Api.delete('/logout');
 
                 this.user = null;
-
-                window.localStorage.clear()
 
                 navigateTo('/admin/login')
             } catch (error: any) {

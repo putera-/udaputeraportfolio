@@ -1,14 +1,14 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-    const isLogedIn = window.localStorage.getItem('isLogedIn');
+    const { value: token } = useCookie('token');
     const AuthStore = useAuthStore();
 
     if (to.path == '/admin/login') {
-        if (!AuthStore.user && isLogedIn === '1') {
+        if (!AuthStore.user && token) {
             await AuthStore.getUser();
             if (AuthStore.user) return navigateTo('/admin')
         }
     } else {
-        if (isLogedIn !== '1') return navigateTo('/admin/login');
+        if (!token) return navigateTo('/admin/login');
 
         if (!AuthStore.user) {
             await AuthStore.getUser();
