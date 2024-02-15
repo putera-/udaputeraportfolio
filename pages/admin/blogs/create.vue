@@ -19,18 +19,29 @@
                 <label class="form-control w-full">
                     <div class="label-text font-semibold">Blog Title</div>
                     <input v-model="form.title" type="text" placeholder="Blog Title"
-                        class="input input-bordered w-full" />
-                    <div v-if="errors.title" class="text-right label-text-alt text-error">{{ errors.title }}</div>
+                        class="input input-lg input-bordered font-bold w-full" />
+                    <div v-if="errors.title" class="text-right label-text-alt text-error">{{ errors.title }}
+                    </div>
                 </label>
                 <div class="overflow-x-auto py-2">
                     <div class="label-text font-semibold">Photos</div>
                     <div class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
-                        <div v-for="photo in photos_preview"
-                            class="w-full aspect-video rounded overflow-hidden bg-neutral/40">
+                        <div v-for="(photo, i) in photos_preview"
+                            class="w-full aspect-video rounded overflow-hidden bg-neutral/10 relative">
                             <img :src="photo" class="h-full max-w-full mx-auto">
+
+                            <div class="dropdown dropdown-end absolute z-[1] right-2 top-2">
+                                <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                                    <li><button class="btn btn-error btn-xs h-min my-px" @click="removePhoto(i)">
+                                            <LucideTrash2 :size="16" />Remove
+                                        </button></li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <div v-if="!photos.length" class="bg-neutral/50 w-full aspect-video rounded"></div>
+                        <div v-if="!photos.length" class="bg-neutral/10 w-full aspect-video rounded"></div>
                     </div>
                     <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
                         multiple @change="handlePhotos">
@@ -98,6 +109,11 @@ const handlePhotos = (e: Event): void => {
             };
         }
     }
+};
+
+const removePhoto = (index: number) => {
+    photos_preview.value.splice(index, 1);
+    photos.value.splice(index, 1);
 }
 
 // cancel

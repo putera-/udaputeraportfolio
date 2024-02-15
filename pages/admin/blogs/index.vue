@@ -49,10 +49,10 @@
                             </div>
                         </div>
                         <div class="border-b border-b-neutral/25"></div>
-                        <div class="hover:scale-105 duration-300 aspect-video bg-neutral/40 rounded-lg overflow-hidden">
+                        <div class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden">
                             <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
                                 class="h-full max-w-full mx-auto">
-                            <div v-else class="aspect-video w-full rounded-lg bg-accent/50"></div>
+                            <div v-else class="aspect-video w-full rounded-lg bg-accent/10"></div>
                         </div>
                         <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ blog.content }}</div>
                     </div>
