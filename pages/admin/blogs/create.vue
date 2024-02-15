@@ -25,24 +25,33 @@
                 </label>
                 <div class="overflow-x-auto py-2">
                     <div class="label-text font-semibold">Photos</div>
-                    <div class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
-                        <div v-for="(photo, i) in photos_preview"
-                            class="w-full aspect-video rounded overflow-hidden bg-neutral/10 relative">
-                            <img :src="photo" class="h-full max-w-full mx-auto">
 
-                            <div class="dropdown dropdown-end absolute z-[1] right-2 top-2">
-                                <LucideMoreVertical :size="16" tabindex="0" role="button" />
-                                <ul tabindex="0"
-                                    class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
-                                    <li><button class="btn btn-error btn-xs h-min my-px" @click="removePhoto(i)">
-                                            <LucideTrash2 :size="16" />Remove
-                                        </button></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div v-if="!photos.length" class="bg-neutral/10 w-full aspect-video rounded"></div>
+                    <!-- dummy photo -->
+                    <div v-if="!photos.length" class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
+                        <div class="bg-neutral/10 w-full aspect-video rounded"></div>
                     </div>
+
+                    <!-- photo preview -->
+                    <draggable v-model="photos" group="photo" item-key="id"
+                        class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
+                        <template #item="{ element, index }">
+                            <div class="min-w-full h-full aspect-video rounded overflow-hidden bg-neutral/10 relative">
+                                <img :src="element.photo" class="h-full max-w-full mx-auto">
+
+                                <div class="dropdown dropdown-end absolute z-[1] right-2 top-2">
+                                    <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                                    <ul tabindex="0"
+                                        class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                                        <li><button class="btn btn-error btn-xs h-min my-px"
+                                                @click="removePhoto(index)">
+                                                <LucideTrash2 :size="16" />Remove
+                                            </button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </template>
+                    </draggable>
+
                     <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
                         multiple @change="handlePhotos">
                 </div>
@@ -77,6 +86,7 @@
 </template>
 
 <script setup lang="ts">
+import draggable from 'vuedraggable'
 import { toast } from 'vue3-toastify';
 
 definePageMeta({
@@ -89,8 +99,7 @@ const form = ref<Record<string, string>>({
     content: ''
 });
 
-const photos_preview = ref<string[]>([]);
-const photos = ref<File[]>([]);
+const photos = ref<{ file: File, photo: string }[]>([]);
 
 // PHOTOS
 const handlePhotos = (e: Event): void => {
@@ -98,21 +107,23 @@ const handlePhotos = (e: Event): void => {
     const files = fileInput.files;
 
     if (files!.length) {
-        for (const photo of files!) {
-            photos.value.push(photo);
+        for (let i = 0; i < files!.length; i++) {
+            const photo = files![i];
 
             const reader = new FileReader();
 
             reader.readAsDataURL(photo);
             reader.onload = () => {
-                photos_preview.value.push(reader.result as string);
+                photos.value.push({
+                    file: photo,
+                    photo: reader.result as string,
+                });
             };
         }
     }
 };
 
 const removePhoto = (index: number) => {
-    photos_preview.value.splice(index, 1);
     photos.value.splice(index, 1);
 }
 
@@ -128,7 +139,9 @@ const save = async () => {
     try {
         isLoading.value = true;
 
-        await BlogStore.create(form.value, photos.value)
+        const _photo = photos.value.map(p => p.file)
+
+        await BlogStore.create(form.value, _photo)
 
         confirmSave.value = false;
 
