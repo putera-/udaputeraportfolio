@@ -114,12 +114,19 @@ const handlePhotos = (e: Event): void => {
 
             reader.readAsDataURL(photo);
             reader.onload = () => {
+                // prevent more than 10 photo
+                if (photos.value.length == 10) return;
+
                 photos.value.push({
                     file: photo,
                     photo: reader.result as string,
                 });
             };
+
         }
+
+        // reset
+        fileInput.value = '';
     }
 };
 
