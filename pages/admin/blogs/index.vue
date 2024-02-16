@@ -38,9 +38,12 @@
                                 <LucideMoreVertical :size="16" tabindex="0" role="button" />
                                 <ul tabindex="0"
                                     class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
-                                    <li><a class="btn btn-xs h-min justify-start my-px">
+                                    <li>
+                                        <NuxtLink :to="'/admin/blogs/' + blog.id"
+                                            class="btn btn-xs h-min justify-start my-px">
                                             <LucidePencil :size="16" />Edit
-                                        </a></li>
+                                        </NuxtLink>
+                                    </li>
                                     <li><button class="btn btn-error btn-xs h-min my-px"
                                             @click="removeData = blog; confirmDelete = true;">
                                             <LucideTrash2 :size="16" />Delete

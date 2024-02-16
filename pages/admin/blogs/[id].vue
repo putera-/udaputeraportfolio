@@ -5,11 +5,11 @@
             <li>
                 <NuxtLink to="/admin/blogs">Blogs</NuxtLink>
             </li>
-            <li>Create</li>
+            <li>Update</li>
         </template>
 
         <template #default>
-            <div class="font-bold text-3xl flex gap-2">New Blog
+            <div class="font-bold text-3xl flex gap-2">Update Blog
                 <IconsCatLoading v-if="isLoading" class="w-8" />
             </div>
             <div class="divider before:h-px after:h-px mt-0"></div>
@@ -89,20 +89,39 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { toast } from 'vue3-toastify';
-
 definePageMeta({
     middleware: ['auth'],
     layout: false
 });
 
+const { public: { apiUrl } } = useRuntimeConfig();
+
+// get blog data
+const id: string = useRoute().params.id as string;
+const BlogStore = useBlogStore();
+const blog: Blog = await BlogStore.get(id);
+
 const form = ref<Record<string, string>>({
-    title: '',
-    content: ''
+    title: blog.title,
+    content: blog.content
 });
 
-const photos = ref<{ file: File, photo: string }[]>([]);
+// cancel
+const confirmCancel = ref<boolean>(false);
 
-// PHOTOS
+const errors = ref<Record<string, string>>({});
+const confirmSave = ref<boolean>(false);
+const isLoading = ref<boolean>(false);
+
+const currentPhotos = blog.photos.map(p => {
+    return {
+        id: p.id,
+        photo: apiUrl + p.path_md
+    };
+});
+const photos = ref<{ file?: File, photo: string, id?: number }[]>(currentPhotos);
+
+
 const handlePhotos = (e: Event): void => {
     const fileInput = e.target as HTMLInputElement;
     const files = fileInput.files;
@@ -133,23 +152,26 @@ const handlePhotos = (e: Event): void => {
 
 const removePhoto = (index: number) => {
     photos.value.splice(index, 1);
-}
-
-// cancel
-const confirmCancel = ref<boolean>(false);
-const confirmSave = ref<boolean>(false);
-const isLoading = ref<boolean>(false);
-
-const BlogStore = useBlogStore();
-const errors = ref<Record<string, string>>({});
+};
 
 const save = async () => {
     try {
         isLoading.value = true;
 
-        const _photo = photos.value.map(p => p.file)
+        const keepPhoto: any[] = [];
+        const newPhoto: File[] = [];
 
-        await BlogStore.create(form.value, _photo)
+        const putData: any = { ...form.value };
+
+        for (let i = 0; i < photos.value.length; i++) {
+            const photo = photos.value[i];
+            // keep photo
+            if (photo.id) keepPhoto.push({ index: i, id: photo.id });
+            // new photo
+            if (photo.file) newPhoto.push(photo.file);
+        }
+
+        await BlogStore.update(blog.id, putData, keepPhoto, newPhoto)
 
         confirmSave.value = false;
 
@@ -161,6 +183,7 @@ const save = async () => {
             }
         });
     } catch (error: any) {
+        console.log(errors);
         if (error.isJoi) {
             errors.value = error.data
         } else {
@@ -169,6 +192,7 @@ const save = async () => {
         confirmSave.value = false;
         isLoading.value = false;
     }
-}
+};
+
 
 </script>
