@@ -110,7 +110,6 @@ export const useApiStore = defineStore('api', {
 
 
             if (status == 401) {
-                window.localStorage.clear(); // clear local storage
                 return navigateTo('/admin/login'); // login page
             }
 
