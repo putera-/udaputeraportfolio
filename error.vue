@@ -9,7 +9,7 @@
             <div class="text-xl sm:text-3xl md:text-5xl font-bold text-white">
                 {{ error!.statusMessage || 'Internal Server Error!!!' }}
             </div>
-            <a :href="url.origin" class="btn btn-neutral w-min truncate">{{ url.origin }}</a>
+            <button @click="handleError" class="btn btn-neutral w-min truncate">{{ url.origin }}</button>
         </div>
     </div>
 
@@ -27,5 +27,11 @@ const props = defineProps({
     error: Object as () => NuxtError
 });
 
+console.log('props.error page')
+console.log(props.error)
+
 const url = useRequestURL();
+
+const handleError = () => clearError({ redirect: '/' })
+
 </script>

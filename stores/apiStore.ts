@@ -105,18 +105,19 @@ export const useApiStore = defineStore('api', {
             }
         },
         handleError(error: any) {
-            if (error.status == 401) {
+            const status = error.status || 500;
+            const message = error.data.message || 'Internal Server Error!';
+
+
+            if (status == 401) {
                 window.localStorage.clear(); // clear local storage
                 return navigateTo('/admin/login'); // login page
             }
 
-            if (error.status == 404 || error.status == 500 || error.status == undefined) {
-                throw createError({
-                    statusCode: error.status
-                });
-            }
-
-            throw error.data.errors;
+            throw createError({
+                statusCode: status,
+                statusMessage: message,
+            });
         }
     },
 })
