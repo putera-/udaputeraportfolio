@@ -19,8 +19,10 @@ export const useBlogStore = defineStore('blog', {
             this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`) as BlogPage;
         },
         async create(data: Record<string, string>, photos: File[]): Promise<void> {
-            // TODO Validate
             const Api = useApiStore();
+
+            // validate
+            data = validate(isBlog, data);
 
             let formData: Record<string, string> | FormData;
 
