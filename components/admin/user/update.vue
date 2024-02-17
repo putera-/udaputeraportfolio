@@ -39,6 +39,7 @@ const formData = ref({
 
 const handleUpdate = async () => {
     errors.value = {};
+    responseError.value = {};
     confirmUpdate.value = false;
     emit('updating');
     try {
@@ -52,7 +53,6 @@ const handleUpdate = async () => {
             errors.value = error.data;
         } else {
             responseError.value = error.message;
-            toast.error(error.message, { autoClose: 3000 });
         }
         emit('done');
     }

@@ -3,6 +3,12 @@ import type loginVue from '~/pages/admin/login.vue';
 <template>
 <div class="flex flex-col gap-4">
     <label class="form-control w-full max-w-xs">
+        <div class="label label-text pb-0">Old Password</div>
+        <input v-model="formData.old_password" type="password" placeholder="Password"
+            class="input input-bordered w-full max-w-xs" />
+        <div class="text-error text-right text-sm pr-2" v-if="errors.old_password">{{ errors.old_password }}</div>
+    </label>
+    <label class="form-control w-full max-w-xs">
         <div class="label label-text pb-0">Password</div>
         <input v-model="formData.password" type="password" placeholder="Password"
             class="input input-bordered w-full max-w-xs" />
@@ -40,12 +46,14 @@ const AuthStore = useAuthStore();
 const confirmUpdate = ref<boolean>(false);
 
 const formData = ref({
+    old_password: '',
     password: '',
     password_confirm: ''
 });
 
 const handleUpdate = async () => {
     errors.value = {};
+    responseError.value = {};
     confirmUpdate.value = false;
     emit('updating');
     try {
@@ -59,7 +67,6 @@ const handleUpdate = async () => {
             errors.value = error.data;
         } else {
             responseError.value = error.message;
-            toast.error(error.message, { autoClose: 3000 });
         }
         emit('done');
     }
