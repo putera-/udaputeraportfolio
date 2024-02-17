@@ -1,3 +1,5 @@
+import { updateUserValidation } from "~/utils/authValidate";
+
 interface AuthState {
     user: User | null
 }
@@ -19,6 +21,13 @@ export const useAuthStore = defineStore('auth', {
             } catch (error: any) {
                 throw new Error(error)
             }
+        },
+        async updateUser(data: Record<string, string>): Promise<void> {
+            const Api = useApiStore();
+
+            data = validate(updateUserValidation, data);
+
+            await Api.put('/user', data);
         },
         async login(data: { email: string, password: string }): Promise<void> {
             const Api = useApiStore();

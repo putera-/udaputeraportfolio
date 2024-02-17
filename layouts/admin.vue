@@ -31,21 +31,26 @@
                             <ImagesRupiahCircle />
                         </div>
                     </div>
-                    <ul tabindex="10"
-                        class="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li>
-                            <button @click="">
-                                <LucideUser :size="16" />
-                                User
-                            </button>
-                        </li>
-                        <li>
-                            <button @click="AuthStore.logout()">
-                                <LucideKeySquare :size="16" />
-                                Logout
-                            </button>
-                        </li>
-                    </ul>
+                    <div class="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <div class="p-2 border-b border-b-neutral/20 mb-2">
+                            <div class="font-semibold">{{ AuthStore.user!.name }}</div>
+                            <div class="text-xs">{{ AuthStore.user!.email }}</div>
+                        </div>
+                        <ul tabindex="10" class="">
+                            <li>
+                                <NuxtLink to="/admin/user">
+                                    <LucideUser :size="16" />
+                                    User Setting
+                                </NuxtLink>
+                            </li>
+                            <li>
+                                <button @click="AuthStore.logout()">
+                                    <LucideKeySquare :size="16" />
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
