@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
 
             data = validate(updateUserValidation, data);
 
-            await Api.put('/user', data);
+            this.user = await Api.put('/user', data) as User;
         },
         async login(data: { email: string, password: string }): Promise<void> {
             const Api = useApiStore();

@@ -11,7 +11,6 @@
     <div role="tabpanel" class="tab-content p-6">
         <AdminProfileSocial v-if="!loading" />
     </div>
-
 </div>
 </template>
 

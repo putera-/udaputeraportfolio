@@ -7,10 +7,10 @@ const authValidation = Joi.object({
 });
 
 const updateUserValidation = Joi.object({
-    name: isString.required().label("Name"),
-    email: isString.required().label("Email"),
-    password: isPassword.required().label("Password"),
-    password_confirm: isPassword.required()
+    name: isString.label("Name"),
+    email: isString.label("Email"),
+    password: isPassword.label("Password"),
+    password_confirm: isPassword
         .valid(Joi.ref('password'))
         .label("Password Confirm")
         .options({
