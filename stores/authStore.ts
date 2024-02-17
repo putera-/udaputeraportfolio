@@ -16,11 +16,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async getUser(): Promise<void> {
             const Api = useApiStore();
-            try {
-                this.user = await Api.get('/user') as User;
-            } catch (error: any) {
-                throw new Error(error)
-            }
+            this.user = await Api.get('/user') as User;
         },
         async updateUser(data: Record<string, string>): Promise<void> {
             const Api = useApiStore();
@@ -31,13 +27,9 @@ export const useAuthStore = defineStore('auth', {
         },
         async login(data: { email: string, password: string }): Promise<void> {
             const Api = useApiStore();
-            try {
-                this.user = await Api.post('/login', data) as User;
+            this.user = await Api.post('/login', data) as User;
 
-                navigateTo('/admin')
-            } catch (error: any) {
-                throw new Error(error)
-            }
+            navigateTo('/admin')
         },
         async logout(): Promise<void> {
             const Api = useApiStore();

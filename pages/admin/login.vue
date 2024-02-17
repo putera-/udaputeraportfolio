@@ -22,7 +22,8 @@
                 <div class="mt-6 text-error" v-if="errors.password">{{ errors.password }}</div>
             </div>
 
-            <div class="text-right max-sm:mt-2">
+            <div class="flex justify-end items-center max-sm:mt-2">
+                <div class="text-error text-sm mr-4" v-if="responseError">{{ responseError }}</div>
                 <button @click="doLogin"
                     class="btn max-sm:btn-sm btn-base-100 w-min shadow-[0_5px_00px_6px_rgba(0,0,0,1)] md:shadow-[0_7px_00px_8px_rgba(0,0,0,1)]">LOGIN</button>
             </div>
@@ -44,7 +45,8 @@ const formData = ref<{ email: string, password: string }>({
     email: '',
     password: ''
 });
-const errors = ref<Record<string, string>>({})
+const errors = ref<Record<string, string>>({});
+const responseError = ref<string>("");
 
 const doLogin = async () => {
     try {
@@ -54,6 +56,8 @@ const doLogin = async () => {
     } catch (error: any) {
         if (error.isJoi) {
             errors.value = error.data;
+        } else {
+            responseError.value = error.message;
         }
     }
 }
