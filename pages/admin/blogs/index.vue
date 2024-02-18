@@ -6,7 +6,7 @@
         </template>
 
         <template #default>
-            <div class="flex justify-between">
+            <div class="border-b border-b-neutral/10 pb-2 mb-4 flex justify-between">
                 <div class="font-bold text-3xl flex gap-2">Blogs
                     <IconsCatLoading v-if="isLoading" class="w-8" />
                 </div>
@@ -14,7 +14,7 @@
                     <LucidePlus :size="12" /> New Blog
                 </NuxtLink>
             </div>
-            <div class="divider before:h-px after:h-px mt-0"></div>
+
             <div class="flex gap-2 max-sm:items-end justify-between">
                 <div class="grow">
                     <AdminSearch :filter="filter" :doFilter="doFilter" />

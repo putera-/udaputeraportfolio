@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="font-semibold mb-4 border border-b-neutral/25 flex gap-4">USER SETTINGS
+    <div class="font-bold text-3xl pb-2 mb-4 border-b border-b-neutral/10 flex gap-4">USER SETTINGS
         <IconsCatLoading v-if="isLoading" class="w-6" />
     </div>
 

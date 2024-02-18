@@ -58,7 +58,7 @@
     </div>
     <div class="xl:px-10">
         <label>Avatar</label>
-        <img v-if="form.avatar" :src="form.avatar" class="rounded-2xl mx-auto">
+        <img v-if="form.avatar" :src="form.avatar" class="w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
         <div v-else class="bg-neutral/50 w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
         </div>
         <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
@@ -71,7 +71,7 @@
         </label>
     </div>
 </div>
-<div class="divider mb-0"></div>
+<div class="border-b border-b-neutral/10 my-4"></div>
 
 <div class="">
     <button @click="confirmUpdate = true" class="btn btn-primary float-right">Update</button>
