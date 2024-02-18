@@ -10,7 +10,7 @@
                 <div class="font-bold text-3xl flex gap-2">Experiences
                     <IconsCatLoading v-show="isLoading" class="w-8" />
                 </div>
-                <button class="btn btn-neutral btn-sm">
+                <button class="btn btn-neutral btn-sm" @click="showForm = true">
                     <LucidePlus :size="12" /> New Experiences
                 </button>
             </div>
@@ -101,11 +101,15 @@
                     :gotoPage="getData" />
             </div>
 
+            <!-- confirmation modal -->
             <AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
                 Are you sure to remove?
                 <br>
                 <span class="font-bold text-lg" v-if="removeData">{{ removeData.company }}</span>
             </AdminConfirmation>
+
+            <!-- form modal -->
+            <AdminExperienceForm :show="showForm" @close="showForm = false" @saved="getData(); showForm = false" />
         </template>
     </NuxtLayout>
 </div>
@@ -143,6 +147,9 @@ const getData = async (targetPage: number = 1) => {
 
     isLoading.value = false;
 }
+
+// FORM
+const showForm = ref<boolean>(false);
 
 
 // DELETE

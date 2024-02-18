@@ -1,3 +1,5 @@
+import { experienceValidation } from "~/utils/experience.validation";
+
 interface ExperienceState {
     data: ExperiencePage | null
 }
@@ -21,6 +23,13 @@ export const useExperienceStore = defineStore('experience', {
         async remove(id: number): Promise<void> {
             const Api = useApiStore();
             await Api.delete(`/experience/${id}`);
+        },
+        async create(data: Record<string, any>) {
+            const Api = useApiStore();
+            data = validate(experienceValidation, data);
+            console.log('data validate');
+            console.log(data);
+            await Api.post('/experience', data);
         }
     }
 });
