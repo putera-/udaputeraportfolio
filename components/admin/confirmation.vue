@@ -8,7 +8,10 @@
         </p>
         <div class="modal-action">
             <label class="btn" @click="$emit('close')">Close</label>
-            <label class="btn btn-neutral" @click="$emit('yes')">{{ actionText }}</label>
+            <label class="btn btn-neutral" @click="isLoading = true; $emit('yes')">
+                {{ actionText }}
+                <IconsCatLoading v-if="isLoading" class="w-8" />
+            </label>
         </div>
     </div>
     <label class="modal-backdrop" @click="$emit('close')">Close</label>
@@ -22,10 +25,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(['close', 'yes']);
+const isLoading = ref<boolean>(false);
 
 const _show = ref<Boolean>(props.show);
 watchEffect(() => {
     _show.value = props.show;
+    isLoading.value = false;
 })
 
 </script>
