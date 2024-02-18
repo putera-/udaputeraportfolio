@@ -21,7 +21,6 @@ export const useBlogStore = defineStore('blog', {
         async get(id: number | string): Promise<Blog> {
             const Api = useApiStore();
             return await Api.get(`/blog/${id}`) as Blog;
-
         },
         async create(data: Record<string, string>, photos: File[]): Promise<void> {
             const Api = useApiStore();

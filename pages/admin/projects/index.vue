@@ -39,10 +39,10 @@
                                 <ul tabindex="0"
                                     class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
                                     <li>
-                                        <!-- <NuxtLink :to="'/admin/projects/' + project.id"
+                                        <NuxtLink :to="'/admin/projects/' + project.id"
                                             class="btn btn-xs h-min justify-start my-px">
                                             <LucidePencil :size="16" />Edit
-                                        </NuxtLink> -->
+                                        </NuxtLink>
                                     </li>
                                     <li>
                                         <button class="btn btn-error btn-xs h-min my-px"
@@ -55,7 +55,7 @@
                         </div>
                         <div class="text-xs font-light flex justify-between">
                             <div>{{ project.readStartDate }} - {{ project.readEndDate }}</div>
-                            <div class="font-semibold">{{ project.status }}</div>
+                            <div class="font-semibold">{{ project.read_status }}</div>
                         </div>
                         <div class="border-b border-b-neutral/25"></div>
                         <div class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden">

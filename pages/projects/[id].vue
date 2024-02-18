@@ -24,7 +24,8 @@
             </div>
             <div class="mt-4">
                 <div class="lg:hidden">
-                    <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ status }}</span></div>
+                    <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ project.read_status
+                    }}</span></div>
                     <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
                     <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
                         project.company }}</span></div>
@@ -37,7 +38,7 @@
             </div>
         </div>
         <div class="max-lg:hidden lg:col-span-3">
-            <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ status }}</span></div>
+            <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ project.read_status }}</span></div>
             <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
             <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
                 project.company }}</span></div>
@@ -63,10 +64,6 @@ const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
 const id = route.params.id;
 const project = await $fetch('/api/project/' + id) as Project;
-
-const status = computed(() => {
-    return project.status.replaceAll('_', ' ');
-});
 
 // SEO and META
 const { value: useProfile } = useState<Profile>('profile');

@@ -10,6 +10,7 @@ interface Project {
     github?: string
     gitlab?: string
     status: string
+    read_status: string
     company?: string
     skills?: SkillCategory[]
     ProjectSkills?: ProjectSkills[]
