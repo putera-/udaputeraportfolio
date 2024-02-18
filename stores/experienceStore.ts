@@ -27,9 +27,12 @@ export const useExperienceStore = defineStore('experience', {
         async create(data: Record<string, any>) {
             const Api = useApiStore();
             data = validate(experienceValidation, data);
-            console.log('data validate');
-            console.log(data);
             await Api.post('/experience', data);
+        },
+        async update(id: number, data: Record<string, any>) {
+            const Api = useApiStore();
+            data = validate(experienceValidation, data);
+            await Api.put(`/experience/${id}`, data);
         }
     }
 });

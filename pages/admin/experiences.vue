@@ -10,7 +10,7 @@
                 <div class="font-bold text-3xl flex gap-2">Experiences
                     <IconsCatLoading v-show="isLoading" class="w-8" />
                 </div>
-                <button class="btn btn-neutral btn-sm" @click="showForm = true">
+                <button class="btn btn-neutral btn-sm" @click="showForm = true; updateData = null">
                     <LucidePlus :size="12" /> New Experiences
                 </button>
             </div>
@@ -48,7 +48,8 @@
                                 <td class="text-center">{{ data.location }}</td>
                                 <td>
                                     <div class="flex justify-center gap-3">
-                                        <button class="btn btn-sm btn-circle btn-neutral h-min my-px">
+                                        <button @click="showForm = true; updateData = data"
+                                            class="btn btn-sm btn-circle btn-neutral h-min my-px">
                                             <LucidePencil :size="16" />
                                         </button>
                                         <button class="btn btn-sm btn-circle btn-error h-min my-px"
@@ -109,7 +110,8 @@
             </AdminConfirmation>
 
             <!-- form modal -->
-            <AdminExperienceForm :show="showForm" @close="showForm = false" @saved="getData(); showForm = false" />
+            <AdminExperienceForm :show="showForm" :data="updateData" @close="showForm = false"
+                @saved="getData(); showForm = false" />
         </template>
     </NuxtLayout>
 </div>
@@ -150,7 +152,7 @@ const getData = async (targetPage: number = 1) => {
 
 // FORM
 const showForm = ref<boolean>(false);
-
+const updateData = ref<Experience | null>(null);
 
 // DELETE
 const confirmDelete = ref<boolean>(false);

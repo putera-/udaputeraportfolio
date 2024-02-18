@@ -5,7 +5,7 @@
         <form method="dialog">
             <button @click="$emit('close')" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <h3 class="font-bold text-lg mb-2">New Experience</h3>
+        <h3 class="font-bold text-lg mb-2">{{ data ? 'Update' : 'New' }} Experience</h3>
         <div>
             <label class="form-control w-full">
                 <span class="label label-text">Company</span>
@@ -61,26 +61,26 @@
         <div class="modal-action flex justify-end items-center">
             <div class="text-error font-sm" v-if="responseError">{{ responseError }}</div>
             <button @click="$emit('close')" class="btn">Close!</button>
-            <button @click="confirmSave = true" class="btn btn-neutral">Update / Save</button>
+            <button @click="confirmSave = true" class="btn btn-neutral">{{ data ? 'Update' : 'Save' }}</button>
         </div>
 
         <!-- confirmation modal -->
         <AdminConfirmation action-text="Save" :show="confirmSave" @close="confirmSave = false" @yes="save">
-            Are you sure to save / update?
-            <!-- <br> -->
-            <!-- <span class="font-bold text-lg" v-if="removeData">{{ removeData.company }}</span> -->
+            Are you sure to {{ data ? 'update' : 'save' }}?
         </AdminConfirmation>
     </div>
 </div>
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify';
 import dayjs from 'dayjs';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps<{
-    show: Boolean
+    show: Boolean,
+    data: Experience | null
 }>();
 const _show = ref<Boolean>(props.show);
 const emit = defineEmits(['close', 'saved'])
@@ -91,12 +91,12 @@ const formData = ref<Record<string, any>>({});
 watchEffect((): void => {
     _show.value = props.show;
     formData.value = {
-        title: '',
-        company: '',
-        location: '',
-        description: '',
-        startDate: dayjs().format(format),
-        endDate: null
+        title: props.data ? props.data.title : '',
+        company: props.data ? props.data.company : '',
+        location: props.data ? props.data.location : '',
+        description: props.data ? props.data.description : '',
+        startDate: dayjs(props.data ? props.data.startDate : '').format(format),
+        endDate: props.data ? props.data.endDate : null
     }
 });
 
@@ -120,8 +120,17 @@ const save = async () => {
     errors.value = {};
     responseError.value = '';
     try {
-        await ExperienceStore.create(formData.value);
+        if (!props.data) {
+            // create
+            await ExperienceStore.create(formData.value);
+        } else {
+            // update
+            await ExperienceStore.update(props.data.id, formData.value);
+        }
         confirmSave.value = false;
+        toast.success("Success", {
+            autoClose: 3000
+        });
         emit('saved');
     } catch (error: any) {
         confirmSave.value = false;
