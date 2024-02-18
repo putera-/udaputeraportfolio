@@ -11,7 +11,7 @@
                     <IconsCatLoading v-show="isLoading" class="w-8" />
                 </div>
                 <button class="btn btn-neutral btn-sm" @click="showForm = true; updateData = null">
-                    <LucidePlus :size="12" /> New Experiences
+                    <LucidePlus :size="12" /> New Experience
                 </button>
             </div>
 
