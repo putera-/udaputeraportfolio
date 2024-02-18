@@ -28,7 +28,7 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                     <div v-for="blog in BlogStore.blogs"
                         class="card rounded-xl shadow-lg p-4 bg-base-100 flex flex-col gap-2">
-                        <div class="flex justify-between gap-2 max-w-full">
+                        <div class="flex justify-between items-center gap-2 max-w-full">
                             <div class="overflow-hidden">
                                 <div class="font-semibold text-neutral text-lg truncate w-full">{{ blog.title }}
                                 </div>
@@ -69,6 +69,7 @@
                 <AdminPagination :page="BlogStore.page" :total_page="BlogStore.total_page" :gotoPage="getData" />
             </div>
 
+            <!-- delete confirmation -->
             <AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
                 Are you sure to remove this blog?
                 <br>
@@ -126,13 +127,13 @@ const remove = async (): Promise<void> => {
     try {
         await BlogStore.remove(removeData.value!.id);
 
-        // reload page
-        await getData();
-
         isLoading.value = false;
         confirmDelete.value = false;
         removeData.value = null;
         toast.success('Success', { autoClose: 3000 })
+
+        // reload page
+        await getData();
     } catch (error: any) {
         toast.error(error.message, { autoClose: 3000 })
 
