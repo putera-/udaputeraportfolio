@@ -6,10 +6,15 @@
         </template>
 
         <template #default>
-            <div class="font-bold text-3xl flex gap-2">Experiences
-                <IconsCatLoading v-if="isLoading" class="w-8" />
+            <div class="border-b border-b-neutral/10 pb-2 mb-4 flex justify-between">
+                <div class="font-bold text-3xl flex gap-2">Experiences
+                    <IconsCatLoading v-show="isLoading" class="w-8" />
+                </div>
+                <button class="btn btn-neutral btn-sm">
+                    <LucidePlus :size="12" /> New Experiences
+                </button>
             </div>
-            <div class="divider before:h-px after:h-px mt-0"></div>
+
             <div class="flex gap-2 max-sm:items-end justify-between">
                 <div class="grow">
                     <AdminSearch :filter="filter" :doFilter="doFilter" />
@@ -26,10 +31,10 @@
                         <thead>
                             <tr>
                                 <th>Company</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Location</th>
-                                <th>Action</th>
+                                <th class="text-center">Start Date</th>
+                                <th class="text-center">End Date</th>
+                                <th class="text-center">Location</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,33 +43,54 @@
                                     <div class="text-neutral font-semibold">{{ data.company }}</div>
                                     <div class="text-xs">{{ data.title }}</div>
                                 </td>
-                                <td>{{ data.readStartDate }}</td>
-                                <td>{{ data.readEndDate }}</td>
-                                <td>{{ data.location }}</td>
-                                <td></td>
+                                <td class="text-center">{{ data.readStartDate }}</td>
+                                <td class="text-center">{{ data.readEndDate }}</td>
+                                <td class="text-center">{{ data.location }}</td>
+                                <td>
+                                    <div class="flex justify-center gap-3">
+                                        <button class="btn btn-sm btn-circle btn-neutral h-min my-px">
+                                            <LucidePencil :size="16" />
+                                        </button>
+                                        <button class="btn btn-sm btn-circle btn-error h-min my-px"
+                                            @click="removeData = data; confirmDelete = true">
+                                            <LucideTrash2 :size="16" />
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="md:hidden flex flex-col gap-2">
                     <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperienceStore.experiences ">
-                        <div class="flex gap-2 items-center">
-                            <LucideBuilding2 :size="20" class="text-gray-500" />
-                            <div class="grow">
-                                <div class="flex justify-between">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-xs">{{ data.readStartDate }} - {{ data.readEndDate }}</div>
+                                <div class="flex gap-2">
+                                    <LucideBuilding2 :size="20" class="text-gray-500 mt-2" />
                                     <div>
                                         <div class="text-neutral font-semibold">{{ data.company }}</div>
                                         <div class="text-xs">{{ data.title }}</div>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm">
-                                            <LucidePencil :size="16" />
-                                        </button>
+                                        <div class="text-xs">{{ data.location }}</div>
                                     </div>
                                 </div>
-                                <div class="divider before:h-px after:h-px my-1 w-full"></div>
-                                <div class="text-xs">{{ data.readStartDate }} - {{ data.readEndDate }}</div>
-                                <div class="text-xs">{{ data.location }}</div>
+                            </div>
+                            <div class="dropdown dropdown-end">
+                                <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                                    <li>
+                                        <button class="btn btn-xs h-min justify-start my-px">
+                                            <LucidePencil :size="16" />Edit
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-error btn-xs h-min my-px"
+                                            @click="removeData = data; confirmDelete = true">
+                                            <LucideTrash2 :size="16" />Delete
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -74,12 +100,21 @@
                 <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page"
                     :gotoPage="getData" />
             </div>
+
+            <AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
+                Are you sure to remove?
+                <br>
+                <span class="font-bold text-lg" v-if="removeData">{{ removeData.company }}</span>
+            </AdminConfirmation>
         </template>
     </NuxtLayout>
 </div>
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 definePageMeta({
     layout: false,
     middleware: ['auth']
@@ -108,5 +143,27 @@ const getData = async (targetPage: number = 1) => {
     await ExperienceStore.getAll(filter.value, page.value)
 
     isLoading.value = false;
+}
+
+
+// DELETE
+const confirmDelete = ref<boolean>(false);
+const removeData = ref<Experience | null>(null);
+const remove = async () => {
+    if (!removeData.value) return;
+    try {
+        await ExperienceStore.remove(removeData.value!.id);
+
+        confirmDelete.value = false;
+        removeData.value = null;
+        toast.success('Success', { autoClose: 3000 })
+
+        // reload page
+        await getData();
+    } catch (error: any) {
+        toast.error(error.message, { autoClose: 3000 })
+
+        isLoading.value = false;
+    }
 }
 </script>

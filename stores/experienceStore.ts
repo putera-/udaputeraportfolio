@@ -17,6 +17,10 @@ export const useExperienceStore = defineStore('experience', {
         async getAll(search: string, page: number = 1): Promise<void> {
             const Api = useApiStore();
             this.data = await Api.get(`/experiences?limit=10&page=${page}&search=${search}`) as ExperiencePage;
+        },
+        async remove(id: number): Promise<void> {
+            const Api = useApiStore();
+            await Api.delete(`/experience/${id}`);
         }
     }
 });

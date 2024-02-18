@@ -68,12 +68,7 @@ export const useBlogStore = defineStore('blog', {
         },
         async remove(id: number): Promise<void> {
             const Api = useApiStore();
-
-            try {
-                await Api.delete(`/blog/${id}`);
-            } catch (error: any) {
-                throw new Error(error);
-            }
+            await Api.delete(`/blog/${id}`);
         }
     }
 });
