@@ -8,7 +8,7 @@
         <template #default>
             <div class="border-b border-b-neutral/10 pb-2 mb-4 flex justify-between">
                 <div class="font-bold text-3xl flex gap-2">Blogs
-                    <IconsCatLoading v-if="isLoading" class="w-8" />
+                    <IconsCatLoading v-show="isLoading" class="w-8" />
                 </div>
                 <NuxtLink to="/admin/blogs/create" class="btn btn-neutral btn-sm">
                     <LucidePlus :size="12" /> New Blog

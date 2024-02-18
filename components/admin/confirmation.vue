@@ -10,7 +10,7 @@
             <label class="btn" @click="$emit('close')">Close</label>
             <label class="btn btn-neutral" @click="isLoading = true; $emit('yes')">
                 {{ actionText }}
-                <IconsCatLoading v-if="isLoading" class="w-8" />
+                <IconsCatLoading v-show="isLoading" class="w-8" />
             </label>
         </div>
     </div>

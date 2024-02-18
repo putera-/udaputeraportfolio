@@ -1,6 +1,6 @@
 <template>
 <div class="font-bold text-3xl flex gap-2">Projects
-    <IconsCatLoading v-if="isLoading" class="w-8" />
+    <IconsCatLoading v-show="isLoading" class="w-8" />
 </div>
 <div class="divider before:h-px after:h-px mt-0"></div>
 <div class="flex gap-2 max-sm:items-end justify-between">
