@@ -95,7 +95,7 @@
 
             <!-- form modal -->
             <AdminEducationForm :show="showForm" :data="updateData" @close="showForm = false"
-                @saved="showForm = false; EducationStore.get()" />
+                @saved="showForm = false; getData()" />
         </template>
     </NuxtLayout>
 </div>
@@ -110,8 +110,12 @@ definePageMeta({
 
 const EducationStore = useEducationStore();
 onBeforeMount(async (): Promise<void> => {
-    await EducationStore.get()
+    await getData();
 });
+
+const getData = async () => {
+    await EducationStore.get()
+}
 
 const filter = ref<string>('');
 
@@ -144,7 +148,7 @@ const remove = async () => {
         toast.success('Success', { autoClose: 3000 })
 
         // reload page
-        await EducationStore.get()
+        await getData()
     } catch (error: any) {
         toast.error(error.message, { autoClose: 3000 })
 

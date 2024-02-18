@@ -34,22 +34,30 @@
                 <div>
                     <label class="form-control w-full max-w-xs">
                         <span class="label label-text">Start Date</span>
-                        <VueDatePicker v-model="formData.startDate" format="d MMMM yyyy" :enable-time-picker="false"
-                            input-class-name="!bg-base-100 !border-neutral/25" />
-                        <span class="label-text-alt text-right text-error" v-if="errors.startDate">{{ errors.startDate
-                        }}</span>
+                        <DatePicker v-model="formData.startDate" color="gray">
+                            <template #default="{ togglePopover }">
+                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal"
+                                    @click="togglePopover">
+                                    {{ dayjs(formData.startDate).format('D MMMM YYYY') }}
+                                </button>
+                            </template>
+                        </DatePicker>
                     </label>
                     <label class="form-control w-full max-w-xs" v-show="formData.endDate != null">
                         <span class="label label-text">End Date</span>
-                        <VueDatePicker v-model="formData.endDate" format="d MMMM yyyy" :enable-time-picker="false"
-                            input-class-name="!bg-base-100 !border-neutral/25" />
-                        <span class="label-text-alt text-right text-error" v-if="errors.endDate">{{ errors.endDate
-                        }}</span>
+                        <DatePicker v-model="formData.endDate" color="gray">
+                            <template #default="{ togglePopover }">
+                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal"
+                                    @click="togglePopover">
+                                    {{ dayjs(formData.endDate).format('D MMMM YYYY') }}
+                                </button>
+                            </template>
+                        </DatePicker>
                     </label>
                 </div>
                 <label class="form-control">
                     <!-- PRESENT -->
-                    <label class="cursor-pointer label flex justify-start gap-2 mt-9">
+                    <label class="cursor-pointer label flex justify-start gap-2 mt-8">
                         <input :checked="formData.endDate == null" @change="setEndDate" type="checkbox"
                             class="checkbox checkbox-neutral" />
                         <span class="label-text">Present</span>
@@ -74,9 +82,8 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
+import { DatePicker } from 'v-calendar';
 import dayjs from 'dayjs';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps<{
     show: Boolean,
@@ -87,7 +94,6 @@ const errors = ref<Record<string, string>>({});
 const responseError = ref<string>('');
 const emit = defineEmits(['close', 'saved'])
 
-const format = "YYYY-MM-D";
 const formData = ref<Record<string, any>>({});
 
 watchEffect((): void => {
@@ -99,8 +105,8 @@ watchEffect((): void => {
         company: props.data ? props.data.company : '',
         location: props.data ? props.data.location : '',
         description: props.data ? props.data.description : '',
-        startDate: dayjs(props.data ? props.data.startDate : '').format(format),
-        endDate: props.data ? props.data.endDate : null
+        startDate: props.data ? new Date(props.data.startDate) : new Date(),
+        endDate: props.data ? (props.data.endDate ? new Date(props.data.endDate) : null) : null
     }
 });
 
@@ -108,7 +114,7 @@ watchEffect((): void => {
 const setEndDate = (e: Event) => {
     const target = e.target as HTMLInputElement
     if (!target.checked) {
-        formData.value.endDate = dayjs().format(format);
+        formData.value.endDate = new Date();
     } else {
         formData.value.endDate = null;
     }
@@ -117,17 +123,25 @@ const setEndDate = (e: Event) => {
 // SAVE
 const ExperienceStore = useExperienceStore();
 const confirmSave = ref<boolean>(false);
+const format = "YYYY-MM-D";
 
 const save = async () => {
     errors.value = {};
     responseError.value = '';
     try {
+        // format date
+        const _data = { ...formData.value };
+        _data.startDate = dayjs(_data.startDate).format(format);
+        if (_data.endDate) {
+            _data.endDate = dayjs(_data.endDate).format(format);
+        }
+
         if (!props.data) {
             // create
-            await ExperienceStore.create(formData.value);
+            await ExperienceStore.create(_data);
         } else {
             // update
-            await ExperienceStore.update(props.data.id, formData.value);
+            await ExperienceStore.update(props.data.id, _data);
         }
         confirmSave.value = false;
         toast.success("Success", {

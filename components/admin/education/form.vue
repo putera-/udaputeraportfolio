@@ -28,16 +28,20 @@
             <div class="flex gap-4 items-start">
                 <div>
                     <label class="form-control w-full max-w-xs">
-                        <span class="label label-text">Start Date</span>
-                        <VueDatePicker v-model="formData.startYear" year-picker
-                            input-class-name="!bg-base-100 !border-neutral/25" />
+                        <span class="label label-text">Start Year</span>
+
+                        <input v-model="formData.startYear" type="text" placeholder="Start Year"
+                            class="input input-bordered w-full" />
+
                         <span class="label-text-alt text-right text-error" v-if="errors.startYear">{{ errors.startYear
                         }}</span>
                     </label>
-                    <label class="form-control w-full max-w-xs" v-show="formData.endYear != null">
-                        <span class="label label-text">End Date</span>
-                        <VueDatePicker v-model="formData.endYear" year-picker
-                            input-class-name="!bg-base-100 !border-neutral/25" />
+                    <label class="form-control w-full max-w-xs" format="yyyy" v-show="formData.endYear != null">
+                        <span class="label label-text">End Year</span>
+
+                        <input v-model="formData.endYear" type="text" placeholder="Start Year"
+                            class="input input-bordered w-full" />
+
                         <span class="label-text-alt text-right text-error" v-if="errors.endYear">{{ errors.endYear
                         }}</span>
                     </label>
@@ -69,9 +73,6 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
-import dayjs from 'dayjs';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps<{
     show: Boolean,
@@ -91,6 +92,7 @@ watchEffect((): void => {
     errors.value = {};
     responseError.value = '';
     _show.value = props.show;
+
     formData.value = {
         institutionName: props.data ? props.data.institutionName : '',
         major: props.data ? props.data.major : '',

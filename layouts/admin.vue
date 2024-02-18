@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import 'vue3-toastify/dist/index.css';
+import 'v-calendar/dist/style.css'
 
 const showMenu = ref<boolean>(false);
 
