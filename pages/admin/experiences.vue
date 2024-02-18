@@ -1,75 +1,87 @@
 <template>
-<div class="font-bold text-3xl flex gap-2">Experiences
-    <IconsCatLoading v-if="isLoading" class="w-8" />
-</div>
-<div class="divider before:h-px after:h-px mt-0"></div>
-<div class="flex gap-2 max-sm:items-end justify-between">
-    <div class="grow">
-        <AdminSearch :filter="filter" :doFilter="doFilter" />
-    </div>
-    <div class="flex-none">
-        <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page" :gotoPage="getData" />
-    </div>
-</div>
-<div class="py-3">
-    <div class="max-md:hidden overflow-x-auto">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Location</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="hover" v-for=" data  in  ExperienceStore.experiences ">
-                    <td>
-                        <div class="text-neutral font-semibold">{{ data.company }}</div>
-                        <div class="text-xs">{{ data.title }}</div>
-                    </td>
-                    <td>{{ data.readStartDate }}</td>
-                    <td>{{ data.readEndDate }}</td>
-                    <td>{{ data.location }}</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="md:hidden flex flex-col gap-2">
-        <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperienceStore.experiences ">
-            <div class="flex gap-2 items-center">
-                <LucideBuilding2 :size="20" class="text-gray-500" />
+<div>
+    <NuxtLayout name="admin">
+        <template #breadcrumb>
+            <li>Experiences</li>
+        </template>
+
+        <template #default>
+            <div class="font-bold text-3xl flex gap-2">Experiences
+                <IconsCatLoading v-if="isLoading" class="w-8" />
+            </div>
+            <div class="divider before:h-px after:h-px mt-0"></div>
+            <div class="flex gap-2 max-sm:items-end justify-between">
                 <div class="grow">
-                    <div class="flex justify-between">
-                        <div>
-                            <div class="text-neutral font-semibold">{{ data.company }}</div>
-                            <div class="text-xs">{{ data.title }}</div>
-                        </div>
-                        <div>
-                            <button class="btn btn-sm">
-                                <LucidePencil :size="16" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="divider before:h-px after:h-px my-1 w-full"></div>
-                    <div class="text-xs">{{ data.readStartDate }} - {{ data.readEndDate }}</div>
-                    <div class="text-xs">{{ data.location }}</div>
+                    <AdminSearch :filter="filter" :doFilter="doFilter" />
+                </div>
+                <div class="flex-none">
+                    <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page"
+                        :gotoPage="getData" />
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="flex justify-end">
-    <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page" :gotoPage="getData" />
+            <div class="py-3">
+                <div class="max-md:hidden overflow-x-auto">
+                    <table class="table">
+                        <!-- head -->
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover" v-for=" data  in  ExperienceStore.experiences ">
+                                <td>
+                                    <div class="text-neutral font-semibold">{{ data.company }}</div>
+                                    <div class="text-xs">{{ data.title }}</div>
+                                </td>
+                                <td>{{ data.readStartDate }}</td>
+                                <td>{{ data.readEndDate }}</td>
+                                <td>{{ data.location }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="md:hidden flex flex-col gap-2">
+                    <div class="card bg-base-100/50 p-2" v-for=" data  in  ExperienceStore.experiences ">
+                        <div class="flex gap-2 items-center">
+                            <LucideBuilding2 :size="20" class="text-gray-500" />
+                            <div class="grow">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="text-neutral font-semibold">{{ data.company }}</div>
+                                        <div class="text-xs">{{ data.title }}</div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm">
+                                            <LucidePencil :size="16" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="divider before:h-px after:h-px my-1 w-full"></div>
+                                <div class="text-xs">{{ data.readStartDate }} - {{ data.readEndDate }}</div>
+                                <div class="text-xs">{{ data.location }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <AdminPagination :page="ExperienceStore.page" :total_page="ExperienceStore.total_page"
+                    :gotoPage="getData" />
+            </div>
+        </template>
+    </NuxtLayout>
 </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'admin',
+    layout: false,
     middleware: ['auth']
 });
 

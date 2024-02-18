@@ -1,26 +1,36 @@
 <template>
 <div>
-    <div class="font-bold text-3xl pb-2 mb-4 border-b border-b-neutral/10 flex gap-4">USER SETTINGS
-        <IconsCatLoading v-if="isLoading" class="w-6" />
-    </div>
+    <NuxtLayout name="admin">
+        <template #breadcrumb>
+            <li>User Settings</li>
+        </template>
 
-    <div role="tablist" class="tabs tabs-lifted">
-        <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]" aria-label="User" checked />
-        <div role="tabpanel" class="tab-content p-6">
-            <AdminUserUpdate @updating="isLoading = true" @done="isLoading = false" />
-        </div>
+        <template #default>
+            <div class="font-bold text-3xl pb-2 mb-4 border-b border-b-neutral/10 flex gap-4">USER SETTINGS
+                <IconsCatLoading v-if="isLoading" class="w-6" />
+            </div>
 
-        <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]" aria-label="Change Password" />
-        <div role="tabpanel" class="tab-content p-6">
-            <AdminUserChangePassword @updating="isLoading = true" @done="isLoading = false" />
-        </div>
-    </div>
+            <div role="tablist" class="tabs tabs-lifted">
+                <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]" aria-label="User"
+                    checked />
+                <div role="tabpanel" class="tab-content p-6">
+                    <AdminUserUpdate @updating="isLoading = true" @done="isLoading = false" />
+                </div>
+
+                <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]"
+                    aria-label="Change Password" />
+                <div role="tabpanel" class="tab-content p-6">
+                    <AdminUserChangePassword @updating="isLoading = true" @done="isLoading = false" />
+                </div>
+            </div>
+        </template>
+    </NuxtLayout>
 </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'admin',
+    layout: false,
     middleware: ['auth']
 });
 
