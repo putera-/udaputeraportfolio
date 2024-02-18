@@ -89,6 +89,7 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { toast } from 'vue3-toastify';
+
 definePageMeta({
     middleware: ['auth'],
     layout: false

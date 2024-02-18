@@ -106,20 +106,18 @@ export const useApiStore = defineStore('api', {
         },
         handleError(error: any) {
             const status = error.status || 500;
-            const message = error.data.message || 'Internal Server Error!';
-
+            const message = error.data.message || error.message || '';
 
             if (status == 401) {
                 return navigateTo('/admin/login'); // login page
-            }
-            if (status == 400) {
+            } else if (status != 500) {
                 throw new Error(message)
+            } else {
+                throw createError({
+                    statusCode: status,
+                    statusMessage: message || 'Internal Server Error!',
+                });
             }
-
-            throw createError({
-                statusCode: status,
-                statusMessage: message,
-            });
         }
     },
 })

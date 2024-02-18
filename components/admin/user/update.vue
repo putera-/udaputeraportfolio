@@ -25,7 +25,6 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
-const emit = defineEmits(['updating', 'done']);
 
 const errors = ref<Record<string, string>>({});
 const responseError = ref<string>('');
@@ -39,22 +38,20 @@ const formData = ref({
 
 const handleUpdate = async () => {
     errors.value = {};
-    responseError.value = {};
-    confirmUpdate.value = false;
-    emit('updating');
+    responseError.value = '';
     try {
         await AuthStore.updateUser(formData.value);
-        emit('done');
+        confirmUpdate.value = false;
         toast.success('Success', {
             autoClose: 500
         });
     } catch (error: any) {
+        confirmUpdate.value = false;
         if (error.isJoi) {
             errors.value = error.data;
         } else {
             responseError.value = error.message;
         }
-        emit('done');
     }
 }
 </script>

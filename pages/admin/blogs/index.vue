@@ -131,6 +131,7 @@ const remove = async (): Promise<void> => {
 
         isLoading.value = false;
         confirmDelete.value = false;
+        removeData.value = null;
         toast.success('Success', { autoClose: 3000 })
     } catch (error: any) {
         toast.error(error.message, { autoClose: 3000 })

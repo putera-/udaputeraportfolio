@@ -44,7 +44,8 @@
 
 <div class="border-b border-b-neutral/10 my-4"></div>
 
-<div class="">
+<div class="flex justify-end gap-2 items-center">
+    <div class="text-error font-sm" v-if="responseError">{{ responseError }}</div>
     <button @click="confirmUpdate = true" class="btn btn-neutral float-right">Update</button>
 </div>
 
@@ -56,7 +57,6 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 
 const ProfileStore = useProfileStore();
 const profile: Profile = ProfileStore.profile as Profile;
@@ -73,7 +73,10 @@ const form = ref<Record<string, string>>({
 
 const confirmUpdate = ref<Boolean>(false);
 const errors = ref<Record<string, string>>({});
+const responseError = ref<string>('');
+
 const doUpdate = async () => {
+    responseError.value = '';
     try {
         const data = validate(socialValidate, form.value);
         await ProfileStore.update(data);
@@ -85,13 +88,11 @@ const doUpdate = async () => {
             autoClose: 3000
         });
     } catch (error: any) {
+        confirmUpdate.value = false;
         if (error.isJoi) {
             errors.value = error.data;
-            confirmUpdate.value = false;
         } else {
-            toast.error(error, {
-                autoClose: 3000
-            });
+            responseError.value = error.message;
         }
     }
 };

@@ -53,8 +53,9 @@
 </div>
 <div class="border-b border-b-neutral/10 my-4"></div>
 
-<div class="">
+<div class="flex gap-2 items-center">
     <button @click="confirmUpdate = true" class="btn btn-neutral float-right">Update</button>
+    <div class="text-error font-sm" v-if="responseError">{{ responseError }}</div>
 </div>
 
 <AdminConfirmation action-text="Update" :show="confirmUpdate" @close="confirmUpdate = false" @yes="doUpdate">
@@ -65,7 +66,6 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 
 const ProfileStore = useProfileStore();
 const profile: Profile = ProfileStore.profile as Profile;
@@ -107,9 +107,12 @@ const handleAvatar = (e: Event): void => {
 
 const confirmUpdate = ref<Boolean>(false);
 const errors = ref<Record<string, string>>({});
+const responseError = ref<string>('');
+
 const doUpdate = async () => {
     let data: any | FormData = { ...form.value };
     delete data.avatar;
+    responseError.value = '';
 
     try {
         data = validate(profileValidate, data);
@@ -134,13 +137,11 @@ const doUpdate = async () => {
             autoClose: 3000
         });
     } catch (error: any) {
+        confirmUpdate.value = false;
         if (error.isJoi) {
             errors.value = error.data;
-            confirmUpdate.value = false;
         } else {
-            toast.error(error, {
-                autoClose: 3000
-            });
+            responseError.value = error.message;
         }
     }
 }
