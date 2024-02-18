@@ -103,7 +103,7 @@
                     :gotoPage="getData" />
             </div>
 
-            <!-- confirmation modal -->
+            <!-- remove confirmation modal -->
             <AdminConfirmation action-text="Delete" :show="confirmDelete" @close="confirmDelete = false" @yes="remove">
                 Are you sure to remove?
                 <br>
