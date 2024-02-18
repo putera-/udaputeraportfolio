@@ -81,13 +81,14 @@
                                 <ul tabindex="0"
                                     class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
                                     <li>
-                                        <button class="btn btn-xs h-min justify-start my-px">
+                                        <button @click="showForm = true; updateData = data"
+                                            class="btn btn-xs h-min justify-start my-px">
                                             <LucidePencil :size="16" />Edit
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-error btn-xs h-min my-px"
-                                            @click="removeData = data; confirmDelete = true">
+                                        <button @click="removeData = data; confirmDelete = true"
+                                            class="btn btn-error btn-xs h-min my-px">
                                             <LucideTrash2 :size="16" />Delete
                                         </button>
                                     </li>
