@@ -83,12 +83,16 @@ const props = defineProps<{
     data: Experience | null
 }>();
 const _show = ref<Boolean>(props.show);
+const errors = ref<Record<string, string>>({});
+const responseError = ref<string>('');
 const emit = defineEmits(['close', 'saved'])
 
 const format = "YYYY-MM-D";
 const formData = ref<Record<string, any>>({});
 
 watchEffect((): void => {
+    errors.value = {};
+    responseError.value = '';
     _show.value = props.show;
     formData.value = {
         title: props.data ? props.data.title : '',
@@ -113,8 +117,6 @@ const setEndDate = (e: Event) => {
 // SAVE
 const ExperienceStore = useExperienceStore();
 const confirmSave = ref<boolean>(false);
-const errors = ref<Record<string, string>>({})
-const responseError = ref<string>('')
 
 const save = async () => {
     errors.value = {};
