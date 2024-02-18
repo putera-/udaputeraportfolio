@@ -113,6 +113,7 @@ const doUpdate = async () => {
     let data: any | FormData = { ...form.value };
     delete data.avatar;
     responseError.value = '';
+    errors.value = {};
 
     try {
         data = validate(profileValidate, data);
@@ -132,7 +133,6 @@ const doUpdate = async () => {
             fileInput.value.value = '';
         }
 
-        errors.value = {};
         toast.success("Success", {
             autoClose: 3000
         });

@@ -49,6 +49,7 @@ const errors = ref<Record<string, string>>({});
 const responseError = ref<string>('');
 
 const doUpdate = async () => {
+    errors.value = {};
     responseError.value = '';
     try {
         const data = validate(addressValidate, form.value);
@@ -56,7 +57,6 @@ const doUpdate = async () => {
 
         confirmUpdate.value = false;
 
-        errors.value = {};
         toast.success("Success", {
             autoClose: 3000
         });

@@ -77,13 +77,13 @@ const responseError = ref<string>('');
 
 const doUpdate = async () => {
     responseError.value = '';
+    errors.value = {};
     try {
         const data = validate(socialValidate, form.value);
         await ProfileStore.update(data);
 
         confirmUpdate.value = false;
 
-        errors.value = {};
         toast.success("Success", {
             autoClose: 3000
         });
