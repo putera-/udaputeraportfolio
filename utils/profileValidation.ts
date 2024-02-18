@@ -9,12 +9,16 @@ const profileValidate = Joi.object({
     email: isEmail.label("Email"),
     phone: isText.regex(phoneRegex).label('Phone Number'),
     dob: Joi.date().label("Date of birth"),
-    address: isText.label("Address"),
-    city: isString.label("City"),
-    country: isString.label("Country"),
     avatar: isText.allow(null, "").label("Avatar"),
     bio: isText.allow(null, "").label("Bio"),
 });
+
+const addressValidate = Joi.object({
+    address: isText.label("Address"),
+    city: isString.label("City"),
+    country: isString.label("Country"),
+});
+
 const socialValidate = Joi.object({
     web: isURL.allow(null, "").label("Web"),
     github: isURL.allow(null, "").label("Github"),
@@ -29,5 +33,6 @@ const socialValidate = Joi.object({
 
 export {
     profileValidate,
+    addressValidate,
     socialValidate
 };

@@ -1,7 +1,7 @@
 <template>
-<div class="max-sm:flex max-sm:flex-col-reverse sm:grid sm:grid-cols-2 gap-6 xl:gap-16">
+<div class="max-lg:flex max-lg:flex-col-reverse lg:grid lg:grid-cols-2 gap-6 xl:gap-16">
     <div>
-        <div class="grid lg:grid-cols-2 gap-4">
+        <div class="2xl:grid 2xl:grid-cols-2 gap-4">
             <label class="form-control w-full">
                 <div class="label-text">First name</div>
                 <input v-model="form.firstname" type="text" placeholder="First Name"
@@ -34,26 +34,6 @@
                 <input v-model="form.dob" type="text" placeholder="Date of birth" class="input input-bordered w-full" />
                 <div v-if="errors.dob" class="text-right label-text-alt text-error">{{ errors.dob }}</div>
             </label>
-            <div class="divider lg:col-span-2 mb-0">Address</div>
-            <label class="form-control w-full">
-                <div class="label-text">Address</div>
-                <textarea v-model="form.address" type="text" placeholder="Address" rows="4"
-                    class="textarea textarea-bordered w-full"></textarea>
-                <div v-if="errors.address" class="text-right label-text-alt text-error">{{ errors.address }}</div>
-            </label>
-            <div class="flex flex-col">
-                <label class="form-control w-full">
-                    <div class="label-text">City</div>
-                    <input v-model="form.city" type="text" placeholder="City" class="input input-bordered w-full" />
-                    <div v-if="errors.city" class="text-right label-text-alt text-error">{{ errors.city }}</div>
-                </label>
-                <label class="form-control w-full">
-                    <div class="label-text">Country</div>
-                    <input v-model="form.country" type="text" placeholder="Country"
-                        class="input input-bordered w-full" />
-                    <div v-if="errors.country" class="text-right label-text-alt text-error">{{ errors.country }}</div>
-                </label>
-            </div>
         </div>
     </div>
     <div class="xl:px-10">
@@ -74,7 +54,7 @@
 <div class="border-b border-b-neutral/10 my-4"></div>
 
 <div class="">
-    <button @click="confirmUpdate = true" class="btn btn-primary float-right">Update</button>
+    <button @click="confirmUpdate = true" class="btn btn-neutral float-right">Update</button>
 </div>
 
 <AdminConfirmation action-text="Update" :show="confirmUpdate" @close="confirmUpdate = false" @yes="doUpdate">
@@ -99,9 +79,6 @@ const form = ref<Record<string, string>>({
     phone: profile.phone,
     dob: profile.dob,
     avatar: apiUrl + profile.avatar_md,
-    address: profile.address,
-    city: profile.city,
-    country: profile.country,
     bio: profile.bio
 });
 

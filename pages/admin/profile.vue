@@ -14,6 +14,12 @@
                     <AdminProfile v-if="!loading" />
                 </div>
 
+                <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]" aria-label="Address"
+                    checked />
+                <div role="tabpanel" class="tab-content p-6">
+                    <AdminProfileAddress v-if="!loading" />
+                </div>
+
                 <input type="radio" name="my_tabs_2" role="tab" class="tab [--tab-bg:#f8fafc]" aria-label="Social" />
                 <div role="tabpanel" class="tab-content p-6">
                     <AdminProfileSocial v-if="!loading" />

@@ -1,5 +1,5 @@
 <template>
-<div class="grid grid-cols-4 gap-8">
+<div class="grid lg:grid-cols-2 2xl:grid-cols-4 gap-8">
     <label class="form-control w-full">
         <div class="label-text">Web</div>
         <input v-model="form.web" type="text" placeholder="Web" class="input input-bordered w-full" />
@@ -41,10 +41,11 @@
         <div v-if="errors.discord" class="text-right label-text-alt text-error">{{ errors.discord }}</div>
     </label>
 </div>
-<div class="divider mb-0"></div>
+
+<div class="border-b border-b-neutral/10 my-4"></div>
 
 <div class="">
-    <button @click="confirmUpdate = true" class="btn btn-primary float-right">Update</button>
+    <button @click="confirmUpdate = true" class="btn btn-neutral float-right">Update</button>
 </div>
 
 <AdminConfirmation action-text="Update" :show="confirmUpdate" @close="confirmUpdate = false" @yes="doUpdate">
