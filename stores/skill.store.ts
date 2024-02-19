@@ -1,12 +1,12 @@
 interface SkillState {
     data: Skill[]
-    categories: SkillCategory[]
+    categories: SkillCategory[] | null
 }
 
 export const useSkillStore = defineStore('skill', {
     state: (): SkillState => ({
         data: [],
-        categories: []
+        categories: null
     }),
     actions: {
         async get(): Promise<void> {
@@ -16,7 +16,7 @@ export const useSkillStore = defineStore('skill', {
         async getCategories(): Promise<void> {
             const Api = useApiStore();
 
-            this.categories = await Api.get('/skill_categories') as SkillCategory[];
+            this.categories = await Api.get('/skill_by_categories') as SkillCategory[];
         },
         async create(data: Record<string, string>, photos: File[]): Promise<void> {
             const Api = useApiStore();

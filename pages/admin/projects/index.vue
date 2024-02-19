@@ -58,10 +58,16 @@
                             <div class="font-semibold">{{ project.read_status }}</div>
                         </div>
                         <div class="border-b border-b-neutral/25"></div>
-                        <div class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden">
+                        <div
+                            class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden relative">
                             <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md"
                                 :alt="project.title" class="h-full max-w-full mx-auto">
                             <div v-else class="aspect-video w-full rounded-lg bg-accent/10"></div>
+
+                            <div class="badge badge-xs py-2 absolute z-[10] left-2 bottom-2">{{
+                                project.skills_count }}
+                                skills
+                            </div>
                         </div>
                         <div class="truncate text-sm font-semibold text-wrap line-clamp-2" v-if="project.company">{{
                             project.company }}</div>

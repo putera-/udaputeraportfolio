@@ -58,89 +58,48 @@
                 </div>
                 <div>
                     <div class="label-text font-semibold">Status</div>
-                    <div class="flex gap-6 mt-1">
+                    <div class="flex flex-wrap gap-3 md:gap-6 mt-1">
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="radio-10"
-                                class="radio checked:bg-red-500" value="ON_PROGRESS" />
+                            <input v-model="project.status" type="radio" name="project-status"
+                                class="radio checked:bg-neutral" value="ON_PROGRESS" />
                             <span class="label-text">ON PROGRESS</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="radio-10"
-                                class="radio checked:bg-red-500" value="COMPLETE" />
+                            <input v-model="project.status" type="radio" name="project-status"
+                                class="radio checked:bg-success" value="COMPLETE" />
                             <span class="label-text">COMPLETE</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="radio-10"
-                                class="radio checked:bg-red-500" value="MAINTENANCE" />
+                            <input v-model="project.status" type="radio" name="project-status"
+                                class="radio checked:bg-warning" value="MAINTENANCE" />
                             <span class="label-text">MAINTENANCE</span>
                         </label>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Company</div>
-                        <input v-model="form.company" type="text" placeholder="Company"
-                            class="input input-bordered font-bold w-full" />
-                        <div v-if="errors.company" class="text-right label-text-alt text-error">{{ errors.company }}
-                        </div>
-                    </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Url</div>
-                        <input v-model="form.url" type="text" placeholder="Url"
-                            class="input input-bordered font-bold w-full" />
-                        <div v-if="errors.url" class="text-right label-text-alt text-error">{{ errors.url }}
-                        </div>
-                    </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Github</div>
-                        <input v-model="form.github" type="text" placeholder="Github"
-                            class="input input-bordered font-bold w-full" />
-                        <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github }}
-                        </div>
-                    </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Gitlab</div>
-                        <input v-model="form.gitlab" type="text" placeholder="Gitlab"
-                            class="input input-bordered font-bold w-full" />
-                        <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab }}
-                        </div>
-                    </label>
-                </div>
-
-                <label class="form-control w-full">
-                    <div class="label-text font-semibold">Description</div>
-                    <textarea v-model="form.description" cols="30" rows="10" placeholder="Description.."
-                        class="textarea textarea-bordered w-full"></textarea>
-                    <div v-if="errors.description" class="text-right label-text-alt text-error">{{ errors.description }}
-                    </div>
-                </label>
-
                 <div class="flex gap-4 items-start">
-                    <div>
-                        <label class="form-control w-full max-w-xs">
-                            <span class="label label-text font-semibold">Start Date</span>
-                            <DatePicker v-model="form.startDate" color="gray">
-                                <template #default="{ togglePopover }">
-                                    <button class="btn btn-outline border-neutral/25 btn-sm font-normal"
-                                        @click="togglePopover">
-                                        {{ dayjs(form.startDate).format('D MMMM YYYY') }}
-                                    </button>
-                                </template>
-                            </DatePicker>
-                        </label>
-                        <label class="form-control w-full max-w-xs" v-show="form.endDate != null">
-                            <span class="label label-text font-semibold">End Date</span>
-                            <DatePicker v-model="form.endDate" color="gray">
-                                <template #default="{ togglePopover }">
-                                    <button class="btn btn-outline border-neutral/25 btn-sm font-normal"
-                                        @click="togglePopover">
-                                        {{ dayjs(form.endDate).format('D MMMM YYYY') }}
-                                    </button>
-                                </template>
-                            </DatePicker>
-                        </label>
-                    </div>
+                    <label class="form-control w-min min-w-xs">
+                        <span class="label label-text font-semibold">Start Date</span>
+                        <DatePicker v-model="form.startDate" color="gray">
+                            <template #default="{ togglePopover }">
+                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
+                                    @click="togglePopover">
+                                    {{ dayjs(form.startDate).format('D MMMM YYYY') }}
+                                </button>
+                            </template>
+                        </DatePicker>
+                    </label>
+                    <label class="form-control w-min min-w-32">
+                        <span class="label label-text font-semibold">End Date</span>
+                        <DatePicker v-model="form.endDate" color="gray">
+                            <template #default="{ togglePopover }">
+                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
+                                    @click="togglePopover" :disabled="form.endDate == null">
+                                    {{ form.endDate == null ? '-' : dayjs(form.endDate).format('D MMMM YYYY') }}
+                                </button>
+                            </template>
+                        </DatePicker>
+                    </label>
                     <label class="form-control">
                         <!-- PRESENT -->
                         <label class="cursor-pointer label flex justify-start gap-2 mt-8">
@@ -151,7 +110,64 @@
                     </label>
                 </div>
 
-                <!-- TODO skill selector -->
+
+                <!-- DETAIL -->
+                <div class="grid lg:grid-cols-2 gap-4">
+                    <label class="form-control w-full">
+                        <div class="label-text font-semibold">Company</div>
+                        <input v-model="form.company" type="text" placeholder="Company"
+                            class="input input-bordered w-full" />
+                        <div v-if="errors.company" class="text-right label-text-alt text-error">{{ errors.company }}
+                        </div>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label-text font-semibold">Url</div>
+                        <input v-model="form.url" type="text" placeholder="Url" class="input input-bordered w-full" />
+                        <div v-if="errors.url" class="text-right label-text-alt text-error">{{ errors.url }}
+                        </div>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label-text font-semibold">Github</div>
+                        <input v-model="form.github" type="text" placeholder="Github"
+                            class="input input-bordered w-full" />
+                        <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github }}
+                        </div>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label-text font-semibold">Gitlab</div>
+                        <input v-model="form.gitlab" type="text" placeholder="Gitlab"
+                            class="input input-bordered w-full" />
+                        <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab }}
+                        </div>
+                    </label>
+                </div>
+
+                <!-- SKILL -->
+                <div>
+                    <div class="label-text font-semibold flex items-center gap-4">Skills
+                        <button class="btn btn-xs btn-neutral" @click="open_skill_selector = true">
+                            <LucidePlus :size="12" />Add Skill
+                        </button>
+                    </div>
+                    <div class="card bg-base-100 shadow p-4 mt-2">
+                        <div v-for="category of data_skills" class="mb-2">
+                            <div class="label-text font-semibold flex items-center gap-4 mb-px">{{ category.title
+                            }}
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <Skill :skill="skill" v-for="skill of category.skills" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="form-control w-full">
+                    <div class="label-text font-semibold">Description</div>
+                    <textarea v-model="form.description" cols="30" rows="10" placeholder="Description.."
+                        class="textarea textarea-bordered w-full"></textarea>
+                    <div v-if="errors.description" class="text-right label-text-alt text-error">{{ errors.description }}
+                    </div>
+                </label>
 
                 <div class="flex justify-end gap-4">
                     <button class="btn" @click="confirmCancel = true">Cancel</button>
@@ -169,6 +185,10 @@
             <AdminConfirmation action-text="Save" :show="confirmSave" @close="confirmSave = false" @yes="save">
                 Are you sure to save this new project?
             </AdminConfirmation>
+
+            <!-- SKILL SELECTOR -->
+            <AdminProjectSkillSelector :show="open_skill_selector" :selected="selected_skills"
+                @close="open_skill_selector = false" @select="addSkill" />
         </template>
     </NuxtLayout>
 </div>
@@ -188,6 +208,13 @@ definePageMeta({
 
 const { public: { apiUrl } } = useRuntimeConfig();
 
+// get skill category
+const SkillStore = useSkillStore();
+onBeforeMount(async () => {
+    console.log('get skill store broo')
+    if (SkillStore.categories == null) await SkillStore.getCategories();
+})
+
 // get project data
 const id: string = useRoute().params.id as string;
 const ProjectStore = useProjectStore();
@@ -203,8 +230,46 @@ const form = ref<Record<string, any>>({
     endDate: project.endDate,
     status: project.status,
     company: project.company,
-    skills: project.skills
+    // skills: project.skills
 });
+
+// SKILL
+const open_skill_selector = ref<boolean>(false);
+const data_skills = ref<SkillCategory[]>(project.skill_category);
+const selected_skills = ref<Skill[]>(project.skills!)
+
+const addSkill = (newSkill: Skill, category: SkillCategory) => {
+    // TODO fix selected skills
+    const index = selected_skills.value.findIndex(s => s.id == newSkill.id);
+
+    if (index < 0) {
+        selected_skills.value.push(newSkill);
+    } else {
+        selected_skills.value.splice(index, 1);
+    }
+
+    const catIndex = data_skills.value.findIndex(c => c.id == newSkill.categoryId);
+    if (catIndex < 0) {
+        // skill category not include
+        const newCategory = { ...category };
+        newCategory.skills = [newSkill];
+
+        data_skills.value.push(newCategory);
+    } else {
+        const skillIndex = data_skills.value[catIndex].skills!.findIndex(sss => sss.id == newSkill.id);
+        if (skillIndex < 0) {
+            // add skill
+            data_skills.value[catIndex].skills!.push(newSkill);
+        } else {
+            // remove index
+            data_skills.value[catIndex].skills!.splice(skillIndex, 1);
+            if (!data_skills.value[catIndex].skills!.length) {
+                // remove category
+                data_skills.value.splice(catIndex, 1)
+            }
+        }
+    }
+}
 
 // cancel
 const confirmCancel = ref<boolean>(false);
@@ -283,7 +348,11 @@ const save = async () => {
             if (photo.file) newPhoto.push(photo.file);
         }
 
-        await ProjectStore.update(project.id, putData, keepPhoto, newPhoto)
+        console.log(putData)
+        console.log(keepPhoto)
+        console.log(newPhoto)
+
+        // await ProjectStore.update(project.id, putData, keepPhoto, newPhoto)
 
         confirmSave.value = false;
 
@@ -291,7 +360,7 @@ const save = async () => {
             autoClose: 500,
             onClose: () => {
                 isLoading.value = false;
-                navigateTo('/admin/projects');
+                // navigateTo('/admin/projects');
             }
         });
     } catch (error: any) {

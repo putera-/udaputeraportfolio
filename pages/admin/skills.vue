@@ -129,7 +129,7 @@ definePageMeta({
 const SkillStore = useSkillStore();
 onBeforeMount(async (): Promise<void> => {
     await getData();
-    await SkillStore.getCategories();
+    if (SkillStore.categories == null) await SkillStore.getCategories();
 });
 
 const isLoading = ref<boolean>(false);

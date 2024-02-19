@@ -12,8 +12,9 @@ interface Project {
     status: string
     read_status: string
     company?: string
-    skills?: SkillCategory[]
-    ProjectSkills?: ProjectSkills[]
+    skills?: Skill[]
+    skills_count: number
+    skill_category: SkillCategory[]
     photos: Photo[]
 }
 

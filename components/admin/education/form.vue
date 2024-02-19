@@ -1,4 +1,3 @@
-
 <template>
 <input type="checkbox" v-model="_show" class="modal-toggle" />
 <div class="modal" role="dialog">
