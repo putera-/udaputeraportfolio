@@ -20,7 +20,8 @@
                     <div class="label-text font-semibold">Project Title</div>
                     <input v-model="form.title" type="text" placeholder="Project Title"
                         class="input input-lg input-bordered font-bold w-full" />
-                    <div v-if="errors.title" class="text-right label-text-alt text-error">{{ errors.title }}
+                    <div v-if="errors.title" class="text-right label-text-alt text-error">
+                        {{ errors.title }}
                     </div>
                 </label>
                 <div class="overflow-x-auto py-2">
@@ -60,23 +61,24 @@
                     <div class="label-text font-semibold">Status</div>
                     <div class="flex flex-wrap gap-3 md:gap-6 mt-1">
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="project-status"
+                            <input v-model="form.status" type="radio" name="project-status"
                                 class="radio checked:bg-neutral" value="ON_PROGRESS" />
                             <span class="label-text">ON PROGRESS</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="project-status"
+                            <input v-model="form.status" type="radio" name="project-status"
                                 class="radio checked:bg-success" value="COMPLETE" />
                             <span class="label-text">COMPLETE</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="project.status" type="radio" name="project-status"
+                            <input v-model="form.status" type="radio" name="project-status"
                                 class="radio checked:bg-warning" value="MAINTENANCE" />
                             <span class="label-text">MAINTENANCE</span>
                         </label>
                     </div>
                 </div>
 
+                <!-- START DATE - END DATE -->
                 <div class="flex gap-4 items-start">
                     <label class="form-control w-min min-w-xs">
                         <span class="label label-text font-semibold">Start Date</span>
@@ -109,6 +111,14 @@
                         </label>
                     </label>
                 </div>
+                <div>
+                    <div v-if="errors.startDate" class="label-text-alt text-error">
+                        {{ errors.startDate }}
+                    </div>
+                    <div v-if="errors.endDate" class="label-text-alt text-error">
+                        {{ errors.endDate }}
+                    </div>
+                </div>
 
 
                 <!-- DETAIL -->
@@ -117,7 +127,8 @@
                         <div class="label-text font-semibold">Company</div>
                         <input v-model="form.company" type="text" placeholder="Company"
                             class="input input-bordered w-full" />
-                        <div v-if="errors.company" class="text-right label-text-alt text-error">{{ errors.company }}
+                        <div v-if="errors.company" class="text-right label-text-alt text-error">{{
+                            errors.company }}
                         </div>
                     </label>
                     <label class="form-control w-full">
@@ -130,14 +141,16 @@
                         <div class="label-text font-semibold">Github</div>
                         <input v-model="form.github" type="text" placeholder="Github"
                             class="input input-bordered w-full" />
-                        <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github }}
+                        <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github
+                        }}
                         </div>
                     </label>
                     <label class="form-control w-full">
                         <div class="label-text font-semibold">Gitlab</div>
                         <input v-model="form.gitlab" type="text" placeholder="Gitlab"
                             class="input input-bordered w-full" />
-                        <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab }}
+                        <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab
+                        }}
                         </div>
                     </label>
                 </div>
@@ -151,7 +164,8 @@
                     </div>
                     <div class="card bg-base-100 shadow p-4 mt-2">
                         <div v-for="category of data_skills" class="mb-2">
-                            <div class="label-text font-semibold flex items-center gap-4 mb-px">{{ category.title
+                            <div class="label-text font-semibold flex items-center gap-4 mb-px">{{
+                                category.title
                             }}
                             </div>
                             <div class="flex flex-wrap gap-2">
@@ -165,11 +179,13 @@
                     <div class="label-text font-semibold">Description</div>
                     <textarea v-model="form.description" cols="30" rows="10" placeholder="Description.."
                         class="textarea textarea-bordered w-full"></textarea>
-                    <div v-if="errors.description" class="text-right label-text-alt text-error">{{ errors.description }}
+                    <div v-if="errors.description" class="text-right label-text-alt text-error">{{
+                        errors.description }}
                     </div>
                 </label>
 
-                <div class="flex justify-end gap-4">
+                <div class="flex items-center justify-end gap-4">
+                    <div class="text-error text-sm">{{ responseError }}</div>
                     <button class="btn" @click="confirmCancel = true">Cancel</button>
                     <button class="btn btn-neutral" @click="confirmSave = true">Save</button>
                 </div>
@@ -211,7 +227,6 @@ const { public: { apiUrl } } = useRuntimeConfig();
 // get skill category
 const SkillStore = useSkillStore();
 onBeforeMount(async () => {
-    console.log('get skill store broo')
     if (SkillStore.categories == null) await SkillStore.getCategories();
 })
 
@@ -239,7 +254,6 @@ const data_skills = ref<SkillCategory[]>(project.skill_category);
 const selected_skills = ref<Skill[]>(project.skills!)
 
 const addSkill = (newSkill: Skill, category: SkillCategory) => {
-    // TODO fix selected skills
     const index = selected_skills.value.findIndex(s => s.id == newSkill.id);
 
     if (index < 0) {
@@ -275,6 +289,7 @@ const addSkill = (newSkill: Skill, category: SkillCategory) => {
 const confirmCancel = ref<boolean>(false);
 
 const errors = ref<Record<string, string>>({});
+const responseError = ref<string>('');
 const confirmSave = ref<boolean>(false);
 const isLoading = ref<boolean>(false);
 
@@ -330,8 +345,10 @@ const setEndDate = (e: Event) => {
     }
 }
 
-
 const save = async () => {
+    // reset error
+    responseError.value = '';
+    errors.value = {};
     try {
         isLoading.value = true;
 
@@ -348,11 +365,7 @@ const save = async () => {
             if (photo.file) newPhoto.push(photo.file);
         }
 
-        console.log(putData)
-        console.log(keepPhoto)
-        console.log(newPhoto)
-
-        // await ProjectStore.update(project.id, putData, keepPhoto, newPhoto)
+        await ProjectStore.update(project.id, putData, keepPhoto, newPhoto, selected_skills.value)
 
         confirmSave.value = false;
 
@@ -360,14 +373,14 @@ const save = async () => {
             autoClose: 500,
             onClose: () => {
                 isLoading.value = false;
-                // navigateTo('/admin/projects');
+                navigateTo('/admin/projects');
             }
         });
     } catch (error: any) {
         if (error.isJoi) {
             errors.value = error.data
         } else {
-            toast.error(error.message, { autoClose: 3000 });
+            responseError.value = error.message
         }
         confirmSave.value = false;
         isLoading.value = false;

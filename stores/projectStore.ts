@@ -47,7 +47,7 @@ export const useProjectStore = defineStore('project', {
             await Api.post('/project', formData);
 
         },
-        async update(id: number, data: any, keepPhoto: any[], photos: File[]): Promise<void> {
+        async update(id: number, data: any, keepPhoto: any[], photos: File[], skills: Skill[]): Promise<void> {
             const Api = useApiStore();
 
             // validate
@@ -63,6 +63,10 @@ export const useProjectStore = defineStore('project', {
 
             for (const photo of photos) {
                 formData.append('new_photos', photo);
+            }
+
+            for (let i = 0; i < skills.length; i++) {
+                formData.append(`skills[${i}]`, String(skills[i].id));
             }
 
             await Api.put('/project/' + id, formData);
