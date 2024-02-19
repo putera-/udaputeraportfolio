@@ -45,10 +45,10 @@
             <div class="text-sm" v-if="project.url">Url: <span class="text-accent font-semi-bold">{{ project.url
             }}</span></div>
 
-            <ProjectSkills v-if="project.skills" :skills="project.skills" class="mt-4" />
+            <ProjectSkills v-if="project.skill_category" :skills="project.skill_category" class="mt-4" />
         </div>
     </div>
-    <ProjectSkills v-if="project.skills" :skills="project.skills" class="lg:hidden" />
+    <ProjectSkills v-if="project.skill_category" :skills="project.skill_category" class="lg:hidden" />
 </div>
 </template>
 
