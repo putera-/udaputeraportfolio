@@ -64,6 +64,14 @@
                     </label>
                 </label>
             </div>
+            <div>
+                <div v-if="errors.startDate" class="label-text-alt text-error">
+                    {{ errors.startDate }}
+                </div>
+                <div v-if="errors.endDate" class="label-text-alt text-error">
+                    {{ errors.endDate }}
+                </div>
+            </div>
         </div>
 
         <div class="modal-action flex justify-end items-center">
@@ -153,7 +161,7 @@ const save = async () => {
         if (error.isJoi) {
             errors.value = error.data;
         } else {
-            responseError.value = error.message;
+            responseError.value = error.data.message;
         }
 
     }
