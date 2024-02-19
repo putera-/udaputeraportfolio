@@ -7,18 +7,11 @@
             </div>
             <div class="skeleton w-2 h-5"></div>
         </div>
-        <div class="flex justify-between">
-            <div class="flex gap-1">
-                <div class="skeleton w-16 h-3"></div>
-                <div class="skeleton w-16 h-3"></div>
-            </div>
-            <div class="skeleton w-20 h-3"></div>
-        </div>
+        <div class="skeleton w-16 h-3"></div>
         <div class="border-b border-b-neutral/10"></div>
         <div class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden">
             <div class="skeleton aspect-video w-full rounded-lg"></div>
         </div>
-        <div class="skeleton w-24 h-4"></div>
         <div class="skeleton w-full h-4"></div>
         <div class="skeleton w-full h-4"></div>
     </div>

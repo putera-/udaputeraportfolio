@@ -24,6 +24,9 @@
                 </div>
             </div>
             <div class="py-3">
+                <!-- SKELETON -->
+                <AdminBlogSkeleton v-if="BlogStore.data == null" />
+
                 <div v-if="BlogStore.blogs.length"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                     <div v-for="blog in BlogStore.blogs"
@@ -51,7 +54,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="border-b border-b-neutral/25"></div>
+                        <div class="border-b border-b-neutral/10"></div>
                         <div class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden">
                             <img v-if="blog.photos.length" :src="apiUrl + blog.photos[0].path_md" :alt="blog.title"
                                 class="h-full max-w-full mx-auto">
@@ -61,7 +64,9 @@
                     </div>
 
                 </div>
-                <div v-else class="flex justify-center">
+
+                <!-- EMPTY -->
+                <div v-if="BlogStore.data != null && !BlogStore.blogs.length" class="flex justify-center">
                     <ImagesEmpty class="w-3/4 lg:w-1/3" />
                 </div>
             </div>

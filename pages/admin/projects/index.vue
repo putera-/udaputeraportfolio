@@ -60,7 +60,7 @@
                             <div>{{ project.readStartDate }} - {{ project.readEndDate }}</div>
                             <div class="font-semibold">{{ project.read_status }}</div>
                         </div>
-                        <div class="border-b border-b-neutral/25"></div>
+                        <div class="border-b border-b-neutral/10"></div>
                         <div
                             class="hover:scale-105 duration-300 aspect-video bg-neutral/10 rounded-lg overflow-hidden relative">
                             <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md"
