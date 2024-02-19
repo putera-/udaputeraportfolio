@@ -9,9 +9,7 @@
         </template>
 
         <template #default>
-            <div class="font-bold text-3xl flex gap-2">Update Project
-                <IconsCatLoading v-show="isLoading" class="w-8" />
-            </div>
+            <div class="font-bold text-3xl flex gap-2">Update Project</div>
             <div class="divider before:h-px after:h-px mt-0"></div>
 
 
@@ -187,7 +185,10 @@
                 <div class="flex items-center justify-end gap-4">
                     <div class="text-error text-sm">{{ responseError }}</div>
                     <button class="btn" @click="confirmCancel = true">Cancel</button>
-                    <button class="btn btn-neutral" @click="confirmSave = true">Save</button>
+                    <button class="btn btn-neutral" @click="confirmSave = true">
+                        Save
+                        <IconsCatLoading v-show="isLoading" class="w-8" />
+                    </button>
                 </div>
             </div>
 
