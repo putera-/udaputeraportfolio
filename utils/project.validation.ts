@@ -1,10 +1,12 @@
 import Joi from 'joi';
+import dayjs from 'dayjs';
 
+const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
 export const isProject = Joi.object({
     title: isString.required().label("Project Title"),
     description: isText.required().label("Description"),
-    startDate: Joi.date().max('now').required().label("Start Date"),
-    endDate: Joi.date().min(Joi.ref('startDate')).max('now').allow(null, "").label("End Date"),
+    startDate: Joi.date().max(tomorrow).required().label("Start Date"),
+    endDate: Joi.date().min(Joi.ref('startDate')).max(tomorrow).allow(null, "").label("End Date"),
     url: isURL.allow(null, "").label("URL"),
     github: isURL.allow(null, "").label("Github"),
     gitlab: isURL.allow(null, "").label("Gitlab"),

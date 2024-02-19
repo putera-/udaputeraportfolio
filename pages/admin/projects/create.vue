@@ -244,7 +244,7 @@ const form = ref<Record<string, any>>({
     gitlab: '',
     startDate: dayjs().format('YYYY-MM-DD'),
     endDate: null,
-    status: 'ON PROGRESS',
+    status: 'ON_PROGRESS',
     company: '',
     // skills: project.skills
 });
@@ -372,7 +372,7 @@ const save = async () => {
         if (error.isJoi) {
             errors.value = error.data
         } else {
-            responseError.value = error.message
+            responseError.value = error.data.message
         }
         confirmSave.value = false;
         isLoading.value = false;

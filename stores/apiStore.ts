@@ -105,11 +105,13 @@ export const useApiStore = defineStore('api', {
             }
         },
         handleError(error: any) {
-            const status = error.status || 500;
+            const status = error.status;
             const message = error.data.message || error.message || '';
 
             if (status == 401) {
                 return navigateTo('/admin/login'); // login page
+            } else if (status == 400) {
+                throw error;
             } else if (status != 500) {
                 throw new Error(message)
             } else {
