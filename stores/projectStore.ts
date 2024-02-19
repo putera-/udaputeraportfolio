@@ -24,24 +24,20 @@ export const useProjectStore = defineStore('project', {
             const Api = useApiStore();
             return await Api.get(`/project/${id}`) as Project;
         },
-        async create(data: Record<string, string>, photos: File[]): Promise<void> {
+        async create(data: any, photos: File[], skills: Skill[]): Promise<void> {
             const Api = useApiStore();
 
             // validate
             data = validate(isProject, data);
 
-            let formData: Record<string, string> | FormData;
+            const formData: FormData = toFormData(data);
 
-            if (photos.length) {
-                // create FormData if photo available
-                formData = toFormData(data);
+            for (const photo of photos) {
+                formData.append('photos', photo);
+            }
 
-                for (const photo of photos) {
-                    formData.append('photos', photo);
-                }
-            } else {
-                // still for json
-                formData = data;
+            for (let i = 0; i < skills.length; i++) {
+                formData.append(`skills[${i}]`, String(skills[i].id));
             }
 
             await Api.post('/project', formData);

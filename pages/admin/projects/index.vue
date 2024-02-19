@@ -10,7 +10,7 @@
                 <div class="font-bold text-3xl flex gap-2">Projects
                     <IconsCatLoading v-show="isLoading" class="w-8" />
                 </div>
-                <NuxtLink to="/admin/blogs/create" class="btn btn-neutral btn-sm">
+                <NuxtLink to="/admin/projects/create" class="btn btn-neutral btn-sm">
                     <LucidePlus :size="12" /> New Project
                 </NuxtLink>
             </div>
