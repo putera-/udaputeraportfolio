@@ -7,7 +7,7 @@
             <div v-if="project.photos.length">
                 <Carousel :autoplay="10000" :wrapAround="true" class="">
                     <Slide v-for="(photo, i) in project.photos" :key="i" class="">
-                        <div class="aspect-video w-full bg-contain bg-accent/25 flex justify-center">
+                        <div class="aspect-video w-full bg-contain bg-accent/20 flex justify-center">
                             <img class="max-h-full" :src="apiUrl + photo.path">
                         </div>
                     </Slide>
@@ -19,7 +19,7 @@
                 </Carousel>
             </div>
             <div v-else
-                class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-neutral text-accent">
+                class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-accent/20 text-accent">
                 <LucideBriefcase :size="200" class="" />
             </div>
             <div class="mt-4">

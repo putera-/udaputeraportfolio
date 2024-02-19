@@ -5,7 +5,7 @@
         <div v-if="blog.photos.length">
             <Carousel :autoplay="10000" :wrapAround="true" class="">
                 <Slide v-for="(photo, i) in blog.photos" :key="i" class="">
-                    <div class="aspect-video w-full bg-contain bg-accent/25 flex justify-center">
+                    <div class="aspect-video w-full bg-contain bg-accent/20 flex justify-center">
                         <img class="max-h-full" :src="apiUrl + photo.path">
                     </div>
                 </Slide>
@@ -17,12 +17,14 @@
             </Carousel>
         </div>
         <div v-else
-            class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-neutral text-accent">
+            class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-accent/20 text-accent">
             <LucideBriefcase :size="200" class="" />
         </div>
     </div>
-    <div class="text-3xl font-semibold text-accent">{{ blog.title }}</div>
-    <div class="text-sm">{{ blog.readDate }}</div>
+    <div>
+        <div class="text-3xl font-semibold text-accent">{{ blog.title }}</div>
+        <div class="text-xs font-light">{{ blog.readDate }}</div>
+    </div>
     <div>
         <div class="indent-8">{{ blog.content }}</div>
     </div>
@@ -41,6 +43,8 @@ const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
 const id = route.params.id;
 const blog = await $fetch('/api/blog/' + id) as Blog;
+
+console.log(blog);
 
 // SEO and META
 const { value: useProfile } = useState<Profile>('profile');

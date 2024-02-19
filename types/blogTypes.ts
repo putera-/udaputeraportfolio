@@ -3,6 +3,7 @@ interface Blog {
     title: string
     content: string
     photos: Photo[]
+    readDate: string
     readDateTime: string
     shortDateTime: string
 }
