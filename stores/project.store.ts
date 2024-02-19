@@ -18,6 +18,7 @@ export const useProjectStore = defineStore('project', {
     actions: {
         async getAll(search: string, page: number = 1): Promise<void> {
             const Api = useApiStore();
+            this.data = null
             this.data = await Api.get(`/projects?limit=12&page=${page}&search=${search}`) as ProjectPage;
         },
         async get(id: number | string): Promise<Project> {

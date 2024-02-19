@@ -25,6 +25,9 @@
                 </div>
             </div>
             <div class="py-3">
+                <!-- SKELETON -->
+                <AdminProjectSkeleton v-if="ProjectStore.data == null" />
+
                 <div v-if="ProjectStore.projects.length"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                     <div v-for="project in ProjectStore.projects"
@@ -73,9 +76,10 @@
                             project.company }}</div>
                         <div class="truncate text-sm font-light text-wrap line-clamp-2">{{ project.description }}</div>
                     </div>
-
                 </div>
-                <div v-else class="flex justify-center">
+
+                <!-- EMPTY -->
+                <div v-if="ProjectStore.data != null && !ProjectStore.projects.length" class="flex justify-center">
                     <ImagesEmpty class="w-3/4 lg:w-1/3" />
                 </div>
             </div>
