@@ -57,7 +57,7 @@ const doLogin = async () => {
         if (error.isJoi) {
             errors.value = error.data;
         } else {
-            responseError.value = error.message;
+            responseError.value = error.data.message;
         }
     }
 }

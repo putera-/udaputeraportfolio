@@ -44,8 +44,6 @@ const route = useRoute();
 const id = route.params.id;
 const blog = await $fetch('/api/blog/' + id) as Blog;
 
-console.log(blog);
-
 // SEO and META
 const { value: useProfile } = useState<Profile>('profile');
 const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
