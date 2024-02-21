@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     },
     modules: [
         'nuxt-lucide-icons',
-        '@pinia/nuxt'
+        '@pinia/nuxt',
+        '@nuxtjs/device'
     ],
     pinia: {
         storesDirs: ['./stores/**']
