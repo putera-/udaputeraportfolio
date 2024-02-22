@@ -1,15 +1,15 @@
 interface LogState {
-    web_logs: WebLog[]
+    web_sessions: WebSessions[]
 }
 
 export const useLogStore = defineStore('log', {
     state: (): LogState => ({
-        web_logs: []
+        web_sessions: []
     }),
     actions: {
-        async getWebLog(): Promise<void> {
+        async getWebSesions(): Promise<void> {
             const Api = useApiStore();
-            this.web_logs = await Api.get('/web_access_log') as WebLog[];
+            this.web_sessions = await Api.get('/web_access_log') as WebSessions[];
         }
     }
 });

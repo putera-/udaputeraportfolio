@@ -1,3 +1,15 @@
+interface WebSessions {
+    session: string
+    ip: string
+    city: string
+    country: string
+    countryCode: string
+    timestamp: string
+    readDate: string
+    readTime: string
+    count: number
+    logs: WebLog[]
+}
 interface WebLog {
     id: number
     session: string

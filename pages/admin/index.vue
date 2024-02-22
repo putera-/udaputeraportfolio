@@ -18,23 +18,25 @@
                             <tr>
                                 <th>Session / Ip</th>
                                 <th class="">Location</th>
-                                <th class="text-center">Date Time</th>
+                                <th class="text-right">Last Date Time</th>
+                                <th class="text-center">Count</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="hover" v-for=" log in LogStore.web_logs ">
+                            <tr class="hover" v-for=" session in LogStore.web_sessions ">
                                 <td>
-                                    <div class="text-neutral font-semibold">{{ log.session }}</div>
-                                    <div class="text-xs">{{ log.ip }}</div>
+                                    <div class="text-neutral font-semibold">{{ session.session }}</div>
+                                    <div class="text-xs">{{ session.ip }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral font-semibold">{{ log.city }}</div>
-                                    <div class="text-xs">{{ log.country }}</div>
+                                    <div class="text-neutral font-semibold">{{ session.city }}</div>
+                                    <div class="text-xs">{{ session.country }}, {{ session.countryCode }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral text-right">{{ log.readDate }}</div>
-                                    <div class="text-xs text-right">{{ log.readTime }}</div>
+                                    <div class="text-neutral text-right">{{ session.readDate }}</div>
+                                    <div class="text-xs text-right">{{ session.readTime }}</div>
                                 </td>
+                                <td class="text-center">{{ session.count }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -70,6 +72,6 @@ definePageMeta({
 
 const LogStore = useLogStore();
 onBeforeMount(async (): Promise<void> => {
-    await LogStore.getWebLog();
+    await LogStore.getWebSesions();
 });
 </script>
