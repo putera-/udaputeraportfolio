@@ -25,7 +25,10 @@
             <div class="flex justify-end items-center max-sm:mt-2">
                 <div class="text-error text-sm mr-4" v-if="responseError">{{ responseError }}</div>
                 <button @click="doLogin"
-                    class="btn max-sm:btn-sm btn-base-100 w-min shadow-[0_5px_00px_6px_rgba(0,0,0,1)] md:shadow-[0_7px_00px_8px_rgba(0,0,0,1)]">LOGIN</button>
+                    class="btn max-sm:btn-sm btn-base-100 w-min text-nowrap flex flex-nowrap shadow-[0_5px_00px_6px_rgba(0,0,0,1)] md:shadow-[0_7px_00px_8px_rgba(0,0,0,1)]">
+                    LOGIN
+                    <IconsCatLoading v-show="isLoading" class="w-8" />
+                </button>
             </div>
         </div>
     </div>
@@ -45,15 +48,21 @@ const formData = ref<{ email: string, password: string }>({
     email: '',
     password: ''
 });
+
 const errors = ref<Record<string, string>>({});
 const responseError = ref<string>("");
+const isLoading = ref(false);
 
 const doLogin = async () => {
+    errors.value = {};
+    responseError.value = '';
     try {
+        isLoading.value = true;
         const form = validate(authValidation, formData.value);
 
         await AuthStore.login(form);
     } catch (error: any) {
+        isLoading.value = false;
         if (error.isJoi) {
             errors.value = error.data;
         } else {

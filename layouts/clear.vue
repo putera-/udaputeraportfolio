@@ -11,12 +11,12 @@
             </div>
 
             <div
-                class="max-lg:row-span-4 lg:col-span-5 xl:col-span-4 h-full flex max-lg:flex-col max-lg:items-center mt-12 md:mt-20 lg:mt-0 max-lg:ml-10 justify-end">
+                class="max-lg:row-span-3 lg:col-span-5 xl:col-span-4 h-full flex max-lg:flex-col max-lg:items-center mt-12 md:mt-20 lg:mt-0 max-lg:ml-10 justify-end">
 
                 <ImagesProgrammer class="w-[60%] md:w-[75%] z-10" />
 
             </div>
-            <div class="max-lg:row-span-6 lg:col-span-5 xl:col-span-6 h-full rounded-2xl z-30">
+            <div class="max-lg:row-span-7 lg:col-span-5 xl:col-span-6 h-full rounded-2xl z-30">
                 <slot />
             </div>
         </div>

@@ -42,6 +42,18 @@ export const useAuthStore = defineStore('auth', {
             } catch (error: any) {
                 throw new Error(error)
             }
+        },
+        async is_user_exist(): Promise<boolean> {
+            const Api = useApiStore();
+            const { exist } = await Api.get('/is_user_exist') as { exist: boolean };
+
+            return exist
+        },
+        async create_user(data: Record<string, any>): Promise<void> {
+            const Api = useApiStore();
+            await Api.post('/create_user', data) as any;
+
+            navigateTo('/admin/login');
         }
     }
 });
