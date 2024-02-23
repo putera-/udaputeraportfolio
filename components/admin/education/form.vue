@@ -97,7 +97,7 @@ watchEffect((): void => {
         major: props.data ? props.data.major : '',
         degree: props.data ? props.data.degree : '',
         startYear: props.data ? props.data.startYear : currentYear,
-        endYear: props.data ? (props.data.endYear != 'Present' ? props.data.endYear : null) : null
+        endYear: props.data ? (props.data.endYear != null ? props.data.endYear : null) : null
     }
 });
 

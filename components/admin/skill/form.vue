@@ -79,7 +79,7 @@ watchEffect((): void => {
 
     formData.value = {
         title: props.data ? props.data.title : '',
-        category: props.data ? props.data.category.title : '',
+        category: props.data ? (props.data.category ? props.data.category.title : '') : '',
         svg: props.data ? props.data.svg : '',
     }
 });

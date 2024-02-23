@@ -18,7 +18,7 @@ export const useSkillStore = defineStore('skill', {
 
             this.categories = await Api.get('/skill_by_categories') as SkillCategory[];
         },
-        async create(data: Record<string, string>, photos: File[]): Promise<void> {
+        async create(data: Record<string, string>): Promise<void> {
             const Api = useApiStore();
 
             // validate

@@ -10,7 +10,7 @@
     <div>{{ profile.bio }}</div>
     <div class="grow flex flex-col justify-end">
         <div class="flex gap-10 w-20">
-            <div v-if="profile.year_of_experience > 1" class="flex flex-col gap-2">
+            <div v-if="profile.year_of_experience! > 1" class="flex flex-col gap-2">
                 <div class="text-7xl text-accent">{{ profile.year_of_experience
                 }}+</div>
                 <div>YEARS OF EXPERIENCE</div>
