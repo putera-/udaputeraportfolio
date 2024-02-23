@@ -35,6 +35,10 @@
                                 <td>
                                     <div class="text-neutral font-semibold">{{ log.session }}</div>
                                     <div class="text-xs">{{ log.ip }}</div>
+                                    <a :href="`https://www.google.com/maps/@${log.lat},${log.lon},15z`" target="_blank"
+                                        class="flex gap-2 items-center btn btn-xs w-min flex-nowrap text-nowrap">
+                                        <LucideMap :size="16" /> See Map
+                                    </a>
                                 </td>
                                 <td>
                                     <div class="text-neutral font-semibold">{{ log.city }}</div>
