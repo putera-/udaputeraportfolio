@@ -163,15 +163,22 @@ const save = async () => {
         const newPhoto: File[] = [];
 
         const putData: any = { ...form.value };
+        // putData.photos = [];
+        // putData.new_photos = [];
 
         for (let i = 0; i < photos.value.length; i++) {
             const photo = photos.value[i];
+            // keep photo
+            // if (photo.id) putData.photos.push({ index: i, id: photo.id });
+            // new photo
+            // if (photo.file) putData.new_photos.push(photo.file);
             // keep photo
             if (photo.id) keepPhoto.push({ index: i, id: photo.id });
             // new photo
             if (photo.file) newPhoto.push(photo.file);
         }
 
+        // await BlogStore.update(blog.id, putData)
         await BlogStore.update(blog.id, putData, keepPhoto, newPhoto)
 
         confirmSave.value = false;
@@ -184,6 +191,7 @@ const save = async () => {
             }
         });
     } catch (error: any) {
+        console.log(error);
         if (error.isJoi) {
             errors.value = error.data
         } else {

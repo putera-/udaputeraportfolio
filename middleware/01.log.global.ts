@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-    if (!to.path.includes('/admin')) {
+    if (!to.fullPath.includes('/admin')) {
         const session = useCookie('session');
         const ipAdddress = useState('ip');
 
@@ -16,7 +16,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         const log = {
             session: session.value,
             ip: ipAdddress.value,
-            path: to.path,
+            path: to.fullPath,
             user_agent: device.userAgent,
             isMobile: device.isMobile,
             isDesktop: device.isDesktop,

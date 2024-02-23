@@ -47,22 +47,32 @@ export const useBlogStore = defineStore('blog', {
 
         },
         async update(id: number, data: any, keepPhoto: any[], photos: File[]): Promise<void> {
+            // async update(id: number, data: any): Promise<void> {
             const Api = useApiStore();
 
             // validate
             data = validate(isBlog, data);
 
+
+            data.photos = keepPhoto;
+            data.new_photos = photos;
+            console.log('data after validation');
+            console.log(data);
+
             const formData: FormData = toFormData(data);
 
-            for (let i = 0; i < keepPhoto.length; i++) {
-                const photo = keepPhoto[i];
-                formData.append(`photos[${i}][id]`, photo.id);
-                formData.append(`photos[${i}][index]`, photo.index);
-            }
+            console.log('formData');
+            console.log(formData);
 
-            for (const photo of photos) {
-                formData.append('new_photos', photo);
-            }
+            // for (let i = 0; i < keepPhoto.length; i++) {
+            //     const photo = keepPhoto[i];
+            //     formData.append(`photos[${i}][id]`, photo.id);
+            //     formData.append(`photos[${i}][index]`, photo.index);
+            // }
+
+            // for (const photo of photos) {
+            //     formData.append('new_photos', photo);
+            // }
 
             await Api.put('/blog/' + id, formData);
         },

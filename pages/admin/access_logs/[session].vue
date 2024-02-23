@@ -2,7 +2,10 @@
 <div>
     <NuxtLayout name="admin">
         <template #breadcrumb>
-            <li>Access Log</li>
+            <li>
+                <NuxtLink to="/admin/access_logs">Access Log</NuxtLink>
+            </li>
+            <li>Session</li>
         </template>
 
         <template #default>
@@ -14,45 +17,59 @@
                 <button class="btn btn-sm" @click="getLogs">
                     <LucideRefreshCw :size="12" /> Refresh
                 </button>
+
                 <div class="max-md:hidden overflow-x-auto">
                     <table class="table">
                         <!-- head -->
                         <thead>
                             <tr>
                                 <th>Session / Ip</th>
-                                <th class="">Location</th>
-                                <th class="text-right">Last Date Time</th>
-                                <th class="text-center">Count</th>
-                                <th></th>
+                                <th>Location</th>
+                                <th class="text-right">Date Time</th>
+                                <th>Path</th>
+                                <th>Device</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="hover" v-for=" session in LogStore.web_sessions ">
+                            <tr class="hover" v-for=" log in logs ">
                                 <td>
-                                    <div class="text-neutral font-semibold">{{ session.session }}</div>
-                                    <div class="text-xs">{{ session.ip }}</div>
+                                    <div class="text-neutral font-semibold">{{ log.session }}</div>
+                                    <div class="text-xs">{{ log.ip }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral font-semibold">{{ session.city }}</div>
-                                    <div class="text-xs">{{ session.country }}, {{ session.countryCode }}</div>
+                                    <div class="text-neutral font-semibold">{{ log.city }}</div>
+                                    <div class="text-xs">{{ log.country }}, {{ log.countryCode }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral text-right">{{ session.readDate }}</div>
-                                    <div class="text-xs text-right">{{ session.readTime }}</div>
+                                    <div class="text-neutral text-right">{{ log.readDate }}</div>
+                                    <div class="text-xs text-right">{{ log.readTime }}</div>
                                 </td>
-                                <td class="text-center">{{ session.count }}</td>
+                                <td>{{ log.path }}</td>
                                 <td>
-                                    <NuxtLink :to="'/admin/access_logs/' + session.session"
-                                        class="btn btn-sm btn-circle">
-                                        <LucideEye />
-                                    </NuxtLink>
+                                    <div class="flex gap-2">
+                                        <!-- platform -->
+                                        <IconsWindows class="w-5" v-if="log.isWindows" />
+                                        <IconsMacOS class="w-5" v-if="logs.isMacOS" />
+                                        <IconsAndroid class="w-5" v-if="logs.isAndroid" />
+                                        <IconsIOS class="w-5" v-if="logs.isIos" />
+
+                                        <!-- device -->
+                                        <LucideMonitor :size="20" v-if="log.isDesktop" />
+                                        <LucideSmartPhone :size="20" v-if="log.isMobile" />
+
+                                        <!-- brpwser -->
+                                        <LucideChrome :size="20" v-if="log.isChrome" />
+                                        <IconsSafari class="w-5" v-if="log.isSafari" />
+                                        <IconsEdge class="w-5" v-if="log.isEdge" />
+                                        <IconsFirefox class="w-5" v-if="log.isFirefox" />
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="md:hidden flex flex-col gap-2">
-                    <div class="card bg-base-100/50 p-2" v-for=" log in LogStore.web_sessions ">
+                    <div class="card bg-base-100/50 p-2" v-for=" log in LogStore.web_logs ">
                         <div class="flex justify-between">
                             <div class="flex gap-2">
                                 <LucideBuilding2 :size="20" class="text-gray-500 mt-2" />
@@ -80,12 +97,17 @@ definePageMeta({
     middleware: ['auth']
 });
 
+const session = useRoute().params.session as string;
 const LogStore = useLogStore();
+
+const logs = ref<WebLog[]>([])
+
 onBeforeMount(async (): Promise<void> => {
     await getLogs();
 });
 
 const getLogs = async () => {
-    await LogStore.getWebSesions();
+    logs.value = await LogStore.getLogBySesion(session);
+    console.log(logs.value)
 }
 </script>
