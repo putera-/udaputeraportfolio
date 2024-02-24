@@ -35,3 +35,19 @@ interface WebLog {
     readDate: string
     readTime: string
 }
+
+interface ErrorLog {
+    "user": string
+    "ip-addr": string
+    "method": string
+    "url": string
+    "date": string
+    "readDate": string
+    "readTime": string
+    "http-version": string
+    "status": string
+    "response-time": string
+    "content-length": string
+    "referer": string
+    "user-agent": string
+}

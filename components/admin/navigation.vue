@@ -49,5 +49,21 @@ const menus: Menu[] = [
         icon: resolveComponent("LucideBriefcase"),
         to: "/admin/projects"
     },
+    {
+        label: "Logs",
+        icon: resolveComponent("LucideScrollText"),
+        children: [
+            {
+                label: "Access Logs",
+                icon: resolveComponent("LucideBriefcase"),
+                to: "/admin/access_logs"
+            },
+            {
+                label: "Error Logs",
+                icon: resolveComponent("LucideAlertTriangle"),
+                to: "/admin/error_logs"
+            },
+        ]
+    },
 ];
 </script>
