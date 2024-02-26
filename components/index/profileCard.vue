@@ -2,7 +2,7 @@
 <div class="md:fixed md:w-[40%] lg:w-[32%] xl:w-[25%] rounded-3xl border border-accent/50 p-8 flex flex-col gap-6">
     <div class="flex justify-between items-center">
         <div class="text-xl lg:text-2xl xl:text-3xl font-semibold text-accent">{{ fullname }}</div>
-        <div class="text-sm font-ligbt text-right">Full Stack<br>Developer</div>
+        <div class="text-sm font-ligbt text-right">{{ profile.job }}</div>
     </div>
     <div
         class="aspect-square bg-neutral rounded-xl flex justify-center items-center overflow-hidden hover:scale-110 duration-300">
