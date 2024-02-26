@@ -38,8 +38,10 @@
     </div>
     <div class="xl:px-10">
         <label>Avatar</label>
-        <img v-if="form.avatar" :src="form.avatar" class="w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
-        <div v-else class="bg-neutral/50 w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl mx-auto">
+        <div class="w-48 lg:w-52 xl:w-60 aspect-square rounded-2xl overflow-hidden mx-auto">
+            <img v-if="form.avatar" :src="form.avatar" class="min-w-full min-h-full">
+            <div v-else class="bg-neutral/50 w-full h-full">
+            </div>
         </div>
         <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
             @change="handleAvatar">
@@ -65,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
 import { toast } from 'vue3-toastify';
 
 const ProfileStore = useProfileStore();
@@ -119,6 +122,7 @@ const doUpdate = async () => {
         data = validate(profileValidate, data);
 
         if (avatar) {
+            data.dob = dayjs(data.dob).format('YYYY-MM-DD');
             const formData: FormData = toFormData(data);
 
             formData.append('avatar', avatar);
