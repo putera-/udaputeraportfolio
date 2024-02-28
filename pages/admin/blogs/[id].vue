@@ -53,8 +53,9 @@
                         </template>
                     </draggable>
 
-                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
-                        multiple @change="handlePhotos">
+                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
+                        accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" multiple
+                        @change="handlePhotos">
                 </div>
 
                 <label class="form-control w-full">
@@ -120,7 +121,7 @@ const currentPhotos = blog.photos.map(p => {
         photo: apiUrl + p.path_md
     };
 });
-const photos = ref<{ file?: File, photo: string, id?: number }[]>(currentPhotos);
+const photos = ref<{ file?: File, photo: string, id?: string }[]>(currentPhotos);
 
 
 const handlePhotos = (e: Event): void => {
@@ -163,22 +164,15 @@ const save = async () => {
         const newPhoto: File[] = [];
 
         const putData: any = { ...form.value };
-        // putData.photos = [];
-        // putData.new_photos = [];
 
         for (let i = 0; i < photos.value.length; i++) {
             const photo = photos.value[i];
-            // keep photo
-            // if (photo.id) putData.photos.push({ index: i, id: photo.id });
-            // new photo
-            // if (photo.file) putData.new_photos.push(photo.file);
             // keep photo
             if (photo.id) keepPhoto.push({ index: i, id: photo.id });
             // new photo
             if (photo.file) newPhoto.push(photo.file);
         }
 
-        // await BlogStore.update(blog.id, putData)
         await BlogStore.update(blog.id, putData, keepPhoto, newPhoto)
 
         confirmSave.value = false;
