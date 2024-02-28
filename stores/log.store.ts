@@ -40,6 +40,7 @@ export const useLogStore = defineStore('log', {
 
             const session = useCookie('session');
             if (!session.value) session.value = uuidv4();
+            const time = new Date();
 
             const device = useDevice();
             const log = {
@@ -57,7 +58,7 @@ export const useLogStore = defineStore('log', {
                 isEdge: device.isEdge,
                 isChrome: device.isChrome,
                 isSafari: device.isSafari,
-                timestamp: new Date(),
+                timestamp: time.toString()
             };
 
             await Api.post('/access-log', log);
