@@ -74,14 +74,14 @@ const ProfileStore = useProfileStore();
 const profile: Profile = ProfileStore.profile as Profile;
 const { public: { apiUrl } } = useRuntimeConfig();
 
-const form = ref<Record<string, string>>({
+const form = ref<Record<string, any>>({
     firstname: profile.firstname,
     lastname: profile.lastname,
     job: profile.job,
     email: profile.email,
     phone: profile.phone,
     dob: profile.dob,
-    avatar: apiUrl + profile.avatar_md,
+    avatar: profile.avatar ? apiUrl + profile.avatar_md : undefined,
     bio: profile.bio
 });
 
@@ -89,8 +89,8 @@ const fileInput = ref<HTMLInputElement | null>(null);
 let avatar: File | null;
 
 const handleAvatar = (e: Event): void => {
-    const fileInput = e.target as HTMLInputElement;
-    const files = fileInput.files;
+    const target = e.target as HTMLInputElement;
+    const files = target.files;
 
     if (!files!.length) {
         avatar = null;
@@ -119,9 +119,8 @@ const doUpdate = async () => {
     errors.value = {};
 
     try {
-        data = validate(profileValidate, data);
-
         if (avatar) {
+            // format dob because FormData only accept string
             data.dob = dayjs(data.dob).format('YYYY-MM-DD');
             const formData: FormData = toFormData(data);
 
@@ -132,9 +131,11 @@ const doUpdate = async () => {
         await ProfileStore.update(data);
 
         confirmUpdate.value = false;
+
         // reset file input avatar
         if (fileInput.value) {
             fileInput.value.value = '';
+            avatar = null;
         }
 
         toast.success("Success", {
