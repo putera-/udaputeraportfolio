@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 interface LogState {
     web_sessions: WebSessions[]
     error_logs: ErrorLog[]
-    // ipAddress: string | null
+    ipAddress: string | null
 }
 
 export const useLogStore = defineStore('log', {
     state: (): LogState => ({
         web_sessions: [],
         error_logs: [],
-        // ipAddress: null
+        ipAddress: null
     }),
     actions: {
         async getWebSesions(): Promise<void> {
@@ -25,27 +25,24 @@ export const useLogStore = defineStore('log', {
             const Api = useApiStore();
             this.error_logs = await Api.get('/error_log') as ErrorLog[];
         },
+        async getIpAddress() {
+            const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
+            this.ipAddress = ip;
+        },
         async sendAccessLog(fullPath: string) {
             const Api = useApiStore();
-            // console.log('this.ipAddress')
-            // console.log(this.ipAddress)
 
-            const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
-            // if (!this.ipAddress) {
-            //     const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
-            //     this.ipAddress = ip;
-
-            // }
-            // console.log(this.ipAddress)
+            if (!this.ipAddress) {
+                await this.getIpAddress()
+            }
 
             const session = useCookie('session');
             if (!session.value) session.value = uuidv4();
-            const time = new Date();
 
             const device = useDevice();
             const log = {
                 session: session.value,
-                ip: ip,
+                ip: this.ipAddress,
                 path: fullPath,
                 user_agent: device.userAgent,
                 isMobile: device.isMobile,
