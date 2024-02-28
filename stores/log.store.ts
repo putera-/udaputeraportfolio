@@ -57,8 +57,7 @@ export const useLogStore = defineStore('log', {
                 isFirefox: device.isFirefox,
                 isEdge: device.isEdge,
                 isChrome: device.isChrome,
-                isSafari: device.isSafari,
-                timestamp: time.toString()
+                isSafari: device.isSafari
             };
 
             await Api.post('/access-log', log);
