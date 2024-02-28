@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 
 interface LogState {
     web_sessions: WebSessions[]
@@ -15,11 +16,23 @@ export const useLogStore = defineStore('log', {
     actions: {
         async getWebSesions(): Promise<void> {
             const Api = useApiStore();
-            this.web_sessions = await Api.get('/web_access_log') as WebSessions[];
+            const response = await Api.get('/web_access_log') as Record<string, any>[];
+
+            for (const log of response) {
+                this.getReadDateTime(log);
+            }
+
+            this.web_sessions = response as WebSessions[];
         },
         async getLogBySesion(session: string): Promise<WebLog[]> {
             const Api = useApiStore();
-            return await Api.get('/web_access_log/' + session) as WebLog[];
+            const response = await Api.get('/web_access_log/' + session) as Record<string, any>[];
+
+            for (const log of response) {
+                this.getReadDateTime(log);
+            }
+
+            return response as WebLog[];
         },
         async getErrorLogs(): Promise<void> {
             const Api = useApiStore();
@@ -58,6 +71,11 @@ export const useLogStore = defineStore('log', {
             };
 
             await Api.post('/access-log', log);
+        },
+        getReadDateTime(log: Record<string, any>) {
+            log.readTimestamp = dayjs(log.timestamp).format('D MMMM YYYY HH:mm');
+            log.readDate = dayjs(log.timestamp).format('D MMMM YYYY');
+            log.readTime = dayjs(log.timestamp).format('HH:mm');
         }
     }
 });

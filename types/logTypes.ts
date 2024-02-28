@@ -5,6 +5,7 @@ interface WebSessions {
     country: string
     countryCode: string
     timestamp: string
+    readTimestamp: string
     readDate: string
     readTime: string
     count: number
@@ -32,6 +33,7 @@ interface WebLog {
     isChrome: boolean
     isSafari: boolean
     timestamp: string
+    readTimestamp: string
     readDate: string
     readTime: string
 }

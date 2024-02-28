@@ -45,9 +45,10 @@
                                     <div class="text-xs">{{ log.country }}, {{ log.countryCode }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral text-right">{{ dayjs(log.timestamp).format('D MMMM YYYY')
-                                    }}</div>
-                                    <div class="text-xs text-right">{{ dayjs(log.timestamp).format('HH:ss') }}</div>
+                                    <div class="text-neutral text-right text-nowrap">
+                                        {{ log.readDate }}
+                                    </div>
+                                    <div class="text-xs text-right">{{ log.readTime }}</div>
                                 </td>
                                 <td>{{ log.path }}</td>
                                 <td>
@@ -85,7 +86,7 @@
                                 </div>
                                 <div>
                                     <div class="text-xs">{{ log.country }}, {{ log.countryCode }}</div>
-                                    <div class="text-xs">{{ dayjs(log.timestamp).format('D MMMM YYYY HH:ss') }}</div>
+                                    <div class="text-xs">{{ log.readTimestamp }}</div>
                                     <div class="text-xs">{{ log.session }}</div>
                                 </div>
                                 <div class="flex gap-2">
@@ -120,7 +121,6 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs';
 definePageMeta({
     layout: false,
     middleware: ['auth']

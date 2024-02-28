@@ -37,10 +37,10 @@
                                     <div class="text-xs">{{ session.country }}, {{ session.countryCode }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral text-right">
-                                        {{ dayjs(session.timestamp).format('D MMMM YYYY') }}
+                                    <div class="text-neutral text-right text-nowrap">
+                                        {{ session.readDate }}
                                     </div>
-                                    <div class="text-xs text-right">{{ dayjs(session.timestamp).format('HH:ss') }}</div>
+                                    <div class="text-xs text-right">{{ session.readTime }}</div>
                                 </td>
                                 <td class="text-center">{{ session.count }}</td>
                                 <td>
@@ -64,7 +64,7 @@
                                                 session.ip }}</span></div>
                                     <div class="text-xs">{{ session.country }}</div>
                                     <div class="text-xs">
-                                        {{ dayjs(session.timestamp).format('D MMMM YYYY HH:ss') }}
+                                        {{ session.readTimestamp }}
                                     </div>
                                     <div class="text-xs">{{ session.session }}</div>
                                 </div>
@@ -79,7 +79,6 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs';
 definePageMeta({
     layout: false,
     middleware: ['auth']
