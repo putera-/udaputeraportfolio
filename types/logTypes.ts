@@ -11,7 +11,7 @@ interface WebSessions {
     logs: WebLog[]
 }
 interface WebLog {
-    id: number
+    id: string
     session: string
     ip: string
     path: string

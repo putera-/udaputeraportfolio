@@ -52,8 +52,9 @@
                         </template>
                     </draggable>
 
-                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
-                        multiple @change="handlePhotos">
+                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
+                        accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" multiple
+                        @change="handlePhotos">
                 </div>
                 <div>
                     <div class="label-text font-semibold">Status</div>

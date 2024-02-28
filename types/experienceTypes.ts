@@ -1,5 +1,5 @@
 interface Experience {
-    id: number
+    id: string
     company: string
     location: string
     title: string

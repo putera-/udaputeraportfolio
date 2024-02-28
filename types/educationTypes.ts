@@ -1,5 +1,5 @@
 interface Education {
-    id: number
+    id: string
     institutionName: string
     startYear: number
     endYear?: number

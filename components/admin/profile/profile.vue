@@ -43,8 +43,8 @@
             <div v-else class="bg-neutral/50 w-full h-full">
             </div>
         </div>
-        <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
-            @change="handleAvatar">
+        <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
+            accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" @change="handleAvatar">
         <label class="form-control w-full">
             <div class="label-text">Bio</div>
             <textarea v-model="form.bio" type="text" placeholder="Bio" rows="4"

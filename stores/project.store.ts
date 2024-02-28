@@ -21,7 +21,7 @@ export const useProjectStore = defineStore('project', {
             this.data = null
             this.data = await Api.get(`/projects?limit=12&page=${page}&search=${search}`) as ProjectPage;
         },
-        async get(id: number | string): Promise<Project> {
+        async get(id: string): Promise<Project> {
             const Api = useApiStore();
             return await Api.get(`/project/${id}`) as Project;
         },
@@ -44,7 +44,7 @@ export const useProjectStore = defineStore('project', {
             await Api.post('/project', formData);
 
         },
-        async update(id: number, data: any, keepPhoto: any[], photos: File[], skills: Skill[]): Promise<void> {
+        async update(id: string, data: any, keepPhoto: any[], photos: File[], skills: Skill[]): Promise<void> {
             const Api = useApiStore();
 
             // validate
@@ -68,7 +68,7 @@ export const useProjectStore = defineStore('project', {
 
             await Api.put('/project/' + id, formData);
         },
-        async remove(id: number): Promise<void> {
+        async remove(id: string): Promise<void> {
             const Api = useApiStore();
             await Api.delete(`/project/${id}`);
         }

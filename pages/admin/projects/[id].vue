@@ -52,8 +52,9 @@
                         </template>
                     </draggable>
 
-                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput" accept="image/*"
-                        multiple @change="handlePhotos">
+                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
+                        accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" multiple
+                        @change="handlePhotos">
                 </div>
                 <div>
                     <div class="label-text font-semibold">Status</div>
@@ -263,7 +264,7 @@ const addSkill = (newSkill: Skill, category: SkillCategory) => {
         selected_skills.value.splice(index, 1);
     }
 
-    const catIndex = data_skills.value.findIndex(c => c.id == newSkill.categoryId);
+    const catIndex = data_skills.value.findIndex((c: SkillCategory) => c.id == newSkill.categoryId);
     if (catIndex < 0) {
         // skill category not include
         const newCategory = { ...category };
@@ -300,7 +301,7 @@ const currentPhotos = project.photos.map(p => {
         photo: apiUrl + p.path_md
     };
 });
-const photos = ref<{ file?: File, photo: string, id?: number }[]>(currentPhotos);
+const photos = ref<{ file?: File, photo: string, id?: string }[]>(currentPhotos);
 
 
 const handlePhotos = (e: Event): void => {

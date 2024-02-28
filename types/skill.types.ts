@@ -1,14 +1,14 @@
 interface SkillCategory {
-    id: number
+    id: string
     title: string
     skills?: Skill[]
 }
 
 interface Skill {
-    id: number
+    id: string
     title: string
     svg: string
-    categoryId: number
+    categoryId: string
     category?: SkillCategory
     projects_count: number
 }

@@ -19,7 +19,7 @@ export const useBlogStore = defineStore('blog', {
             this.data = null;
             this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`) as BlogPage;
         },
-        async get(id: number | string): Promise<Blog> {
+        async get(id: string): Promise<Blog> {
             const Api = useApiStore();
             return await Api.get(`/blog/${id}`) as Blog;
         },
@@ -66,7 +66,7 @@ export const useBlogStore = defineStore('blog', {
 
             await Api.put('/blog/' + id, formData);
         },
-        async remove(id: number): Promise<void> {
+        async remove(id: string): Promise<void> {
             const Api = useApiStore();
             await Api.delete(`/blog/${id}`);
         }
