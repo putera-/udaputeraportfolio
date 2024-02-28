@@ -14,7 +14,7 @@
             </div>
 
             <div class="py-3">
-                <button class="btn btn-sm" @click="getLogs">
+                <button class="btn btn-sm mb-2" @click="getLogs">
                     <LucideRefreshCw :size="12" /> Refresh
                 </button>
 
@@ -53,9 +53,9 @@
                                     <div class="flex gap-2">
                                         <!-- platform -->
                                         <IconsWindows class="w-5" v-if="log.isWindows" />
-                                        <IconsMacOS class="w-5" v-if="logs.isMacOS" />
-                                        <IconsAndroid class="w-5" v-if="logs.isAndroid" />
-                                        <IconsIOS class="w-5" v-if="logs.isIos" />
+                                        <IconsMacOS class="w-5" v-if="log.isMacOS" />
+                                        <IconsAndroid class="w-5" v-if="log.isAndroid" />
+                                        <IconsIOS class="w-5" v-if="log.isIos" />
 
                                         <!-- device -->
                                         <LucideMonitor :size="20" v-if="log.isDesktop" />
@@ -73,18 +73,41 @@
                     </table>
                 </div>
                 <div class="md:hidden flex flex-col gap-2">
-                    <div class="card bg-base-100/50 p-2" v-for=" log in LogStore.web_logs ">
-                        <div class="flex justify-between">
-                            <div class="flex gap-2">
-                                <LucideBuilding2 :size="20" class="text-gray-500 mt-2" />
+                    <div class="card bg-base-100/50 p-2" v-for=" log in logs ">
+                        <div class="flex gap-2">
+                            <LucideBuilding2 :size="20" class="text-gray-500 mt-2" />
+                            <div class="flex flex-col gap-2">
+                                <div class="text-neutral font-semibold">{{ log.city }}
+                                    <span class="text-xs font-normal">
+                                        {{ log.ip }}
+                                    </span>
+                                </div>
                                 <div>
-                                    <div class="text-neutral font-semibold">{{ log.city }} <span
-                                            class="text-xs font-normal">{{
-                                                log.ip }}</span></div>
-                                    <div class="text-xs">{{ log.country }}</div>
+                                    <div class="text-xs">{{ log.country }}, {{ log.countryCode }}</div>
                                     <div class="text-xs">{{ log.readDate }} {{ log.readTime }}</div>
                                     <div class="text-xs">{{ log.session }}</div>
                                 </div>
+                                <div class="flex gap-2">
+                                    <!-- platform -->
+                                    <IconsWindows class="w-5" v-if="log.isWindows" />
+                                    <IconsMacOS class="w-5" v-if="log.isMacOS" />
+                                    <IconsAndroid class="w-5" v-if="log.isAndroid" />
+                                    <IconsIOS class="w-5" v-if="log.isIos" />
+
+                                    <!-- device -->
+                                    <LucideMonitor :size="20" v-if="log.isDesktop" />
+                                    <LucideSmartPhone :size="20" v-if="log.isMobile" />
+
+                                    <!-- brpwser -->
+                                    <LucideChrome :size="20" v-if="log.isChrome" />
+                                    <IconsSafari class="w-5" v-if="log.isSafari" />
+                                    <IconsEdge class="w-5" v-if="log.isEdge" />
+                                    <IconsFirefox class="w-5" v-if="log.isFirefox" />
+                                </div>
+                                <a :href="`https://www.google.com/maps/@${log.lat},${log.lon},15z`" target="_blank"
+                                    class="flex gap-2 items-center btn btn-xs w-min flex-nowrap text-nowrap">
+                                    <LucideMap :size="16" /> See Map
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -112,6 +135,5 @@ onBeforeMount(async (): Promise<void> => {
 
 const getLogs = async () => {
     logs.value = await LogStore.getLogBySesion(session);
-    console.log(logs.value)
 }
 </script>

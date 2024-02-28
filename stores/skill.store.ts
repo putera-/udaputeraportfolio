@@ -26,7 +26,7 @@ export const useSkillStore = defineStore('skill', {
 
             await Api.post('/skill', data);
         },
-        async update(id: number, data: any): Promise<void> {
+        async update(id: string, data: any): Promise<void> {
             const Api = useApiStore();
 
             // validate
@@ -34,7 +34,7 @@ export const useSkillStore = defineStore('skill', {
 
             await Api.put('/skill/' + id, data);
         },
-        async remove(id: number): Promise<void> {
+        async remove(id: string): Promise<void> {
             const Api = useApiStore();
 
             await Api.delete('/skill/' + id);

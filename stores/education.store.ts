@@ -13,7 +13,7 @@ export const useEducationStore = defineStore('education', {
             const Api = useApiStore();
             this.data = await Api.get(`/educations`) as Education[];
         },
-        async remove(id: number): Promise<void> {
+        async remove(id: string): Promise<void> {
             const Api = useApiStore();
             await Api.delete(`/education/${id}`);
         },
@@ -22,7 +22,7 @@ export const useEducationStore = defineStore('education', {
             data = validate(educationValidation, data);
             await Api.post('/education', data);
         },
-        async update(id: number, data: Record<string, any>) {
+        async update(id: string, data: Record<string, any>) {
             const Api = useApiStore();
             data = validate(educationValidation, data);
             await Api.put(`/education/${id}`, data);

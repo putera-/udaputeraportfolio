@@ -141,14 +141,14 @@ const getData = async () => {
 
 
 const filter = ref<string>('');
-const selectedCategory = ref<number>(0);
+const selectedCategory = ref<string>("0");
 const skills = computed(() => {
     const search: string = filter.value.toLowerCase().trim();
     const category = selectedCategory.value;
 
-    if (search != '' || category != 0) {
+    if (search != '' || category != "0") {
         return SkillStore.data.filter((skill: Skill) => {
-            if (category == 0) {
+            if (category == "0") {
                 return skill.title.toLowerCase().includes(search);
             } else {
                 return skill.title.toLowerCase().includes(search) && skill.categoryId == category;

@@ -20,7 +20,7 @@ export const useExperienceStore = defineStore('experience', {
             const Api = useApiStore();
             this.data = await Api.get(`/experiences?limit=10&page=${page}&search=${search}`) as ExperiencePage;
         },
-        async remove(id: number): Promise<void> {
+        async remove(id: string): Promise<void> {
             const Api = useApiStore();
             await Api.delete(`/experience/${id}`);
         },
@@ -29,7 +29,7 @@ export const useExperienceStore = defineStore('experience', {
             data = validate(experienceValidation, data);
             await Api.post('/experience', data);
         },
-        async update(id: number, data: Record<string, any>) {
+        async update(id: string, data: Record<string, any>) {
             const Api = useApiStore();
             data = validate(experienceValidation, data);
             await Api.put(`/experience/${id}`, data);
