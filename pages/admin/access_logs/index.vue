@@ -37,8 +37,10 @@
                                     <div class="text-xs">{{ session.country }}, {{ session.countryCode }}</div>
                                 </td>
                                 <td>
-                                    <div class="text-neutral text-right">{{ session.readDate }}</div>
-                                    <div class="text-xs text-right">{{ session.readTime }}</div>
+                                    <div class="text-neutral text-right">
+                                        {{ dayjs(session.timestamp).format('D MMMM YYYY') }}
+                                    </div>
+                                    <div class="text-xs text-right">{{ dayjs(session.timestamp).format('HH:ss') }}</div>
                                 </td>
                                 <td class="text-center">{{ session.count }}</td>
                                 <td>
@@ -52,17 +54,19 @@
                     </table>
                 </div>
                 <div class="md:hidden flex flex-col gap-2">
-                    <div class="card bg-base-100/50 p-2" v-for=" log in LogStore.web_sessions ">
+                    <div class="card bg-base-100/50 p-2" v-for=" session in LogStore.web_sessions ">
                         <div class="flex justify-between">
                             <div class="flex gap-2">
                                 <LucideBuilding2 :size="20" class="text-gray-500 mt-2" />
                                 <div>
-                                    <div class="text-neutral font-semibold">{{ log.city }} <span
+                                    <div class="text-neutral font-semibold">{{ session.city }} <span
                                             class="text-xs font-normal">{{
-                                                log.ip }}</span></div>
-                                    <div class="text-xs">{{ log.country }}</div>
-                                    <div class="text-xs">{{ log.readDate }} {{ log.readTime }}</div>
-                                    <div class="text-xs">{{ log.session }}</div>
+                                                session.ip }}</span></div>
+                                    <div class="text-xs">{{ session.country }}</div>
+                                    <div class="text-xs">
+                                        {{ dayjs(session.timestamp).format('D MMMM YYYY HH:ss') }}
+                                    </div>
+                                    <div class="text-xs">{{ session.session }}</div>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
 definePageMeta({
     layout: false,
     middleware: ['auth']
