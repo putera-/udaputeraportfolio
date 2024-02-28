@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 interface LogState {
     web_sessions: WebSessions[]
     error_logs: ErrorLog[]
-    ipAddress: string | null
+    // ipAddress: string | null
 }
 
 export const useLogStore = defineStore('log', {
     state: (): LogState => ({
         web_sessions: [],
         error_logs: [],
-        ipAddress: null
+        // ipAddress: null
     }),
     actions: {
         async getWebSesions(): Promise<void> {
@@ -27,11 +27,16 @@ export const useLogStore = defineStore('log', {
         },
         async sendAccessLog(fullPath: string) {
             const Api = useApiStore();
+            // console.log('this.ipAddress')
+            // console.log(this.ipAddress)
 
-            if (!this.ipAddress) {
-                const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
-                this.ipAddress = ip;
-            }
+            const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
+            // if (!this.ipAddress) {
+            //     const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
+            //     this.ipAddress = ip;
+
+            // }
+            // console.log(this.ipAddress)
 
             const session = useCookie('session');
             if (!session.value) session.value = uuidv4();
@@ -39,7 +44,7 @@ export const useLogStore = defineStore('log', {
             const device = useDevice();
             const log = {
                 session: session.value,
-                ip: this.ipAddress,
+                ip: ip,
                 path: fullPath,
                 user_agent: device.userAgent,
                 isMobile: device.isMobile,
