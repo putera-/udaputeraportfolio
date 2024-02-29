@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="text-accent font-semibold mt-4">Description:</div>
-                <div class="text-justify">{{ project.description }}</div>
+                <div class="text-justify whitespace-pre-wrap">{{ project.description }}</div>
             </div>
         </div>
         <div class="max-lg:hidden lg:col-span-3">

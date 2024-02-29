@@ -26,7 +26,7 @@
         <div class="text-xs font-light">{{ blog.readDate }}</div>
     </div>
     <div>
-        <div class="indent-8">{{ blog.content }}</div>
+        <div class="text-justify whitespace-pre-wrap">{{ blog.content }}</div>
     </div>
 </div>
 </template>

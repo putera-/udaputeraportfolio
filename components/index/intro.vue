@@ -7,7 +7,7 @@
     <div class="text-4xl md:text-5xl xl:text-7xl font-light">Say Hi from
         <span class="text-accent">{{ profile.lastname }}</span>,<br>{{ profile.job }}
     </div>
-    <div>{{ profile.bio }}</div>
+    <div class="whitespace-pre-wrap font-light">{{ profile.bio }}</div>
     <div class="grow flex flex-col justify-end">
         <div class="flex gap-10 w-20">
             <div v-if="profile.year_of_experience! > 1" class="flex flex-col gap-2">
