@@ -10,11 +10,11 @@
                 class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-3 xl:col-span-8 flex flex-col gap-10 max-lg:px-4">
                 <IndexIntro :profile="profile" id="intro" />
                 <!-- <IndexAbout :profile="profile" id="about" /> -->
-                <IndexBlog :blogs="blogs" id="blogs" />
-                <IndexEducation :educations="educations" id="education" />
-                <IndexExperience :experiences="experiences" id="experience" />
-                <IndexSkill :skills="skills" id="skills" />
-                <IndexProject :projects="projects" id="projects" />
+                <IndexBlog v-if="useShowBlog" :blogs="blogs" id="blogs" />
+                <IndexEducation v-if="useShowEdu" :educations="educations" id="education" />
+                <IndexExperience v-if="useShowExp" :experiences="experiences" id="experience" />
+                <IndexSkill v-if="useShowSkill" :skills="skills" id="skills" />
+                <IndexProject v-if="useShowProject" :projects="projects" id="projects" />
             </div>
         </div>
     </div>
@@ -35,6 +35,12 @@ const getPortfolio = async (): Promise<Portfolio> => {
         });
     }
 }
+
+const useShowBlog = useState<Boolean>('show_blog');
+const useShowEdu = useState<Boolean>('show_education');
+const useShowExp = useState<Boolean>('show_experience');
+const useShowSkill = useState<Boolean>('show_skill');
+const useShowProject = useState<Boolean>('show_project');
 
 const { profile, skills, educations, experiences, projects, blogs } = await getPortfolio();
 

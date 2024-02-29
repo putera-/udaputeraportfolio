@@ -11,12 +11,14 @@
             <div class="rounded-full border border-accent/50 p-2">
                 <template v-for="subMenus in menus">
                     <ul class="flex flex-col items-center gap-2">
-                        <li v-for="menu in subMenus" class="tooltip tooltip-left" :data-tip="menu.title">
-                            <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
-                                class="btn btn-sm btn-circle bg-transparent text-accent hover:text-secondary border-0">
-                                <component :is="menu.icon" :size="16" />
-                            </NuxtLink>
-                        </li>
+                        <template v-for="menu in subMenus">
+                            <li v-if="menu.show" class="tooltip tooltip-left" :data-tip="menu.title">
+                                <NuxtLink :to="{ path: menu.href, hash: menu.hash! }"
+                                    class="btn btn-sm btn-circle bg-transparent text-accent hover:text-secondary border-0">
+                                    <component :is="menu.icon" :size="16" />
+                                </NuxtLink>
+                            </li>
+                        </template>
                     </ul>
                     <div class="divider my-1 before:h-px after:h-px before:bg-accent/50 after:bg-accent/50"
                         :class="menus.indexOf(subMenus) != (menus.length - 1) ? '' : 'hidden'" />
@@ -40,13 +42,15 @@
             <div class="mb-6 text-xl text-accent">Menu</div>
             <template v-for="subMenus in menus">
                 <ul class="menu px-0">
-                    <li v-for="menu in subMenus">
-                        <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
-                            for="my-drawer-4" class="text-accent hover:text-primary px-2">
-                            <component :is="menu.icon" :size="16" />
-                            <div class="text-white font-thin">{{ menu.title }}</div>
-                        </NuxtLink>
-                    </li>
+                    <template v-for="menu in subMenus">
+                        <li v-if="menu.show">
+                            <NuxtLink :to="{ path: menu.href, hash: menu.hash! }" @click="show_mobile_menu = false"
+                                for="my-drawer-4" class="text-accent hover:text-primary px-2">
+                                <component :is="menu.icon" :size="16" />
+                                <div class="text-white font-thin">{{ menu.title }}</div>
+                            </NuxtLink>
+                        </li>
+                    </template>
                 </ul>
                 <div class="divider divider-accent before:h-px after:h-px"
                     :class="menus.indexOf(subMenus) != (menus.length - 1) ? '' : 'hidden'" />
@@ -75,11 +79,18 @@
 
 const show_mobile_menu = ref(false);
 
+const useShowBlog = useState<Boolean>('show_blog');
+const useShowEdu = useState<Boolean>('show_education');
+const useShowExp = useState<Boolean>('show_experience');
+const useShowSkill = useState<Boolean>('show_skill');
+const useShowProject = useState<Boolean>('show_project');
+
 interface Menu {
     title: string
     icon: any,
     href: string
-    hash?: string
+    hash?: string,
+    show: Boolean
 }
 
 const menus: Menu[][] = [
@@ -89,49 +100,57 @@ const menus: Menu[][] = [
             title: 'Home',
             icon: resolveComponent('LucideHome'),
             href: '/',
-            hash: '#home'
+            hash: '#home',
+            show: true
         },
         {
             title: 'Blogs',
             icon: resolveComponent('LucideBookOpenText'),
             href: '/',
-            hash: '#blogs'
+            hash: '#blogs',
+            show: useShowBlog.value
         },
         {
             title: 'Education',
             icon: resolveComponent('LucideGraduationCap'),
             href: '/',
-            hash: '#education'
+            hash: '#education',
+            show: useShowEdu.value
         },
         {
             title: 'Experience',
             icon: resolveComponent('LucideNotebookPen'),
             href: '/',
-            hash: '#experience'
+            hash: '#experience',
+            show: useShowExp.value
         },
         {
             title: 'Skills',
             icon: resolveComponent('LucideBone'),
             href: '/',
-            hash: '#skills'
+            hash: '#skills',
+            show: useShowSkill.value
         },
         {
             title: 'Projects',
             icon: resolveComponent('LucideBriefcase'),
             href: '/',
-            hash: '#projects'
+            hash: '#projects',
+            show: useShowProject.value
         }
     ],
     [
         {
             title: 'All Blogs',
             icon: resolveComponent('LucideBookOpenText'),
-            href: '/blogs'
+            href: '/blogs',
+            show: useShowBlog.value
         },
         {
             title: 'All Projects',
             icon: resolveComponent('LucideBriefcase'),
-            href: '/projects'
+            href: '/projects',
+            show: useShowProject.value
         }
     ]
 ];
