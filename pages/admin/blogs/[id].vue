@@ -185,7 +185,6 @@ const save = async () => {
             }
         });
     } catch (error: any) {
-        console.log(error);
         if (error.isJoi) {
             errors.value = error.data
         } else {

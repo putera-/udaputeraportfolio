@@ -9,7 +9,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
     // send web access log on path change
     router.afterEach(async (to, from) => {
-        console.log('after each bro')
         if (!to.fullPath.includes('/admin')) {
             await LogStore.sendAccessLog(to.fullPath);
         }
