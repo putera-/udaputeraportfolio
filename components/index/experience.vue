@@ -22,10 +22,6 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-center mt-10">
-            <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Experiences</NuxtLink>
-        </div>
-
     </div>
 </div>
 </template>
