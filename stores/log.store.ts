@@ -39,38 +39,46 @@ export const useLogStore = defineStore('log', {
             this.error_logs = await Api.get('/error_log') as ErrorLog[];
         },
         async getIpAddress() {
-            const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
-            this.ipAddress = ip;
+            try {
+                const { ip } = await $fetch('https://api.ipify.org/?format=json') as any;
+                this.ipAddress = ip;
+            } catch (error) {
+            }
         },
         async sendAccessLog(fullPath: string) {
             const Api = useApiStore();
 
-            if (!this.ipAddress) {
-                await this.getIpAddress()
+            try {
+                if (!this.ipAddress) {
+                    await this.getIpAddress()
+                }
+
+                const session = useCookie('session');
+                if (!session.value) session.value = uuidv4();
+
+                const device = useDevice();
+                const log = {
+                    session: session.value,
+                    ip: this.ipAddress,
+                    path: fullPath,
+                    user_agent: device.userAgent,
+                    isMobile: device.isMobile,
+                    isDesktop: device.isDesktop,
+                    isWindows: device.isWindows,
+                    isMacOS: device.isMacOS,
+                    isAndroid: device.isAndroid,
+                    isIos: device.isIos,
+                    isFirefox: device.isFirefox,
+                    isEdge: device.isEdge,
+                    isChrome: device.isChrome,
+                    isSafari: device.isSafari
+                };
+
+                await Api.post('/access-log', log);
+            } catch (error) {
+
             }
 
-            const session = useCookie('session');
-            if (!session.value) session.value = uuidv4();
-
-            const device = useDevice();
-            const log = {
-                session: session.value,
-                ip: this.ipAddress,
-                path: fullPath,
-                user_agent: device.userAgent,
-                isMobile: device.isMobile,
-                isDesktop: device.isDesktop,
-                isWindows: device.isWindows,
-                isMacOS: device.isMacOS,
-                isAndroid: device.isAndroid,
-                isIos: device.isIos,
-                isFirefox: device.isFirefox,
-                isEdge: device.isEdge,
-                isChrome: device.isChrome,
-                isSafari: device.isSafari
-            };
-
-            await Api.post('/access-log', log);
         },
         getReadDateTime(log: Record<string, any>) {
             log.readTimestamp = dayjs(log.timestamp).format('D MMMM YYYY HH:mm');
