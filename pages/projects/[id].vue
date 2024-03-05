@@ -29,9 +29,21 @@
                         <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
                         <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
             project.company }}</span></div>
-                        <div class="text-sm" v-if="project.url">Url: <span class="text-accent font-semi-bold">{{
-            project.url
-        }}</span></div>
+                        <div class="text-sm" v-if="project.url">Url:
+                            <span class="text-accent font-semi-bold">
+                                {{ project.url }}
+                            </span>
+                        </div>
+                        <div class="text-sm" v-if="project.github">Github:
+                            <span class="text-accent font-semi-bold">
+                                {{ project.github }}
+                            </span>
+                        </div>
+                        <div class="text-sm" v-if="project.gitlab">Gitlab:
+                            <span class="text-accent font-semi-bold">
+                                {{ project.gitlab }}
+                            </span>
+                        </div>
                     </div>
 
                     <div class="text-accent font-semibold mt-4">Description:</div>
@@ -44,8 +56,21 @@
                 <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
                 <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
             project.company }}</span></div>
-                <div class="text-sm" v-if="project.url">Url: <span class="text-accent font-semi-bold">{{ project.url
-                        }}</span></div>
+                <div class="text-sm" v-if="project.url">Url:
+                    <span class="text-accent font-semi-bold">
+                        {{ project.url }}
+                    </span>
+                </div>
+                <div class="text-sm" v-if="project.github">Github:
+                    <span class="text-accent font-semi-bold">
+                        {{ project.github }}
+                    </span>
+                </div>
+                <div class="text-sm" v-if="project.gitlab">Gitlab:
+                    <span class="text-accent font-semi-bold">
+                        {{ project.gitlab }}
+                    </span>
+                </div>
 
                 <ProjectSkills v-if="project.skill_category" :skills="project.skill_category" class="mt-4" />
             </div>
