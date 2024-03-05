@@ -1,215 +1,218 @@
 <template>
-<div>
-    <NuxtLayout name="admin">
-        <template #breadcrumb>
-            <li>
-                <NuxtLink to="/admin/projects">Projects</NuxtLink>
-            </li>
-            <li>Update</li>
-        </template>
+    <div>
+        <NuxtLayout name="admin">
+            <template #breadcrumb>
+                <li>
+                    <NuxtLink to="/admin/projects">Projects</NuxtLink>
+                </li>
+                <li>Update</li>
+            </template>
 
-        <template #default>
-            <div class="font-bold text-3xl flex gap-2">Update Project</div>
-            <div class="divider before:h-px after:h-px mt-0"></div>
+            <template #default>
+                <div class="font-bold text-3xl flex gap-2">Update Project</div>
+                <div class="divider before:h-px after:h-px mt-0"></div>
 
 
-            <div class="flex flex-col gap-4">
-                <label class="form-control w-full">
-                    <div class="label-text font-semibold">Project Title</div>
-                    <input v-model="form.title" type="text" placeholder="Project Title"
-                        class="input input-lg input-bordered font-bold w-full" />
-                    <div v-if="errors.title" class="text-right label-text-alt text-error">
-                        {{ errors.title }}
+                <div class="flex flex-col gap-4">
+                    <label class="form-control w-full">
+                        <div class="label-text font-semibold">Project Title</div>
+                        <input v-model="form.title" type="text" placeholder="Project Title"
+                            class="input input-lg input-bordered font-bold w-full" />
+                        <div v-if="errors.title" class="text-right label-text-alt text-error">
+                            {{ errors.title }}
+                        </div>
+                    </label>
+                    <div class="overflow-x-auto py-2">
+                        <div class="label-text font-semibold">Photos</div>
+
+                        <!-- dummy photo -->
+                        <div v-if="!photos.length" class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
+                            <div class="bg-neutral/10 w-full aspect-video rounded"></div>
+                        </div>
+
+                        <!-- photo preview -->
+                        <draggable v-model="photos" group="photo" item-key="id"
+                            class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
+                            <template #item="{ element, index }">
+                                <div
+                                    class="aspect-video rounded overflow-hidden bg-neutral/10 relative cursor-grab flex justify-center items-center">
+                                    <img :src="element.photo" class="max-w-full max-h-full">
+
+                                    <div class="dropdown dropdown-end absolute z-[1] right-2 top-2">
+                                        <LucideMoreVertical :size="16" tabindex="0" role="button" />
+                                        <ul tabindex="0"
+                                            class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
+                                            <li><button class="btn btn-error btn-xs h-min my-px flex flex-nowrap"
+                                                    @click="removePhoto(index)">
+                                                    <LucideTrash2 :size="16" />Remove
+                                                </button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </template>
+                        </draggable>
+
+                        <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
+                            accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" multiple
+                            @change="handlePhotos">
                     </div>
-                </label>
-                <div class="overflow-x-auto py-2">
-                    <div class="label-text font-semibold">Photos</div>
-
-                    <!-- dummy photo -->
-                    <div v-if="!photos.length" class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
-                        <div class="bg-neutral/10 w-full aspect-video rounded"></div>
+                    <div>
+                        <div class="label-text font-semibold">Status</div>
+                        <div class="flex flex-wrap gap-3 md:gap-6 mt-1">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input v-model="form.status" type="radio" name="project-status"
+                                    class="radio checked:bg-neutral" value="ON_PROGRESS" />
+                                <span class="label-text">ON PROGRESS</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input v-model="form.status" type="radio" name="project-status"
+                                    class="radio checked:bg-success" value="COMPLETE" />
+                                <span class="label-text">COMPLETE</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input v-model="form.status" type="radio" name="project-status"
+                                    class="radio checked:bg-warning" value="MAINTENANCE" />
+                                <span class="label-text">MAINTENANCE</span>
+                            </label>
+                        </div>
                     </div>
 
-                    <!-- photo preview -->
-                    <draggable v-model="photos" group="photo" item-key="id"
-                        class="grid grid-cols-5 max-lg:w-[200vw] gap-2 lg:gap-4">
-                        <template #item="{ element, index }">
-                            <div
-                                class="min-w-full h-full aspect-video rounded overflow-hidden bg-neutral/10 relative cursor-grab">
-                                <img :src="element.photo" class="h-full max-w-full mx-auto">
+                    <!-- START DATE - END DATE -->
+                    <div class="flex gap-4 items-start">
+                        <label class="form-control w-min min-w-xs">
+                            <span class="label label-text font-semibold">Start Date</span>
+                            <DatePicker v-model="form.startDate" color="gray">
 
-                                <div class="dropdown dropdown-end absolute z-[1] right-2 top-2">
-                                    <LucideMoreVertical :size="16" tabindex="0" role="button" />
-                                    <ul tabindex="0"
-                                        class="dropdown-content z-[1] menu menu-xs p-2 shadow bg-base-100 rounded-box w-24">
-                                        <li><button class="btn btn-error btn-xs h-min my-px flex flex-nowrap"
-                                                @click="removePhoto(index)">
-                                                <LucideTrash2 :size="16" />Remove
-                                            </button></li>
-                                    </ul>
+                                <template #default="{ togglePopover }">
+                                    <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
+                                        @click="togglePopover">
+                                        {{ dayjs(form.startDate).format('D MMMM YYYY') }}
+                                    </button>
+                                </template>
+                            </DatePicker>
+                        </label>
+                        <label class="form-control w-min min-w-32">
+                            <span class="label label-text font-semibold">End Date</span>
+                            <DatePicker v-model="form.endDate" color="gray">
+
+                                <template #default="{ togglePopover }">
+                                    <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
+                                        @click="togglePopover" :disabled="form.endDate == null">
+                                        {{ form.endDate == null ? '-' : dayjs(form.endDate).format('D MMMM YYYY') }}
+                                    </button>
+                                </template>
+                            </DatePicker>
+                        </label>
+                        <label class="form-control">
+                            <!-- PRESENT -->
+                            <label class="cursor-pointer label flex justify-start gap-2 mt-8">
+                                <input :checked="form.endDate == null" @change="setEndDate" type="checkbox"
+                                    class="checkbox checkbox-neutral" />
+                                <span class="label-text">Present</span>
+                            </label>
+                        </label>
+                    </div>
+                    <div>
+                        <div v-if="errors.startDate" class="label-text-alt text-error">
+                            {{ errors.startDate }}
+                        </div>
+                        <div v-if="errors.endDate" class="label-text-alt text-error">
+                            {{ errors.endDate }}
+                        </div>
+                    </div>
+
+
+                    <!-- DETAIL -->
+                    <div class="grid lg:grid-cols-2 gap-4">
+                        <label class="form-control w-full">
+                            <div class="label-text font-semibold">Company</div>
+                            <input v-model="form.company" type="text" placeholder="Company"
+                                class="input input-bordered w-full" />
+                            <div v-if="errors.company" class="text-right label-text-alt text-error">{{
+                            errors.company }}
+                            </div>
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label-text font-semibold">Url</div>
+                            <input v-model="form.url" type="text" placeholder="Url"
+                                class="input input-bordered w-full" />
+                            <div v-if="errors.url" class="text-right label-text-alt text-error">{{ errors.url }}
+                            </div>
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label-text font-semibold">Github</div>
+                            <input v-model="form.github" type="text" placeholder="Github"
+                                class="input input-bordered w-full" />
+                            <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github
+                                }}
+                            </div>
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label-text font-semibold">Gitlab</div>
+                            <input v-model="form.gitlab" type="text" placeholder="Gitlab"
+                                class="input input-bordered w-full" />
+                            <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab
+                                }}
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- SKILL -->
+                    <div>
+                        <div class="label-text font-semibold flex items-center gap-4">Skills
+                            <button class="btn btn-xs btn-neutral" @click="open_skill_selector = true">
+                                <LucidePlus :size="12" />Add Skill
+                            </button>
+                        </div>
+                        <div class="card bg-base-100 shadow p-4 mt-2">
+                            <div v-for="category of data_skills" class="mb-2">
+                                <div class="label-text font-semibold flex items-center gap-4 mb-px">{{
+                            category.title
+                        }}
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <Skill :skill="skill" v-for="skill of category.skills" />
                                 </div>
                             </div>
-                        </template>
-                    </draggable>
-
-                    <input type="file" class="file-input file-input-sm w-full my-2" ref="fileInput"
-                        accept="image/jpg, image/jpeg, image/png, image/webp, image/gif" multiple
-                        @change="handlePhotos">
-                </div>
-                <div>
-                    <div class="label-text font-semibold">Status</div>
-                    <div class="flex flex-wrap gap-3 md:gap-6 mt-1">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="form.status" type="radio" name="project-status"
-                                class="radio checked:bg-neutral" value="ON_PROGRESS" />
-                            <span class="label-text">ON PROGRESS</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="form.status" type="radio" name="project-status"
-                                class="radio checked:bg-success" value="COMPLETE" />
-                            <span class="label-text">COMPLETE</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input v-model="form.status" type="radio" name="project-status"
-                                class="radio checked:bg-warning" value="MAINTENANCE" />
-                            <span class="label-text">MAINTENANCE</span>
-                        </label>
+                        </div>
                     </div>
-                </div>
 
-                <!-- START DATE - END DATE -->
-                <div class="flex gap-4 items-start">
-                    <label class="form-control w-min min-w-xs">
-                        <span class="label label-text font-semibold">Start Date</span>
-                        <DatePicker v-model="form.startDate" color="gray">
-                            <template #default="{ togglePopover }">
-                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
-                                    @click="togglePopover">
-                                    {{ dayjs(form.startDate).format('D MMMM YYYY') }}
-                                </button>
-                            </template>
-                        </DatePicker>
-                    </label>
-                    <label class="form-control w-min min-w-32">
-                        <span class="label label-text font-semibold">End Date</span>
-                        <DatePicker v-model="form.endDate" color="gray">
-                            <template #default="{ togglePopover }">
-                                <button class="btn btn-outline border-neutral/25 btn-sm font-normal text-nowrap"
-                                    @click="togglePopover" :disabled="form.endDate == null">
-                                    {{ form.endDate == null ? '-' : dayjs(form.endDate).format('D MMMM YYYY') }}
-                                </button>
-                            </template>
-                        </DatePicker>
-                    </label>
-                    <label class="form-control">
-                        <!-- PRESENT -->
-                        <label class="cursor-pointer label flex justify-start gap-2 mt-8">
-                            <input :checked="form.endDate == null" @change="setEndDate" type="checkbox"
-                                class="checkbox checkbox-neutral" />
-                            <span class="label-text">Present</span>
-                        </label>
-                    </label>
-                </div>
-                <div>
-                    <div v-if="errors.startDate" class="label-text-alt text-error">
-                        {{ errors.startDate }}
-                    </div>
-                    <div v-if="errors.endDate" class="label-text-alt text-error">
-                        {{ errors.endDate }}
-                    </div>
-                </div>
-
-
-                <!-- DETAIL -->
-                <div class="grid lg:grid-cols-2 gap-4">
                     <label class="form-control w-full">
-                        <div class="label-text font-semibold">Company</div>
-                        <input v-model="form.company" type="text" placeholder="Company"
-                            class="input input-bordered w-full" />
-                        <div v-if="errors.company" class="text-right label-text-alt text-error">{{
-                            errors.company }}
+                        <div class="label-text font-semibold">Description</div>
+                        <textarea v-model="form.description" cols="30" rows="10" placeholder="Description.."
+                            class="textarea textarea-bordered w-full"></textarea>
+                        <div v-if="errors.description" class="text-right label-text-alt text-error">{{
+                            errors.description }}
                         </div>
                     </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Url</div>
-                        <input v-model="form.url" type="text" placeholder="Url" class="input input-bordered w-full" />
-                        <div v-if="errors.url" class="text-right label-text-alt text-error">{{ errors.url }}
-                        </div>
-                    </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Github</div>
-                        <input v-model="form.github" type="text" placeholder="Github"
-                            class="input input-bordered w-full" />
-                        <div v-if="errors.github" class="text-right label-text-alt text-error">{{ errors.github
-                        }}
-                        </div>
-                    </label>
-                    <label class="form-control w-full">
-                        <div class="label-text font-semibold">Gitlab</div>
-                        <input v-model="form.gitlab" type="text" placeholder="Gitlab"
-                            class="input input-bordered w-full" />
-                        <div v-if="errors.gitlab" class="text-right label-text-alt text-error">{{ errors.gitlab
-                        }}
-                        </div>
-                    </label>
-                </div>
 
-                <!-- SKILL -->
-                <div>
-                    <div class="label-text font-semibold flex items-center gap-4">Skills
-                        <button class="btn btn-xs btn-neutral" @click="open_skill_selector = true">
-                            <LucidePlus :size="12" />Add Skill
+                    <div class="flex items-center justify-end gap-4">
+                        <div class="text-error text-sm">{{ responseError }}</div>
+                        <button class="btn" @click="confirmCancel = true">Cancel</button>
+                        <button class="btn btn-neutral" @click="confirmSave = true">
+                            Save
+                            <IconsCatLoading v-show="isLoading" class="w-8" />
                         </button>
                     </div>
-                    <div class="card bg-base-100 shadow p-4 mt-2">
-                        <div v-for="category of data_skills" class="mb-2">
-                            <div class="label-text font-semibold flex items-center gap-4 mb-px">{{
-                                category.title
-                            }}
-                            </div>
-                            <div class="flex flex-wrap gap-2">
-                                <Skill :skill="skill" v-for="skill of category.skills" />
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <label class="form-control w-full">
-                    <div class="label-text font-semibold">Description</div>
-                    <textarea v-model="form.description" cols="30" rows="10" placeholder="Description.."
-                        class="textarea textarea-bordered w-full"></textarea>
-                    <div v-if="errors.description" class="text-right label-text-alt text-error">{{
-                        errors.description }}
-                    </div>
-                </label>
+                <!-- CANCEL CONFIRMATION -->
+                <AdminConfirmation action-text="Cancel" :show="confirmCancel" @close="confirmCancel = false"
+                    @yes="navigateTo('/admin/projects')">
+                    Are you sure to discard this new project?
+                </AdminConfirmation>
 
-                <div class="flex items-center justify-end gap-4">
-                    <div class="text-error text-sm">{{ responseError }}</div>
-                    <button class="btn" @click="confirmCancel = true">Cancel</button>
-                    <button class="btn btn-neutral" @click="confirmSave = true">
-                        Save
-                        <IconsCatLoading v-show="isLoading" class="w-8" />
-                    </button>
-                </div>
-            </div>
+                <!-- CREATE CONFIRMATION -->
+                <AdminConfirmation action-text="Save" :show="confirmSave" @close="confirmSave = false" @yes="save">
+                    Are you sure to save this new project?
+                </AdminConfirmation>
 
-            <!-- CANCEL CONFIRMATION -->
-            <AdminConfirmation action-text="Cancel" :show="confirmCancel" @close="confirmCancel = false"
-                @yes="navigateTo('/admin/projects')">
-                Are you sure to discard this new project?
-            </AdminConfirmation>
-
-            <!-- CREATE CONFIRMATION -->
-            <AdminConfirmation action-text="Save" :show="confirmSave" @close="confirmSave = false" @yes="save">
-                Are you sure to save this new project?
-            </AdminConfirmation>
-
-            <!-- SKILL SELECTOR -->
-            <AdminProjectSkillSelector :show="open_skill_selector" :selected="selected_skills"
-                @close="open_skill_selector = false" @select="addSkill" />
-        </template>
-    </NuxtLayout>
-</div>
+                <!-- SKILL SELECTOR -->
+                <AdminProjectSkillSelector :show="open_skill_selector" :selected="selected_skills"
+                    @close="open_skill_selector = false" @select="addSkill" />
+            </template>
+        </NuxtLayout>
+    </div>
 </template>
 
 <script setup lang="ts">
