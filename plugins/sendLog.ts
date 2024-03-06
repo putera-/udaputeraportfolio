@@ -3,9 +3,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     const router = useRouter();
 
     // send web access log on path change
-    router.afterEach(async (to, from) => {
-        if (!to.fullPath.includes('/admin')) {
-            await LogStore.sendAccessLog(to.fullPath);
-        }
+    router.afterEach((to, from) => {
+        console.log('nunggu 5 detik')
+        setTimeout(() => {
+            if (!to.fullPath.includes('/admin')) {
+                LogStore.sendAccessLog(to.fullPath);
+            }
+        }, 5000);
     });
 });
