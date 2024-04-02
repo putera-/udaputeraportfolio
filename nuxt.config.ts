@@ -23,13 +23,5 @@ export default defineNuxtConfig({
     pinia: {
         storesDirs: ['./stores/**']
     },
-    routeRules: {
-        '/': { ssr: true },
-        '/blogs': { ssr: true },
-        '/blogs/**': { ssr: true },
-        '/projects': { ssr: true },
-        '/projects/**/': { ssr: true },
-        '/admin/**': { ssr: false },
-        '/admin/**/**': { ssr: false }
-    }
+    ssr: false
 });
