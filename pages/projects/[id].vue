@@ -7,8 +7,8 @@
                 <div v-if="project.photos.length">
                     <Carousel :autoplay="10000" :wrapAround="true" class="">
                         <Slide v-for="(photo, i) in project.photos" :key="i" class="">
-                            <div class="aspect-video bg-accent/20 flex justify-center items-center">
-                                <img class="max-w-full max-h-full" :src="apiUrl + photo.path">
+                            <div class="aspect-video bg-accent/20 w-full bg-cover bg-center"
+                                :style="`background-image: url(${apiUrl + photo.path});`">
                             </div>
                         </Slide>
 

@@ -6,14 +6,14 @@
             <div class="text-xs text-accent">{{ status }}</div>
         </div>
     </div>
-    <div
-        class="aspect-video rounded-xl overflow-hidden hover:scale-105 duration-300 mt-1 bg-accent/20 flex items-center justify-center">
-        <img v-if="project.photos.length" :src="apiUrl + project.photos[0].path_md" alt=""
-            class="max-w-full max-h-full">
-        <div v-else class="aspect-video flex justify-center items-center">
-            <LucideBriefcase :size="120" class="" />
-        </div>
+
+    <div v-if="true" class="aspect-video bg-cover bg-center rounded-xl hover:scale-105 duration-300 mt-1"
+        :style="`background-image: url(${apiUrl + project.photos[0].path_md});`">
     </div>
+    <div v-else class="aspect-video flex justify-center items-center bg-accent/20 rounded-xl">
+        <LucideBriefcase :size="120" class="" />
+    </div>
+
     <div class="font-light mt-2 flex flex-nowrap gap-2 overflow-hidden">
         <div v-for="skill of project.skills" class="badge badge-outline border-neutral/50 rounded-lg">{{
             skill.title }}</div>
