@@ -18,10 +18,37 @@ export default defineNuxtConfig({
     modules: [
         'nuxt-lucide-icons',
         '@pinia/nuxt',
-        '@nuxtjs/device'
+        '@nuxtjs/device',
+        "@vite-pwa/nuxt"
     ],
     pinia: {
         storesDirs: ['./stores/**']
     },
-    ssr: false
+    ssr: false,
+    pwa: {
+        manifest: {
+            name: 'Uda Putera',
+            short_name: 'UP',
+            description: "Portfolio",
+            icons: [
+                {
+                    src: 'icons/icon-512x512.png',
+                    sizes: '512x512',
+                    type: 'image/png'
+                },
+                {
+                    src: 'icons/icon-192x192.png',
+                    sizes: '192x192',
+                    type: 'image/png'
+                },
+            ]
+        },
+        workbox: {
+            navigateFallback: '/'
+        },
+        devOptions: {
+            enabled: true,
+            type: 'module'
+        }
+    }
 });
