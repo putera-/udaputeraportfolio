@@ -73,6 +73,7 @@
                 </div>
             </div>
         </div>
+        <NuxtLink to="/admin" class="absolute bottom-0 text-white/0">To Admin</NuxtLink>
     </div>
 </template>
 
