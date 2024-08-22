@@ -7,7 +7,7 @@
                 <div v-if="project.photos.length">
                     <Carousel :autoplay="10000" :wrapAround="true" class="">
                         <Slide v-for="(photo, i) in project.photos" :key="i" class="">
-                            <div class="aspect-video bg-accent/20 w-full bg-cover bg-center"
+                            <div class="aspect-video bg-accent/10 w-full bg-contain bg-center bg-no-repeat"
                                 :style="`background-image: url(${apiUrl + photo.path});`">
                             </div>
                         </Slide>
@@ -24,11 +24,12 @@
                 </div>
                 <div class="mt-4">
                     <div class="lg:hidden">
-                        <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ project.read_status
-                                }}</span></div>
+                        <div class="text-sm">Status: <span class="text-accent font-semi-bold">
+                                {{ project.read_status }}
+                            </span></div>
                         <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
                         <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
-            project.company }}</span></div>
+                            project.company }}</span></div>
                         <div class="text-sm" v-if="project.url">Url:
                             <span class="text-accent font-semi-bold">
                                 {{ project.url }}
@@ -54,8 +55,9 @@
                 <div class="text-sm">Status: <span class="text-accent font-semi-bold">{{ project.read_status }}</span>
                 </div>
                 <div class="text-xs">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
-                <div class="text-sm" v-if="project.company">Company: <span class="text-accent font-semi-bold">{{
-            project.company }}</span></div>
+                <div class="text-sm" v-if="project.company">Company:
+                    <span class="text-accent font-semi-bold"> {{ project.company }}</span>
+                </div>
                 <div class="text-sm" v-if="project.url">Url:
                     <span class="text-accent font-semi-bold">
                         {{ project.url }}
