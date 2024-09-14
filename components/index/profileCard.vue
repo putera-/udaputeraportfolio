@@ -49,7 +49,8 @@
             </a>
         </div>
         <div class="flex justify-center">
-            <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10">See All Projects</NuxtLink>
+            <NuxtLink to="/projects" class="btn btn-accent rounded-xl px-10 hover:scale-110 duration-300">See All
+                Projects</NuxtLink>
         </div>
     </div>
 </template>
