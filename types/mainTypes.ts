@@ -1,4 +1,4 @@
-interface Menu {
+export interface Menu {
     label: string
     icon: any
     to?: string

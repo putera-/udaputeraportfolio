@@ -1,4 +1,4 @@
-interface Blog {
+export interface Blog {
     id: string
     title: string
     content: string
@@ -8,7 +8,7 @@ interface Blog {
     shortDateTime: string
 }
 
-interface BlogPage {
+export interface BlogPage {
     data: Blog[]
     page: number
     total: number

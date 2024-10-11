@@ -1,4 +1,4 @@
-interface Project {
+export interface Project {
     id: string
     title: string
     description: string
@@ -18,13 +18,13 @@ interface Project {
     photos: Photo[]
 }
 
-interface ProjectSkills {
+export interface ProjectSkills {
     skill: {
         title: string
     }
 }
 
-interface ProjectPage {
+export interface ProjectPage {
     data: Project[]
     page: number
     total: number

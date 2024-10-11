@@ -1,4 +1,4 @@
-interface Portfolio {
+export interface Portfolio {
     profile: Profile
     skills: SkillCategory[]
     educations: Education[]
@@ -7,7 +7,7 @@ interface Portfolio {
     blogs: Blog[]
 }
 
-interface Profile {
+export interface Profile {
     firstname: string
     lastname: string
     job: string

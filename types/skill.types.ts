@@ -1,10 +1,10 @@
-interface SkillCategory {
+export interface SkillCategory {
     id: string
     title: string
     skills?: Skill[]
 }
 
-interface Skill {
+export interface Skill {
     id: string
     title: string
     svg: string

@@ -1,4 +1,4 @@
-interface Photo {
+export interface Photo {
     id: string
     index: number
     path: string

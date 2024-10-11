@@ -1,4 +1,4 @@
-interface Experience {
+export interface Experience {
     id: string
     company: string
     location: string
@@ -10,7 +10,7 @@ interface Experience {
     readEndDate: string
 }
 
-interface ExperiencePage {
+export interface ExperiencePage {
     data: Experience[]
     page: number
     total: number

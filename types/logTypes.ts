@@ -1,4 +1,4 @@
-interface WebSessions {
+export interface WebSessions {
     session: string
     ip: string
     city: string
@@ -11,7 +11,7 @@ interface WebSessions {
     count: number
     logs: WebLog[]
 }
-interface WebLog {
+export interface WebLog {
     id: string
     session: string
     ip: string
@@ -38,18 +38,18 @@ interface WebLog {
     readTime: string
 }
 
-interface ErrorLog {
-    "user": string
+export interface ErrorLog {
+    user: string
     "ip-addr": string
-    "method": string
-    "url": string
-    "date": string
-    "readDate": string
-    "readTime": string
+    method: string
+    url: string
+    date: string
+    readDate: string
+    readTime: string
     "http-version": string
-    "status": string
+    status: string
     "response-time": string
     "content-length": string
-    "referer": string
+    referer: string
     "user-agent": string
 }
