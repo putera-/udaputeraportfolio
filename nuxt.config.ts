@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         'nuxt-lucide-icons',
         '@pinia/nuxt',
         '@nuxtjs/device',
-        "@vite-pwa/nuxt"
+        // "@vite-pwa/nuxt"
     ],
     pinia: {
         storesDirs: ['./stores/**']
