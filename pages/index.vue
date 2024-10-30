@@ -26,44 +26,24 @@
 </template>
 
 <script setup lang="ts">
-// definePageMeta({
-//     middleware: 'profile'
-// });
-const portfolio = ref<Portfolio | undefined>(undefined);
+definePageMeta({
+    middleware: 'profile'
+});
+
+const PortfolioStore = usePortfolioStore();
+const { portfolio, profile } = PortfolioStore;
+
 const { public: { apiUrl } } = useRuntimeConfig();
 
-const getPortfolio = async (): Promise<void> => {
-    try {
-        portfolio.value = await $fetch(apiUrl + '/portfolio') as Portfolio;
+const fullname = `${profile?.firstname ?? ""} ${profile?.lastname ?? ""}`;
 
-    } catch (error: any) {
-        throw createError({
-            statusCode: 500,
-            statusMessage: error.message,
-        });
-    }
-}
-
-// const useShowBlog = useState<Boolean>('show_blog');
-// const useShowEdu = useState<Boolean>('show_education');
-// const useShowExp = useState<Boolean>('show_experience');
-// const useShowSkill = useState<Boolean>('show_skill');
-// const useShowProject = useState<Boolean>('show_project');
-
-getPortfolio();
-
-// SEO and META
-// const { value: useProfile } = useState<Profile>('profile');
-// const useProfile
-// const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
-
-// useSeoMeta({
-//     title: fullname + ' Portfolio',
-//     description: useProfile.bio,
-//     ogTitle: fullname + ' Portfolio',
-//     ogDescription: useProfile.bio,
-//     ogImage: apiUrl + useProfile.avatar,
-//     twitterCard: 'summary_large_image',
-// });
+useSeoMeta({
+    title: fullname + ' Portfolio',
+    description: profile?.bio ?? "",
+    ogTitle: fullname + ' Portfolio',
+    ogDescription: profile?.bio ?? "",
+    ogImage: profile ? (apiUrl + profile.avatar) : "",
+    twitterCard: 'summary_large_image',
+});
 // END: SEO and META
 </script>

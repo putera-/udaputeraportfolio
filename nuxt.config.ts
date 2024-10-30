@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     imports: {
         dirs: ["types/*.ts", "types/**/*.ts", "store/*.ts"],
     },
-    ssr: false,
+    ssr: true,
     // pwa: {
     //     manifest: {
     //         name: 'Uda Putera',
@@ -87,5 +87,9 @@ export default defineNuxtConfig({
     //     }
     // },
 
-    compatibilityDate: '2024-10-11'
+    compatibilityDate: '2024-10-11',
+    devServer: {
+        port: 3003
+    }
+
 });

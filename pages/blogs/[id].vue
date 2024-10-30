@@ -1,34 +1,34 @@
 <template>
-<div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
-    <IndexHeader subTitle="Blogs" href="/blogs" />
-    <div class="overflow-hidden">
-        <div v-if="blog.photos.length">
-            <Carousel :autoplay="10000" :wrapAround="true" class="">
-                <Slide v-for="(photo, i) in blog.photos" :key="i" class="">
-                    <div class="aspect-video w-full bg-contain bg-accent/20 flex justify-center">
-                        <img class="max-h-full" :src="apiUrl + photo.path">
-                    </div>
-                </Slide>
+    <div class="max-w-7xl mx-auto flex flex-col gap-6 px-4 md:px-6 pt-12 pb-24 md:pt-8">
+        <IndexHeader subTitle="Blogs" href="/blogs" />
+        <div class="overflow-hidden">
+            <div v-if="blog.photos.length">
+                <Carousel :autoplay="10000" :wrapAround="true" class="">
+                    <Slide v-for="(photo, i) in blog.photos" :key="i" class="">
+                        <div class="aspect-video w-full bg-contain bg-accent/20 flex justify-center">
+                            <img class="max-h-full" :src="apiUrl + photo.path">
+                        </div>
+                    </Slide>
 
-                <template #addons>
-                    <Navigation />
-                    <Pagination />
-                </template>
-            </Carousel>
+                    <template #addons>
+                        <Navigation />
+                        <Pagination />
+                    </template>
+                </Carousel>
+            </div>
+            <div v-else
+                class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-accent/20 text-accent">
+                <LucideBriefcase :size="200" class="" />
+            </div>
         </div>
-        <div v-else
-            class="aspect-video rounded md:rounded-lg lg:rounded-2xl flex justify-center items-center bg-accent/20 text-accent">
-            <LucideBriefcase :size="200" class="" />
+        <div>
+            <div class="text-3xl font-semibold text-accent">{{ blog.title }}</div>
+            <div class="text-xs font-light">{{ blog.readDate }}</div>
+        </div>
+        <div>
+            <div class="text-justify whitespace-pre-wrap">{{ blog.content }}</div>
         </div>
     </div>
-    <div>
-        <div class="text-3xl font-semibold text-accent">{{ blog.title }}</div>
-        <div class="text-xs font-light">{{ blog.readDate }}</div>
-    </div>
-    <div>
-        <div class="text-justify whitespace-pre-wrap">{{ blog.content }}</div>
-    </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -45,8 +45,10 @@ const id = route.params.id;
 const blog = await $fetch('/api/blog/' + id) as Blog;
 
 // SEO and META
-const { value: useProfile } = useState<Profile>('profile');
-const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const PortfolioStore = usePortfolioStore();
+const { profile } = PortfolioStore;
+
+const fullname = `${profile?.firstname ?? ""} ${profile?.lastname ?? ""}`;
 const photo = blog.photos.length ? (apiUrl + blog.photos[0].path) : ''
 
 useSeoMeta({

@@ -80,11 +80,8 @@
 
 const show_mobile_menu = ref(false);
 
-const useShowBlog = useState<Boolean>('show_blog');
-const useShowEdu = useState<Boolean>('show_education');
-const useShowExp = useState<Boolean>('show_experience');
-const useShowSkill = useState<Boolean>('show_skill');
-const useShowProject = useState<Boolean>('show_project');
+const PortfolioStore = usePortfolioStore();
+const { skills, educations, experiences, projects, blogs } = PortfolioStore;
 
 interface Menu {
     title: string
@@ -109,35 +106,35 @@ const menus: Menu[][] = [
             icon: resolveComponent('LucideBookOpenText'),
             href: '/',
             hash: '#blogs',
-            show: useShowBlog.value
+            show: blogs.length != 0
         },
         {
             title: 'Education',
             icon: resolveComponent('LucideGraduationCap'),
             href: '/',
             hash: '#education',
-            show: useShowEdu.value
+            show: educations.length != 0
         },
         {
             title: 'Experience',
             icon: resolveComponent('LucideNotebookPen'),
             href: '/',
             hash: '#experience',
-            show: useShowExp.value
+            show: experiences.length != 0
         },
         {
             title: 'Skills',
             icon: resolveComponent('LucideBone'),
             href: '/',
             hash: '#skills',
-            show: useShowSkill.value
+            show: skills.length != 0
         },
         {
             title: 'Projects',
             icon: resolveComponent('LucideBriefcase'),
             href: '/',
             hash: '#projects',
-            show: useShowProject.value
+            show: projects.length != 0
         }
     ],
     [
@@ -145,13 +142,13 @@ const menus: Menu[][] = [
             title: 'All Blogs',
             icon: resolveComponent('LucideBookOpenText'),
             href: '/blogs',
-            show: useShowBlog.value
+            show: blogs.length != 0
         },
         {
             title: 'All Projects',
             icon: resolveComponent('LucideBriefcase'),
             href: '/projects',
-            show: useShowProject.value
+            show: projects.length != 0
         }
     ]
 ];

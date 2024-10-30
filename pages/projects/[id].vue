@@ -95,8 +95,15 @@ const id = route.params.id;
 const project = await $fetch('/api/project/' + id) as Project;
 
 // SEO and META
-const { value: useProfile } = useState<Profile>('profile');
-const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+const PortfolioStore = usePortfolioStore();
+const { profile } = PortfolioStore;
+
+const fullname = computed(() => {
+    if (profile) {
+        return `${profile.firstname} ${profile.lastname}`;
+    }
+    return '';
+})
 const photo = project.photos.length ? (apiUrl + project.photos[0].path) : ''
 
 useSeoMeta({
