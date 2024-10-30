@@ -7,12 +7,12 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: web-udaputera-portfolio
-        image: web-udaputera-portfolio:1.0.10
+        image: web-udaputera-portfolio:1.0.11
         restart: always
         ports:
             - 3010:3000
         networks:
             - app-uda-portfolio
         environment:
-            NUXT_API_URL: http://localhost:5000
-            NUXT_PUBLIC_API_URL: http://localhost:5000
+            NUXT_API_URL: http://localhost:5555
+            NUXT_PUBLIC_API_URL: http://localhost:5555
