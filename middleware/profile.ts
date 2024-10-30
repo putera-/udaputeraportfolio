@@ -6,10 +6,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const useShowExp = useState<Boolean>('show_experience');
     const useShowSkill = useState<Boolean>('show_skill');
     const useShowProject = useState<Boolean>('show_project');
+    const { public: { apiUrl } } = useRuntimeConfig();
+    console.log({ 'midleware': apiUrl });
 
     if (!useProfile.value) {
         try {
-            const getPortFolio = await $fetch('/api/portfolio') as Portfolio;
+            const getPortFolio = await $fetch(apiUrl + '/portfolio') as Portfolio;
             const { profile, skills, educations, experiences, projects, blogs } = await Promise.race([getPortFolio, timeoutPromise]) as Portfolio;
 
             useProfile.value = profile;

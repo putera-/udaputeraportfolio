@@ -16,15 +16,15 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // Create a promise that will resolve after 3 seconds
-                const timeoutPromise = new Promise((_, reject) => {
-                    setTimeout(() => {
-                        reject(new Error('request timed out'));
-                    }, 3000);
-                });
+                // const timeoutPromise = new Promise((_, reject) => {
+                //     setTimeout(() => {
+                //         reject(new Error('request timed out'));
+                //     }, 3000);
+                // });
 
-                const response = await Promise.race([fetch, timeoutPromise]);
+                // const response = await Promise.race([fetch, timeoutPromise]);
 
-                return response;
+                return fetch;
             } catch (error: any) {
                 this.handleError(error);
             }
@@ -42,15 +42,15 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // Create a promise that will resolve after 3 seconds
-                const timeoutPromise = new Promise((_, reject) => {
-                    setTimeout(() => {
-                        reject(new Error('request timed out'));
-                    }, 3000);
-                });
+                // const timeoutPromise = new Promise((_, reject) => {
+                //     setTimeout(() => {
+                //         reject(new Error('request timed out'));
+                //     }, 3000);
+                // });
 
-                const response = await Promise.race([fetch, timeoutPromise]);
+                // const response = await Promise.race([fetch, timeoutPromise]);
 
-                return response;
+                return fetch;
             } catch (error) {
                 this.handleError(error);
             }
@@ -68,15 +68,15 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // Create a promise that will resolve after 3 seconds
-                const timeoutPromise = new Promise((_, reject) => {
-                    setTimeout(() => {
-                        reject(new Error('request timed out'));
-                    }, 3000);
-                });
+                // const timeoutPromise = new Promise((_, reject) => {
+                //     setTimeout(() => {
+                //         reject(new Error('request timed out'));
+                //     }, 3000);
+                // });
 
-                const response = await Promise.race([fetch, timeoutPromise]);
+                // const response = await Promise.race([fetch, timeoutPromise]);
 
-                return response;
+                return fetch;
             } catch (error) {
                 this.handleError(error);
             }
@@ -91,15 +91,15 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // Create a promise that will resolve after 3 seconds
-                const timeoutPromise = new Promise((_, reject) => {
-                    setTimeout(() => {
-                        reject(new Error('request timed out'));
-                    }, 3000);
-                });
+                // const timeoutPromise = new Promise((_, reject) => {
+                //     setTimeout(() => {
+                //         reject(new Error('request timed out'));
+                //     }, 3000);
+                // });
 
-                const response = await Promise.race([fetch, timeoutPromise]);
+                // const response = await Promise.race([fetch, timeoutPromise]);
 
-                return response;
+                return fetch;
             } catch (error) {
                 this.handleError(error);
             }
