@@ -6,18 +6,18 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: web-udaputera-portfolio
-        image: web-udaputera-portfolio:1.0.12
+        image: web-udaputera-portfolio:1.0.13
         restart: always
         ports:
             - 3010:3000
         networks:
             - app-uda-portfolio
         environment:
-            NUXT_API_URL: http://localhost:5000
-            NUXT_PUBLIC_API_URL: http://localhost:5000
+            NUXT_API_URL: http://express-uda-portfolio:5000
+            NUXT_PUBLIC_API_URL: http://express-uda-portfolio:5000
 
 # networks
 networks:
-  app-uda-portfolio:
-    name: app-uda-portfolio
-    driver: bridge
+    app-uda-portfolio:
+        name: app-uda-portfolio
+        driver: bridge
