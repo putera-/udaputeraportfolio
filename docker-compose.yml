@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: web-udaputera-portfolio
-        image: web-udaputera-portfolio:1.0.15
+        image: web-udaputera-portfolio:1.0.16
         restart: always
         ports:
             - 3010:3000

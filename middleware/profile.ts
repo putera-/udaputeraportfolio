@@ -7,7 +7,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const useShowSkill = useState<Boolean>('show_skill');
     const useShowProject = useState<Boolean>('show_project');
     const { public: { apiUrl } } = useRuntimeConfig();
-    console.log({ 'midleware': apiUrl });
 
     if (!useProfile.value) {
         try {

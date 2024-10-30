@@ -10,13 +10,15 @@
                     class="col-span-full lg:col-start-2 lg:col-span-10 xl:col-start-2 xl:col-span-10 flex flex-col gap-10 max-lg:px-4">
                     <LazyIndexIntro :profile="portfolio.profile" id="intro" />
                     <!-- <LazyIndexAbout :profile="profile" id="about" /> -->
-                    <LazyIndexBlog v-if="useShowBlog" :blogs="portfolio.blogs" id="blogs" />
-                    <LazyIndexEducation v-if="useShowEdu" :educations="portfolio.educations" id="education" />
+                    <LazyIndexBlog v-if="portfolio.blogs.length" :blogs="portfolio.blogs" id="blogs" />
+                    <LazyIndexEducation v-if="portfolio.educations.length" :educations="portfolio.educations"
+                        id="education" />
                     <img src="/setup-2024.jpeg" alt="Uda Putera Remote Gear 2024"
                         class="rounded-lg hover:scale-110 duration-300">
-                    <LazyIndexExperience v-if="useShowExp" :experiences="portfolio.experiences" id="experience" />
-                    <LazyIndexSkill v-if="useShowSkill" :skills="portfolio.skills" id="skills" />
-                    <LazyIndexProject v-if="useShowProject" :projects="portfolio.projects" id="projects" />
+                    <LazyIndexExperience v-if="portfolio.experiences.length" :experiences="portfolio.experiences"
+                        id="experience" />
+                    <LazyIndexSkill v-if="portfolio.skills.length" :skills="portfolio.skills" id="skills" />
+                    <LazyIndexProject v-if="portfolio.projects" :projects="portfolio.projects" id="projects" />
                 </div>
             </div>
         </div>
@@ -24,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-    middleware: 'profile'
-});
+// definePageMeta({
+//     middleware: 'profile'
+// });
 const portfolio = ref<Portfolio | undefined>(undefined);
 const { public: { apiUrl } } = useRuntimeConfig();
 
@@ -42,25 +44,26 @@ const getPortfolio = async (): Promise<void> => {
     }
 }
 
-const useShowBlog = useState<Boolean>('show_blog');
-const useShowEdu = useState<Boolean>('show_education');
-const useShowExp = useState<Boolean>('show_experience');
-const useShowSkill = useState<Boolean>('show_skill');
-const useShowProject = useState<Boolean>('show_project');
+// const useShowBlog = useState<Boolean>('show_blog');
+// const useShowEdu = useState<Boolean>('show_education');
+// const useShowExp = useState<Boolean>('show_experience');
+// const useShowSkill = useState<Boolean>('show_skill');
+// const useShowProject = useState<Boolean>('show_project');
 
 getPortfolio();
 
 // SEO and META
-const { value: useProfile } = useState<Profile>('profile');
-const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
+// const { value: useProfile } = useState<Profile>('profile');
+// const useProfile
+// const fullname = `${useProfile.firstname} ${useProfile.lastname}`;
 
-useSeoMeta({
-    title: fullname + ' Portfolio',
-    description: useProfile.bio,
-    ogTitle: fullname + ' Portfolio',
-    ogDescription: useProfile.bio,
-    ogImage: apiUrl + useProfile.avatar,
-    twitterCard: 'summary_large_image',
-});
+// useSeoMeta({
+//     title: fullname + ' Portfolio',
+//     description: useProfile.bio,
+//     ogTitle: fullname + ' Portfolio',
+//     ogDescription: useProfile.bio,
+//     ogImage: apiUrl + useProfile.avatar,
+//     twitterCard: 'summary_large_image',
+// });
 // END: SEO and META
 </script>
