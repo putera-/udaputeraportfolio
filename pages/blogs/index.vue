@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in data.data" class="card p-4">
+                <NuxtLink :to="`/blogs/${blog.id}`" v-for="blog in blogs" :key="blog.id" class="card p-4">
                     <BlogCard :blog="blog" />
                 </NuxtLink>
             </div>
@@ -40,18 +40,9 @@ definePageMeta({
 
 const page = ref<number>(1);
 const perpage = ref<number>(9);
-const getData = async () => {
-    try {
-        return await $fetch(`/api/blogs?page=${page.value}&perpage=${perpage.value}`) as BlogPage;
-    } catch (error: any) {
-        throw createError(error);
-    }
-}
-
-const data = ref<BlogPage>();
-watchEffect(async () => {
-    data.value = await getData();
-});
+const BlogStore = useBlogStore();
+const { data, blogs } = storeToRefs(BlogStore);
+BlogStore.getAll('', page.value, perpage.value);
 
 // SEO and META
 const PortfolioStore = usePortfolioStore();

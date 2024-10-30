@@ -91,8 +91,9 @@ import 'vue3-carousel/dist/carousel.css'
 
 const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
+const ProjectStore = useProjectStore();
 const id = route.params.id;
-const project = await $fetch('/api/project/' + id) as Project;
+const project = await ProjectStore.get(id as string);
 
 // SEO and META
 const PortfolioStore = usePortfolioStore();

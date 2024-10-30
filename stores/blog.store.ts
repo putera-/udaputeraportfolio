@@ -14,10 +14,10 @@ export const useBlogStore = defineStore('blog', {
         total_page: (state): number => state.data ? state.data.total_page : 0
     },
     actions: {
-        async getAll(search: string, page: number = 1): Promise<void> {
+        async getAll(search: string, page: number = 1, limit = 12): Promise<void> {
             const Api = useApiStore();
             this.data = null;
-            this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`) as BlogPage;
+            this.data = await Api.get(`/blogs?limit=${limit}&page=${page}&search=${search}`) as BlogPage;
         },
         async get(id: string): Promise<Blog> {
             const Api = useApiStore();

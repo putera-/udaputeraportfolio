@@ -41,8 +41,10 @@ import 'vue3-carousel/dist/carousel.css'
 
 const { public: { apiUrl } } = useRuntimeConfig();
 const route = useRoute();
+
+const BlogStore = useBlogStore();
 const id = route.params.id;
-const blog = await $fetch('/api/blog/' + id) as Blog;
+const blog = await BlogStore.get(id as string);
 
 // SEO and META
 const PortfolioStore = usePortfolioStore();

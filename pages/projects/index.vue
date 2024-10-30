@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <NuxtLink :to="`/projects/${project.id}`" v-for="project in data.data" class="card p-4">
+            <NuxtLink :to="`/projects/${project.id}`" v-for="project in projects" :key="project.id" class="card p-4">
                 <ProjectCard :project="project" />
             </NuxtLink>
         </div>
@@ -37,19 +37,9 @@ definePageMeta({
 
 const page = ref<number>(1);
 const perpage = ref<number>(9);
-const getData = async () => {
-    try {
-        return await $fetch(`/api/projects?page=${page.value}&perpage=${perpage.value}`) as ProjectPage;
-    } catch (error: any) {
-        throw createError(error);
-    }
-}
-
-const data = ref<ProjectPage | null>(null);
-
-watchEffect(async () => {
-    data.value = await getData();
-});
+const ProjectStore = useProjectStore();
+const { data, projects } = storeToRefs(ProjectStore);
+ProjectStore.getAll('', page.value, perpage.value);
 
 // SEO and META
 const PortfolioStore = usePortfolioStore();

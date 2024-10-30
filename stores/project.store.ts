@@ -16,10 +16,10 @@ export const useProjectStore = defineStore('project', {
         total_page: (state): number => state.data ? state.data.total_page : 0
     },
     actions: {
-        async getAll(search: string, page: number = 1): Promise<void> {
+        async getAll(search: string, page: number = 1, limit = 12): Promise<void> {
             const Api = useApiStore();
             this.data = null
-            this.data = await Api.get(`/projects?limit=12&page=${page}&search=${search}`) as ProjectPage;
+            this.data = await Api.get(`/projects?limit=${limit}&page=${page}&search=${search}`) as ProjectPage;
         },
         async get(id: string): Promise<Project> {
             const Api = useApiStore();
