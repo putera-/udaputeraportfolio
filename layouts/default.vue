@@ -1,5 +1,4 @@
 <template>
-    <VitePwaManifest />
     <div data-theme='garden' class="font-inter text-default flex min-h-screen">
         <!-- main content -->
         <div class="grow">
